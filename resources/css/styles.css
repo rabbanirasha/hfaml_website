@@ -1,0 +1,43 @@
+.btn {
+  border-radius: 5px;
+  color: white;
+}
+
+p {
+  font-size: medium;
+}
+
+div {
+  font-size: small;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+#carousel-1, .rounded-bordered {
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  width: 50px;
+}
+
+.carousel-image {
+  border-radius: 10px;
+}
+
+.form-control {
+  border-radius: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.9rem;
+}
+
+footer h3 {
+  color: #ff8c00;
+}
+
