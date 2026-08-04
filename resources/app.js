@@ -1,3 +1,4 @@
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './css/bootstrap.min.css';
 import './css/bss-overrides.css';
 import './css/styles.css';

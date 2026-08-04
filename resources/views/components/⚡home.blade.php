@@ -16,8 +16,8 @@ new class extends Component
         <div class="container text-center py-3"><!-- Start: Hero Carousel -->
             <div class="carousel slide carousel-dark shadow img-fluid" data-bs-ride="carousel" id="carousel-1">
                 <div class="carousel-inner img-fluid" style="height: 100%;">
-                    <div class="carousel-item active img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="assets/img/HFSUF.png" alt="Slide Image" style="z-index: -1;"></div>
-                    <div class="carousel-item h-100"><img class="w-100 d-block img-fluid carousel-image" src="assets/img/HFUF.png" alt="Slide Image" style="z-index: -1;"></div>
+                    <div class="carousel-item active img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFSUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
+                    <div class="carousel-item h-100"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
                 </div>
                 <div><!-- Start: Previous --><a class="carousel-control-prev" role="button" data-bs-slide="prev" href="#carousel-1"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><!-- End: Previous --><!-- Start: Next --><a class="carousel-control-next" role="button" data-bs-slide="next" href="#carousel-1"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a><!-- End: Next --></div>
                 <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button></div>
@@ -112,7 +112,7 @@ new class extends Component
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="fs-4 fw-bolder text-start mb-2">Sponsored by the ACME Laboratories, it&nbsp;</p>
                         <p class="mb-3"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span></p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/avatar2.jpg">
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/team/avatar2.jpg')}}">
                             <div>
                                 <p class="fw-bold text-primary mb-0">John Smith</p>
                                 <p class="text-muted mb-0">Erat netus</p>
@@ -124,7 +124,7 @@ new class extends Component
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="fs-4 fw-bolder text-start mb-2">Sponsored by the ACME Laboratories, it&nbsp;</p>
                         <p class="mb-3"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span></p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/avatar2.jpg">
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/team/avatar2.jpg')}}">
                             <div>
                                 <p class="fw-bold text-primary mb-0">John Smith</p>
                                 <p class="text-muted mb-0">Erat netus</p>
@@ -136,7 +136,7 @@ new class extends Component
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="fs-4 fw-bolder text-start mb-2">Sponsored by the ACME Laboratories, it&nbsp;</p>
                         <p class="mb-3"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span></p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/avatar2.jpg">
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/team/avatar2.jpg')}}">
                             <div>
                                 <p class="fw-bold text-primary mb-0">John Smith</p>
                                 <p class="text-muted mb-0">Erat netus</p>
@@ -161,7 +161,7 @@ new class extends Component
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="p-5 mx-lg-5 pulse animated infinite" style="background: url(&quot;assets/img/blob.svg&quot;) center / contain no-repeat;"><img class="img-fluid rounded w-100" style="min-height: 300px;" src="assets/img/investment.png"></div>
+                    <div class="p-5 mx-lg-5 pulse animated infinite" style="background: url({{asset('img/blob.svg')}}) center / contain no-repeat;"><img class="img-fluid rounded w-100" style="min-height: 300px;" src="{{asset('img/investment.png')}}"></div>
                 </div>
             </div>
         </div><!-- End: Hero Clean Reverse -->
@@ -236,13 +236,13 @@ new class extends Component
         <div class="container text-center py-2">
             <div class="row row-cols-1 row-cols-sm-3">
                 <div class="col">
-                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Sponsors</p><a href="#"> <img class="m-3" src="assets/img/brands/instacart.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/kickstarter.png"></a>
+                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Sponsors</p><a href="#"> <img class="m-3" src="{{asset('img/brands/instacart.png')}}"></a><a href="#"> <img class="m-3" src="{{asset('img/brands/kickstarter.png')}}"></a>
                 </div>
                 <div class="col">
-                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Custodians</p><a href="#"> <img class="m-3" src="assets/img/brands/lyft.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/shopify.png"></a>
+                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Custodians</p><a href="#"> <img class="m-3" src="{{asset('img/brands/lyft.png')}}"></a><a href="#"> <img class="m-3" src="{{asset('img/brands/shopify.png')}}"></a>
                 </div>
                 <div class="col">
-                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Clients</p><a href="#"> <img class="m-3" src="assets/img/brands/pinterest.png"></a><a href="#"> <img class="m-3" src="assets/img/brands/twitter.png"></a>
+                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Clients</p><a href="#"> <img class="m-3" src="{{asset('img/brands/pinterest.png')}}"></a><a href="#"> <img class="m-3" src="{{asset('img/brands/twitter.png')}}"></a>
                 </div>
             </div>
         </div>
