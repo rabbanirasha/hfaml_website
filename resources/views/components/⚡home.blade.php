@@ -17,10 +17,18 @@ new class extends Component
             <div class="carousel slide carousel-dark shadow img-fluid" data-bs-ride="carousel" id="carousel-1">
                 <div class="carousel-inner img-fluid" style="height: 100%;">
                     <div class="carousel-item active img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFSUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
-                    <div class="carousel-item h-100"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
+                    <div class="carousel-item h-100 img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
+                    <div class="carousel-item h-100 img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFACMEUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
                 </div>
-                <div><!-- Start: Previous --><a class="carousel-control-prev" role="button" data-bs-slide="prev" href="#carousel-1"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><!-- End: Previous --><!-- Start: Next --><a class="carousel-control-next" role="button" data-bs-slide="next" href="#carousel-1"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a><!-- End: Next --></div>
-                <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button></div>
+                <div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></button><!-- End: Previous -->
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></button><!-- End: Next -->
+                </div>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> 
+                    <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button>
+                </div>
             </div><!-- End: Hero Carousel -->
         </div>
     </section>
@@ -153,11 +161,11 @@ new class extends Component
                 <div class="col-md-6 text-center text-md-start d-flex flex-column justify-content-center align-items-center mb-4">
                     <div class="py-3" style="max-width: 450px;">
                         <h2 class="fw-bold text-primary">Not Sure Where to Invest?</h2>
-                        <p class="my-3">Invest in our Mutual Funds today with as low as BDT 1000 &amp; receive <strong>attractive </strong>dividends. In our hands, your precious investments continue to grow <strong>fast &amp; safe</strong>.&nbsp;<a class="badge text-bg-primary btn" href="#">Learn More</a></p>
+                        <p class="my-3">Invest in our Mutual Funds today with as low as BDT 1000 &amp; receive <strong>attractive </strong>dividends. In our hands, your precious investments continue to grow <strong>fast &amp; safe</strong>.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
                     </div>
                     <div class="py-3" style="max-width: 450px;">
                         <h2 class="fw-bold text-primary">Corporate Advisory</h2>
-                        <p class="my-3">We offer <strong>advice </strong>on strategy, structure, value &amp; capital<strong>&nbsp;</strong>to boost performance of corporations.&nbsp;<a class="badge text-bg-primary btn" href="#">Learn More</a></p>
+                        <p class="my-3">We offer <strong>advice </strong>on strategy, structure, value &amp; capital<strong>&nbsp;</strong>to revive and boost performance of corporations.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
@@ -178,11 +186,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><svg class="icon icon-tabler icon-tabler-moneybag text-primary" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M9.5 3h5a1.5 1.5 0 0 1 1.5 1.5a3.5 3.5 0 0 1 -3.5 3.5h-1a3.5 3.5 0 0 1 -3.5 -3.5a1.5 1.5 0 0 1 1.5 -1.5z"></path>
-                                        <path d="M4 17v-1a8 8 0 1 1 16 0v1a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
-                                    </svg></div>
+                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-cash-coin"></i></div>
                                 <h5 class="fw-bold card-title">Transparent Investment Philosophy</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">With over 50 years plus total market expertise by our management team, and a consistent investment philosophy and a team of professionals makes us unique in the business.</p>
                             </div>
@@ -191,12 +195,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><svg class="icon icon-tabler icon-tabler-bulb text-primary" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"></path>
-                                        <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"></path>
-                                        <path d="M9.7 17l4.6 0"></path>
-                                    </svg></div>
+                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-lightbulb-fill"></i></div>
                                 <h5 class="fw-bold card-title">Long-term Valuations and risk adjusted Performance</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">We provide our clients with our best ideas and investment expertise as we collaborate with them to help them grow and protect their investment</p>
                             </div>
@@ -205,11 +204,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><svg class="icon icon-tabler icon-tabler-graph text-primary" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-                                        <path d="M7 14l3 -3l2 2l3 -3l2 2"></path>
-                                    </svg></div>
+                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-graph-up-arrow"></i></div>
                                 <h5 class="fw-bold card-title">In-depth research and analysis for Investment</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">We continuously help our clients through tailor an investment strategy to meet their objectives by bring market experts, unique ideas and unique investment strategies.</p>
                             </div>
@@ -218,10 +213,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><svg class="icon icon-tabler icon-tabler-growth text-primary" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M16.5 15a4.5 4.5 0 0 0 -4.5 4.5m4.5 -8.5a4.5 4.5 0 0 0 -4.5 4.5m4.5 -8.5a4.5 4.5 0 0 0 -4.5 4.5m-4 3.5c2.21 0 4 2.015 4 4.5m-4 -8.5c2.21 0 4 2.015 4 4.5m-4 -8.5c2.21 0 4 2.015 4 4.5m0 -7.5v6"></path>
-                                    </svg></div>
+                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-list-ol"></i></div>
                                 <h5 class="fw-bold card-title">Prioritised Client Requirement</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">We embrace the concept of active stewardship. The aim of our work is to preserve and grow the real purchasing power of the assets entrusted to us by our clients over the long term.<br><br></p>
                             </div>

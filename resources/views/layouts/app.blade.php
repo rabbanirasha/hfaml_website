@@ -27,14 +27,14 @@
             </button>
             <div class="collapse navbar-collapse text-nowrap text-end justify-content-between p-2 rounded-1" id="navcol-1" style="background-color: var(--bs-body-bg);">
                 <ul class="navbar-nav text-center">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about_us.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Our Funds</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Our Schemes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Reports</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Downloads</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacts.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('home') }}" wire:navigate.hover>Home</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('about') }}" wire:navigate.hover>About Us</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Services</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Funds</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Schemes</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Reports</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Downloads</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="contacts.html" wire:navigate.hover>Contact Us</a></li>
                 </ul>
                 <div class="d-inline-flex"><a class="btn btn-sm d-none d-xl-inline-flex" role="button" href="signup.html" style="color: var(--bs-primary);">Signup</a><a class="btn btn-primary btn-sm shadow" role="button" href="login.html">Login</a></div>
             </div>

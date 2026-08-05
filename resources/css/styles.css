@@ -37,6 +37,23 @@ div {
   font-size: 0.9rem;
 }
 
+.text-decoration-subheading {
+color: #2c4fc3;
+text-decoration-thickness: 15px;
+text-decoration: underline;
+text-decoration-line: overline;
+text-decoration-color: deeppink;
+}
+
+.team-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.25rem; /* matches .rounded */
+}
+
 footer h3 {
   color: #ff8c00;
 }

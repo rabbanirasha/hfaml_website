@@ -40,3 +40,18 @@
   --bs-btn-disabled-border-color: #ff8c00;
 }
 
+.text-secondary {
+  --bs-text-color:#2c4fc3;
+  --bs-text-bg: #2c4fc3;
+  --bs-text-border-color:#2c4fc3;
+  --bs-text-hover-color:#2c4fc3;
+  --bs-text-hover-bg:#2c4fc3;
+  --bs-text-hover-border-color:#2c4fc3;
+  --bs-text-focus-shadow-rgb: 38,21,0;
+  --bs-text-active-color: #000000;
+  --bs-text-active-bg:#2c4fc3;
+  --bs-text-active-border-color: #2c4fc3;
+  --bs-text-disabled-color: #000000;
+  --bs-text-disabled-bg: #2c4fc3;
+  --bs-text-disabled-border-color: #2c4fc3;
+}
