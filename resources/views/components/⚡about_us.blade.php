@@ -86,7 +86,7 @@ new class extends Component
                 <div class="row justify-content-center mx-auto">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
+                            <img class="team-photo mb-3" src="{{asset('img/team/IMG_20210525_141630.jpg')}}">
                             <p class="mb-0 fw-bold">Mr. Md Fayekuzzaman</p>
                             <p class="mb-0">Executive Director &amp; Former Chief Executive Officer (CEO)</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
@@ -94,7 +94,7 @@ new class extends Component
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
+                            <img class="team-photo mb-3" src="{{asset('img/team/nazmul-islam.jpg')}}">
                             <p class="mb-0 fw-bold">Mr. Nazmul Islam</p>
                             <p class="mb-0">Chief Operating Officer (COO) &amp; CEO (in-charge)</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
@@ -102,7 +102,7 @@ new class extends Component
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
+                            <img class="team-photo mb-3" src="{{asset('img/team/Shihab-Alom-Khan.jpg')}}">
                             <p class="mb-0 fw-bold">Mr. Shihab Alam Khan</p>
                             <p class="mb-0">Sr. Manager - Portfolio Mgmt.</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
@@ -110,7 +110,7 @@ new class extends Component
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
+                            <img class="team-photo mb-3" src="{{asset('img/team/pic.jpg')}}">
                             <p class="mb-0 fw-bold">Mr. Md Mohiuddin Miah</p>
                             <p class="mb-0">Manager - Accounts and Finance</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
@@ -118,7 +118,7 @@ new class extends Component
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
+                            <img class="team-photo mb-3" src="{{asset('img/team/Fazlul-Pic.jpg')}}">
                             <p class="mb-0 fw-bold">Mr. Fazlul Gani Mazumder (Roman)</p>
                             <p class="mb-0">Manager - Compliance and HR</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
@@ -126,7 +126,7 @@ new class extends Component
                     </div>                                                                                               
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
+                            <img class="team-photo mb-3" src="{{asset('img/team/rasha_2024.jpg')}}">
                             <p class="mb-0 fw-bold">Rabbani Rasha</p>
                             <p class="mb-0">Manager - Information Technology</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
