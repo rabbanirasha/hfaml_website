@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg sticky-top navbar-shrink navbar-light" id="mainNav" style="font-size: 13px;height: 60px;">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span><img class="img-fluid" src="{{asset('img/HFAML%20Logo.png')}}" loading="auto" style="height: 2.2rem;"></span></a>
             <div class="theme-switcher dropdown me-auto">
-                <a class="dropdown-toggle my-auto" data-bs-toggle="dropdown" aria-expanded="false" href="#"><i class="bi bi-brightness-high-fill fs-6 text-primary"></i></a>
+                <a class="dropdown-toggle my-auto" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;"><i class="bi bi-brightness-high-fill fs-6 text-primary"></i></a>
                 <div class="dropdown-menu" style="font-size:small;">
                     <a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light"><i class="bi bi-sun pe-2 text-primary"></i>Light</a>
                     <a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="dark"><i class="bi bi-moon-stars pe-2 text-primary"></i>Dark</a>
@@ -27,16 +27,19 @@
             </button>
             <div class="collapse navbar-collapse text-nowrap text-end justify-content-between p-2 rounded-1" id="navcol-1" style="background-color: var(--bs-body-bg);">
                 <ul class="navbar-nav text-center">
-                    <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('home') }}" wire:navigate.hover>Home</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('about') }}" wire:navigate.hover>About Us</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('services') }}" wire:navigate.hover>Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Funds</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Schemes</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Reports</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Downloads</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="contacts.html" wire:navigate.hover>Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}" wire:navigate.hover wire:current.exact="active text-blue">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}" wire:navigate.hover wire:current="active text-blue">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}" wire:navigate.hover wire:current="active text-blue">Our Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html" wire:navigate.hover wire:current="active text-blue">Our Funds</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html" wire:navigate.hover wire:current="active text-blue">Our Schemes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html" wire:navigate.hover wire:current="active text-blue">Reports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html" wire:navigate.hover wire:current="active text-blue">Downloads</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}" wire:navigate.hover wire:current="active text-blue">Contact Us</a></li>
                 </ul>
-                <div class="d-inline-flex"><a class="btn btn-sm d-none d-xl-inline-flex" role="button" href="signup.html" style="color: var(--bs-primary);">SIGN UP</a><a class="btn btn-primary btn-sm shadow" role="button" href="login.html">Login</a></div>
+                <div class="d-inline-flex">
+                    <a class="btn btn-sm d-none d-xl-inline-flex" role="button" wire:navigate.hover href="{{ route('signup') }}" style="color: var(--bs-primary);">SIGN UP</a>
+                    <a class="btn btn-primary btn-sm shadow" role="button" wire:navigate.hover href="{{ route('login') }}">Login</a>
+                </div>
             </div>
         </div>
     </nav>

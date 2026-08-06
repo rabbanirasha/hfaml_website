@@ -6,7 +6,7 @@ Use Livewire\Component;
 new class extends Component
 {
     public function render(){
-        return $this->view()->title("Our Services");
+        return $this->view()->title("Contact Us");
     }
 }
 ?>
@@ -14,7 +14,7 @@ new class extends Component
 <div>
     <section><!-- Start: About Us -->
         <div class="container my-5 rounded-1 p-2 rounded-bordered" style="background-color: var(--bs-body-bg);">
-            <h1 class="fw-bold pt-3 text-primary" style="text-align: center;">Our Services</h1>
+            <h1 class="fw-bold pt-3 text-primary" style="text-align: center;">Contact Us</h1>
             <hr style="border-style: inset;">
             <div class="row mb-4">
                 <div class="col-md-8 col-xl-6 p-4">
