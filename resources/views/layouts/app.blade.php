@@ -29,14 +29,14 @@
                 <ul class="navbar-nav text-center">
                     <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('home') }}" wire:navigate.hover>Home</a></li>
                     <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('about') }}" wire:navigate.hover>About Us</a></li>
-                    <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Services</a></li>
+                    <li class="nav-item"><a class="nav-link data-current:active" href="{{ route('services') }}" wire:navigate.hover>Our Services</a></li>
                     <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Funds</a></li>
                     <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Our Schemes</a></li>
                     <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Reports</a></li>
                     <li class="nav-item"><a class="nav-link data-current:active" href="login.html" wire:navigate.hover>Downloads</a></li>
                     <li class="nav-item"><a class="nav-link data-current:active" href="contacts.html" wire:navigate.hover>Contact Us</a></li>
                 </ul>
-                <div class="d-inline-flex"><a class="btn btn-sm d-none d-xl-inline-flex" role="button" href="signup.html" style="color: var(--bs-primary);">Signup</a><a class="btn btn-primary btn-sm shadow" role="button" href="login.html">Login</a></div>
+                <div class="d-inline-flex"><a class="btn btn-sm d-none d-xl-inline-flex" role="button" href="signup.html" style="color: var(--bs-primary);">SIGN UP</a><a class="btn btn-primary btn-sm shadow" role="button" href="login.html">Login</a></div>
             </div>
         </div>
     </nav>

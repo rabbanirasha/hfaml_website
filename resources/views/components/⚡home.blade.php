@@ -155,21 +155,21 @@ new class extends Component
             </div>
         </div><!-- End: Hero Clean Reverse -->
     </header>
-    <section class="py-2"><!-- Start: Hero Clean Reverse -->
+    <section class="py-4"><!-- Start: Hero Clean Reverse -->
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start d-flex flex-column justify-content-center align-items-center mb-4">
-                    <div class="py-3" style="max-width: 450px;">
-                        <h2 class="fw-bold text-primary">Not Sure Where to Invest?</h2>
+            <div class="row text-center">
+                <div class="col-md-6 mb-4">
+                    <div class="py-3 mx-auto pulse animated infinite" style="max-width: 450px;">
+                        <h4 class="fw-bold" style="color: #2c4fc3;">Not Sure Where to Invest?</h4>
                         <p class="my-3">Invest in our Mutual Funds today with as low as BDT 1000 &amp; receive <strong>attractive </strong>dividends. In our hands, your precious investments continue to grow <strong>fast &amp; safe</strong>.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
-                    </div>
-                    <div class="py-3" style="max-width: 450px;">
-                        <h2 class="fw-bold text-primary">Corporate Advisory</h2>
-                        <p class="my-3">We offer <strong>advice </strong>on strategy, structure, value &amp; capital<strong>&nbsp;</strong>to revive and boost performance of corporations.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="p-5 mx-lg-5 pulse animated infinite" style="background: url({{asset('img/blob.svg')}}) center / contain no-repeat;"><img class="img-fluid rounded w-100" style="min-height: 300px;" src="{{asset('img/investment.png')}}"></div>
+                    {{-- <div class="p-5 mx-lg-5 pulse animated infinite" style="background: url({{asset('img/blob.svg')}}) center / contain no-repeat;"><img class="img-fluid rounded w-100" style="min-height: 300px;" src="{{asset('img/investment.png')}}"></div> --}}
+                    <div class="py-3 mx-auto pulse animated infinite" style="max-width: 450px;">
+                        <h4 class="fw-bold" style="color: #2c4fc3;">Corporate Advisory</h4>
+                        <p class="my-3">We offer <strong>advice </strong>on strategy, structure, value &amp; capital<strong>&nbsp;</strong>to revive and boost performance of corporations.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
+                    </div>                    
                 </div>
             </div>
         </div><!-- End: Hero Clean Reverse -->
@@ -178,7 +178,7 @@ new class extends Component
         <div class="container py-5 bg-primary-gradient">
             <div class="row">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h1 class="fw-bold mb-0 text-primary">Why Us?</h1>
+                    <h1 class="fw-bold text-primary">Why Us?</h1>
                 </div>
             </div>
             <div class="py-3">
@@ -186,7 +186,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-cash-coin"></i></div>
+                                <div class="bs-icon-lg mb-5 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-cash-coin"></i></div>
                                 <h5 class="fw-bold card-title">Transparent Investment Philosophy</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">With over 50 years plus total market expertise by our management team, and a consistent investment philosophy and a team of professionals makes us unique in the business.</p>
                             </div>
@@ -195,7 +195,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-lightbulb-fill"></i></div>
+                                <div class="bs-icon-lg mb-5 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-lightbulb-fill"></i></div>
                                 <h5 class="fw-bold card-title">Long-term Valuations and risk adjusted Performance</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">We provide our clients with our best ideas and investment expertise as we collaborate with them to help them grow and protect their investment</p>
                             </div>
@@ -204,7 +204,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-graph-up-arrow"></i></div>
+                                <div class="bs-icon-lg mb-5 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-graph-up-arrow"></i></div>
                                 <h5 class="fw-bold card-title">In-depth research and analysis for Investment</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">We continuously help our clients through tailor an investment strategy to meet their objectives by bring market experts, unique ideas and unique investment strategies.</p>
                             </div>
@@ -213,7 +213,7 @@ new class extends Component
                     <div class="col my-2">
                         <div class="card shadow-sm">
                             <div class="card-body text-center p-4">
-                                <div class="bs-icon-lg mb-3 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-list-ol"></i></div>
+                                <div class="bs-icon-lg mb-5 mx-auto bs-icon rounded shadow" style="top: 1rem;right: 1rem;"><i class="bi bi-list-ol"></i></div>
                                 <h5 class="fw-bold card-title">Prioritised Client Requirement</h5>
                                 <p class="text-muted card-text" style="text-align: justify;">We embrace the concept of active stewardship. The aim of our work is to preserve and grow the real purchasing power of the assets entrusted to us by our clients over the long term.<br><br></p>
                             </div>
@@ -224,18 +224,37 @@ new class extends Component
         </div><!-- End: Features Cards -->
     </section>
     <section class="py-2">
-        <h1 class="fw-bold text-center mb-0 text-primary">Our Partners</h1>
+        <h1 class="fw-bold text-center text-primary">Our Partners</h1>
         <div class="container text-center py-2">
-            <div class="row row-cols-1 row-cols-sm-3">
-                <div class="col">
-                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Sponsors</p><a href="#"> <img class="m-3" src="{{asset('img/brands/instacart.png')}}"></a><a href="#"> <img class="m-3" src="{{asset('img/brands/kickstarter.png')}}"></a>
+            <div class="row justify-content-center mx-auto">
+                <div class="col-3">
+                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                        <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/runner.jpg')}}">
+                        <p><strong class="text-center">RUNNER GROUP</strong></p>
+                        <a class="badge text-bg-primary btn mt-auto" href="#">Sponsor</a>
+                    </div>
                 </div>
-                <div class="col">
-                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Custodians</p><a href="#"> <img class="m-3" src="{{asset('img/brands/lyft.png')}}"></a><a href="#"> <img class="m-3" src="{{asset('img/brands/shopify.png')}}"></a>
+                <div class="col-3">
+                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                        <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/icb.svg')}}">
+                        <p><strong class="text-center">INVESTMENT CORPORATION OF BANGLADESH</strong></p>
+                        <a class="badge text-bg-primary btn mt-auto" href="#">Trustee</a>
+                    </div>
                 </div>
-                <div class="col">
-                    <p class="fw-bolder text-center mb-2" style="text-align: justify;">Clients</p><a href="#"> <img class="m-3" src="{{asset('img/brands/pinterest.png')}}"></a><a href="#"> <img class="m-3" src="{{asset('img/brands/twitter.png')}}"></a>
+                <div class="col-3">
+                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                        <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/brac.jpg')}}">
+                        <p><strong class="text-center">BRAC BANK PLC</strong></p>
+                        <a class="badge text-bg-primary btn mt-auto" href="#">Custodian</a>
+                    </div>
                 </div>
+                <div class="col-3">
+                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                        <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/acme.jpg')}}">
+                        <p><strong class="text-center">THE ACME LABORATORIES LTD.</strong></p>
+                        <a class="badge text-bg-primary btn mt-auto" href="#">Sponsor</a>
+                    </div>
+                </div>                                                                        
             </div>
         </div>
     </section>

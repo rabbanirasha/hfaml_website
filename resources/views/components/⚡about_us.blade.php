@@ -40,6 +40,83 @@ new class extends Component
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <p style="text-align: justify;"><strong>Our Approach Makes Us Unique</strong><br>We believe that our Clients are the greatest asset of us and we continuously help our clients through tailor an investment strategy to meet their objectives by bring market experts, unique ideas and unique investment strategies. We strive to anticipate and evaluate Capital market trends that may impact client objectives. Our investment framework is rigorous and repeatable, entailing: <br>•&nbsp; &nbsp;A clear investment philosophy <br>•&nbsp; &nbsp;A focus on longer-term valuations and risk-adjusted performance <br>•&nbsp; &nbsp;In-depth research and analysis to support investment decisions <br>• Risk based portfolio construction and generating return as per client requirement</p>
                 </div>
+                <div class="col-md-8 col-xl-6 text-center p-4 mx-auto">
+                    <h4 class="fw-bolder" style="color: #2c4fc3;">OUR PARTNERS</h4>
+                    <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
+                    <div class="row justify-content-center mx-auto">
+                        <div class="col-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                                <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/runner.jpg')}}">
+                                <p><strong class="text-center">RUNNER GROUP</strong></p>
+                                <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                                <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/icb.svg')}}">
+                                <p><strong class="text-center">INVESTMENT CORPORATION OF BANGLADESH</strong></p>
+                                <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                                <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/brac.jpg')}}">
+                                <p><strong class="text-center">BRAC BANK PLC</strong></p>
+                                <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
+                                <img class="rounded-circle mx-auto fit-cover" width="100" height="100" src="{{asset('img/brands/acme.jpg')}}">
+                                <p><strong class="text-center">THE ACME LABORATORIES LTD.</strong></p>
+                                <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
+                            </div>
+                        </div>                                                                        
+                    </div>
+                </div>
+                <div class="col-md-8 col-xl-6 text-center p-4 mx-auto">
+                    <h4 class="fw-bolder" style="color: #2c4fc3;">OUR HISTORY</h4>
+                    <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
+                    <div class="timeline-container overflow-hidden">
+                    <ol class="timeline">
+                        <li class="timeline-item">
+                        <div class="timeline-content">
+                            <time class="fw-bold fs-5" datetime="2016">2016</time>
+                            <h6 class="mt-3">Incorporated as a Private Limited Company</h6>
+                            <p>June 7, 2016</p>
+                        </div>
+                        </li>
+                        <li class="timeline-item">
+                        <div class="timeline-content">
+                            <time class="fw-bold fs-5" datetime="2017">2017</time>
+                            <h6 class="mt-3">Received Asset Management license from Bangladesh Securities and Exchange Commission (BSEC)</h6>
+                            <p>January 19, 2017</p>
+                        </div>
+                        </li>
+                        <li class="timeline-item">
+                        <div class="timeline-content">
+                            <time class="fw-bold fs-5" datetime="2017">2017</time>
+                            <h6 class="mt-3">Subscription of First Fund i.e; HFAML Unit Fund has been started from date</h6>
+                            <p>November 20, 2017</p>
+                        </div>
+                        </li>
+                        <li class="timeline-item">
+                        <div class="timeline-content">
+                            <time class="fw-bold fs-5" datetime="2018">2018</time>
+                            <h6 class="mt-3">Subscription of Second Fund i.e; HFAML-ACME Employees' Unit Fund has been started from date</h6>
+                            <p>October 07,2018</p>
+                        </div>
+                        </li>
+                        <li class="timeline-item">
+                        <div class="timeline-content">
+                            <time class="fw-bold fs-5" datetime="2022">2022</time>
+                            <h6 class="mt-3">Subscription of Third Fund i.e; HFAML Shariah Unit Fund has been started from date</h6>
+                            <p>January 09, 2022</p>
+                        </div>
+                        </li>                                                
+                    </ol>
+                    </div>                    
+                </div>                                
             </div>
             <h4 class="fw-bolder text-center" style="color: #2c4fc3;">OUR TEAM</h4>
             <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
@@ -119,7 +196,7 @@ new class extends Component
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                             <img class="team-photo mb-3" src="{{asset('img/team/Fazlul-Pic.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Fazlul Gani Mazumder (Roman)</p>
+                            <p class="mb-0 fw-bold">Mr. Fazlul Gani Mazumder</p>
                             <p class="mb-0">Manager - Compliance and HR</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
                         </div>
