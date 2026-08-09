@@ -38,7 +38,7 @@
                 </ul>
                 <div class="d-inline-flex">
                     <a class="btn btn-sm d-none d-xl-inline-flex" role="button" wire:navigate.hover href="{{ route('signup') }}" style="color: var(--bs-primary);">SIGN UP</a>
-                    <a class="btn btn-primary btn-sm shadow" role="button" wire:navigate.hover href="{{ route('login') }}">Login</a>
+                    <a class="btn btn-primary btn-sm shadow" role="button" wire:navigate.hover href="{{ route('login') }}">LOGIN</a>
                 </div>
             </div>
         </div>

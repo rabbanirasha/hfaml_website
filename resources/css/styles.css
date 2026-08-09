@@ -47,6 +47,17 @@ color: #2c4fc3 !important;
   border-radius: 0.25rem; /* matches .rounded */
 }
 
+/* Change the color of the active item's underline */
+.nav-underline {
+  --bs-nav-underline-border-color: #ff5733; /* Your custom color */
+  --bs-nav-underline-link-active-color: #ff5733; /* Optional: active text color */
+}
+
+/* Change the underline color when hovering over a link */
+.nav-underline .nav-link:hover {
+  border-bottom-color: #ff5733; /* Custom hover color */
+}
+
 
 /* Mobile View: Snaps to a clean horizontal list layout */
 @media (max-width: 767px) {
