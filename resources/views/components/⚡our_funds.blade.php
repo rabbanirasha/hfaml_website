@@ -94,8 +94,22 @@ new class extends Component
                             ['field' => 'batch', 'label' => 'Inventory', 'sortable' => true]
                         ]"
                         :filters="[
-                            ['field' => 'batch', 'label' => 'Select Status', 'options' => ['active' => 'Active Only', 'inactive' => 'Inactive Only']]
-                        ]" 
+                            [
+                                'field' => 'id', 
+                                'label' => 'All Statuses', 
+                                'options' => ['active' => 'Active Only', 'inactive' => 'Inactive Only', 'draft' => 'Drafts']
+                            ],
+                            [
+                                'field' => 'migration', 
+                                'label' => 'All Visibility Modes', 
+                                'options' => ['public' => 'Public Pages', 'hidden' => 'Hidden Pages']
+                            ],
+                            [
+                                'field' => 'batch', 
+                                'label' => 'All Conditions', 
+                                'options' => ['new' => 'Brand New', 'used' => 'Pre-Owned', 'refurbished' => 'Refurbished']
+                            ]
+                        ]"
                     />                                                                     
                 </div>                                             
             </div>                         
