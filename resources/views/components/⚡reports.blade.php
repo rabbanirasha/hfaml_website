@@ -42,12 +42,12 @@ new class extends Component
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
+                            <thead>
                                 <tr>
-                                    <th scope="col">Report Title</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Action</th>
+                                    <th class="px-4" scope="col">Report Title</th>
+                                    <th class="px-4" scope="col">Type</th>
+                                    <th class="px-4" scope="col">Date</th>
+                                    <th class="px-4" scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

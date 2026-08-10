@@ -83,54 +83,20 @@ new class extends Component
                     </table>                                    
                 </div>
                 <div class="col-md-10 col-xl-10 text-center mx-auto my-5">
-                    <h4 class="fw-bolder text-center" style="color: #2c4fc3;">Key Features of "SIP"</h4>
+                    <h4 class="fw-bolder text-center" style="color: #2c4fc3;">Dividend History</h4>
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
-                    <table class="table table-responsive text-start mt-4">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th class="text-center col-4" scope="col">Attributes</th>
-                        <th class="text-center" scope="col">"SIP" Features</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Who Can Invest under SIP?</td>
-                            <td>Any Individual and General Public can invest in this fund through SIP.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Sale of Units through SIP</td>
-                            <td> An investor can invest through SIP either by auto debit system provided against investors’ bank account or by providing cheques via AMC or Selling Agents at the regular interval which he/she mentioned in the Application Form. An SIP Investor must have a BO account. Units will be credited to SIP investors BO account at a discount of Tk. 0.10 per unit from the ongoing Weekly Sale Price of the unit as decided by AMC.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Limit of Unit Purchase</td>
-                            <td>Under SIP, there will be no minimum lot size. However, any fraction of installment amount remaining will be converted when it sums up to one unit.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>SIP Tenor </td>
-                            <td>The scheme is offered for at least 2 years or any other period set by AMC. However, investors can set SIP scheme for 3 years/5 years/ 10 years. It is advisable to continue SIP investment with a long term perspective but there is no compulsion. After this time period the individual scheme will be matured and SIP holders may surrender or continue, after maturity, according to his/her new option. No fees/charges will be charged on surrender.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Interval for investment under SIP</td>
-                            <td>Systematic Investment Plan (SIP) allows an investor to invest a certain pre-determined amount at a regular interval: weekly, monthly, quarterly, half-yearly, yearly. </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>SIP Termination</td>
-                            <td>An SIP investor can terminate his/her SIP in any time. If an investor wants to terminate the SIP before 2 (two) years, 1% discount from the repurchase/ surrender price will be applicable on total accumulated invested amount on the date of cancellation of the scheme. </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td>CIP option for the SIP investors</td>
-                            <td>Any SIP investor can choose either option of cash dividend or cumulative investment plan (CIP) or mix of both. If an SIP investor chooses CIP (i.e. dividend reinvestment process) instead of cash dividend, he/she will also enjoy CIP units at a discount on prevailing sale price used for CIP conversion. After CIP conversion, they will get dividend on total number of unit in the next year.</td>
-                        </tr>
-                    </tbody>
-                    </table>                                                   
+                    <livewire:datatable 
+                        title="Raw DB Products" 
+                        table="migrations" 
+                        :columns="[
+                            ['field' => 'id', 'label' => 'Product Name', 'sortable' => true],
+                            ['field' => 'migration', 'label' => 'Price ($)', 'sortable' => true],
+                            ['field' => 'batch', 'label' => 'Inventory', 'sortable' => true]
+                        ]"
+                        :filters="[
+                            ['field' => 'batch', 'label' => 'Select Status', 'options' => ['active' => 'Active Only', 'inactive' => 'Inactive Only']]
+                        ]" 
+                    />                                                                     
                 </div>                                             
             </div>                         
         </div>

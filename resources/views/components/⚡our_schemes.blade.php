@@ -91,7 +91,7 @@ new class extends Component
                     </ul>
                 </div>
                 <div class="col-md-10 col-xl-10 text-center mx-auto my-5">
-                    <h4 class="fw-bolder text-center" style="color: #2c4fc3;">"SIP" Vs other capital market investment</h4>
+                    <h4 class="fw-bolder text-center" style="color: #2c4fc3;">"SIP" vs other capital market investment</h4>
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <table class="table table-responsive text-start mt-4">
                     <thead>
