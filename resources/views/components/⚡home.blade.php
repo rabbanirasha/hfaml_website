@@ -161,6 +161,7 @@ new class extends Component
                 <div class="col-md-6 mb-4">
                     <div class="py-3 mx-auto pulse animated infinite" style="max-width: 450px;">
                         <h4 class="fw-bold" style="color: #2c4fc3;">Not Sure Where to Invest?</h4>
+                        <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                         <p class="my-3">Invest in our Mutual Funds today with as low as BDT 1000 &amp; receive <strong>attractive </strong>dividends. In our hands, your precious investments continue to grow <strong>fast &amp; safe</strong>.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
                     </div>
                 </div>
@@ -168,6 +169,7 @@ new class extends Component
                     {{-- <div class="p-5 mx-lg-5 pulse animated infinite" style="background: url({{asset('img/blob.svg')}}) center / contain no-repeat;"><img class="img-fluid rounded w-100" style="min-height: 300px;" src="{{asset('img/investment.png')}}"></div> --}}
                     <div class="py-3 mx-auto pulse animated infinite" style="max-width: 450px;">
                         <h4 class="fw-bold" style="color: #2c4fc3;">Corporate Advisory</h4>
+                        <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                         <p class="my-3">We offer <strong>advice </strong>on strategy, structure, value &amp; capital<strong>&nbsp;</strong>to revive and boost performance of corporations.<br><a class="badge text-bg-primary btn" href="#">Learn More</a></p>
                     </div>                    
                 </div>

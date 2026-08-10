@@ -58,6 +58,10 @@ color: #2c4fc3 !important;
   border-bottom-color: #ff5733; /* Custom hover color */
 }
 
+.nav-underline .nav-link:not(.active) {
+  color: #6c757d; /* Change to your desired inactive color */
+}
+
 
 /* Mobile View: Snaps to a clean horizontal list layout */
 @media (max-width: 767px) {
