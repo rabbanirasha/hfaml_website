@@ -93,14 +93,14 @@
                     </select>
                 </div>
             </div>             
-            <div class="col-6 col-sm-4 text-center text-sm-start text-muted text-wrap small mt-2">
+            <div class="col-6 col-sm-2 text-start text-muted text-nowrap small mt-2">
                 Showing {{ $records->firstItem() ?? 0 }} to {{ $records->lastItem() ?? 0 }} of {{ $records->total() }} rows
             </div>         
-            <div class="col-12 col-sm-4 d-flex justify-content-end align-content-center">
+            <div class="col-12 col-sm-6 d-flex justify-content-end align-content-center">
                 @php
                     $currentPage = $records->currentPage();
                     $lastPage = $records->lastPage();
-                    $window = 1; // show 2 pages before and after current page
+                    $window = 1; // show 1 pages before and after current page
 
                     $start = max(1, $currentPage - $window);
                     $end = min($lastPage, $currentPage + $window);
@@ -129,12 +129,12 @@
                     <ul class="pagination justify-content-center flex-wrap">
                         @if ($records->onFirstPage())
                             <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
+                                <span class="page-link">Prev</span>
                             </li>
                         @else
                             <li class="page-item">
                                 <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() - 1 }})">
-                                    Previous
+                                    Prev
                                 </button>
                             </li>
                         @endif

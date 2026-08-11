@@ -35,7 +35,7 @@ new class extends Component
     <header><!-- Start: Hero Clean Reverse -->
         <div class="container p-4">
             <div class="row p-2 rounded-bordered" style="background-color: var(--bs-body-bg);">
-                <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
+                <div class="col-12 d-flex justify-content-center align-items-center mb-4 mt-2">
                     <div class="text-center">
                         <h1 class="fw-bold mb-0 text-primary">Fund Performance</h1><a class="badge text-bg-primary btn" href="#">Historical Trend</a>
                     </div>
@@ -48,26 +48,33 @@ new class extends Component
                                     <tr>
                                         <th>Effective Date</th>
                                         <th>Fund Name</th>
-                                        <th>NAV</th>
-                                        <th>Selling Price</th>
-                                        <th>Repurchase/ Surrender Price</th>
+                                        <th>NAV at Cost Per Unit*</th>
+                                        <th>NAV at Market (Selling Price) Per Unit*</th>
+                                        <th>Repurchase/Surrender Price Per Unit**</th>
                                     </tr>
                                 </thead>
                                 <tbody style="border-top: 2px solid var(--bs-primary) ;">
                                     <tr>
-                                        <td>26 May 2024</td>
+                                        <td>12 August 2026</td>
                                         <td>HFAML Unit Fund</td>
-                                        <td>7.66</td>
-                                        <td>7.66</td>
-                                        <td>&nbsp;&nbsp;7.36</td>
+                                        <td>12.53</td>
+                                        <td>8.50</td>
+                                        <td>8.33</td>
                                     </tr>
                                     <tr>
-                                        <td>26 May 2024</td>
-                                        <td>HFAML Unit Fund</td>
-                                        <td>7.66</td>
-                                        <td>7.66</td>
-                                        <td>&nbsp;&nbsp;7.36</td>
+                                        <td>12 August 2026</td>
+                                        <td>HFAML ACME Employees' Unit Fund</td>
+                                        <td>13.31</td>
+                                        <td>9.43</td>
+                                        <td>9.25</td>
                                     </tr>
+                                    <tr>
+                                        <td>12 August 2026</td>
+                                        <td>HFAML Shariah Unit Fund</td>
+                                        <td>11.96</td>
+                                        <td>9.25</td>
+                                        <td>9.07</td>
+                                    </tr>                                    
                                 </tbody>
                             </table>
                         </div>

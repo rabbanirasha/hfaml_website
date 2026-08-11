@@ -72,27 +72,26 @@ new class extends Component
                     <h4 class="fw-bolder text-center" style="color: #2c4fc3;">Dividend History</h4>
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <livewire:datatable 
-                        title="Raw DB Products" 
-                        table="users" 
+                        title="Dividend History" 
+                        table="tbl_dividenddeclaration" 
                         :columns="[
-                            ['field' => 'id', 'label' => 'Product Name', 'sortable' => true],
-                            ['field' => 'name', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'email', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'email_verified_at', 'label' => 'Price ($)', 'sortable' => true]
+                            ['field' => 'DividendCOAID', 'label' => '#', 'sortable' => true],
+                            ['field' => 'FundCOAID', 'label' => 'Fund Name', 'sortable' => true],
+                            ['field' => 'RecordDate', 'label' => 'RecordDate', 'sortable' => true],
+                            ['field' => 'EffectiveDate', 'label' => 'EffectiveDate', 'sortable' => true],
+                            ['field' => 'DividendPercentage', 'label' => 'DividendPercentage', 'sortable' => true],
+                            ['field' => 'SaleRateForCIP', 'label' => 'SaleRateForCIP', 'sortable' => true],
+                            ['field' => 'DividendDuring', 'label' => 'DividendDuring', 'sortable' => true],                                                 
+                            
                         ]"
                         :filters="[
                             [
-                                'field' => 'name', 
-                                'label' => 'All Statuses', 
-                                'options' => ['active' => 'Active Only', 'inactive' => 'Inactive Only', 'draft' => 'Drafts']
-                            ],
-                            [
-                                'field' => 'email', 
-                                'label' => 'All Visibility Modes', 
-                                'options' => ['public' => 'Public Pages', 'hidden' => 'Hidden Pages']
+                                'field' => 'FundCOAID', 
+                                'label' => 'FundCOAID', 
+                                'options' => ['2' => 'HFUF', '3' => 'HFACMEUF','4' => 'HFSUF']
                             ]
                         ]"
-                    />                                                                     
+                    />                                                                      
                 </div>                                             
             </div>                         
         </div>
