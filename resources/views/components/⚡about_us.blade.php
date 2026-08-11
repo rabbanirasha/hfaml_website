@@ -164,8 +164,8 @@ new class extends Component
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                             <img class="team-photo mb-3" src="{{asset('img/team/IMG_20210525_141630.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Md Fayekuzzaman</p>
-                            <p class="mb-0">Executive Director &amp; Former Chief Executive Officer (CEO)</p>
+                            <p class="mb-0 fw-bold">Mr. S.M. Shakhawat Hossain</p>
+                            <p class="mb-0">Chief Executive Officer (CEO)</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
                         </div>
                     </div>
@@ -173,7 +173,7 @@ new class extends Component
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                             <img class="team-photo mb-3" src="{{asset('img/team/nazmul-islam.jpg')}}">
                             <p class="mb-0 fw-bold">Mr. Nazmul Islam</p>
-                            <p class="mb-0">Chief Operating Officer (COO) &amp; CEO (in-charge)</p>
+                            <p class="mb-0">Chief Operating Officer (COO)</p>
                             <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
                         </div>
                     </div>
