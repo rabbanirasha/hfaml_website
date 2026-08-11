@@ -4,28 +4,20 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             {{-- <h5 class="mb-0 text-dark font-weight-bold">{{ $title }}</h5> --}}
             
-            <!-- Row Count Limit Menu -->
-            <div class="d-flex align-items-center">
-                <label class="me-2 text-nowrap text-muted small">Show:</label>
-                <select wire:model.live="perPage" class="form-select form-select-sm w-auto">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                </select>
-            </div>
+
         </div>
 
         <div class="row g-2">
             <!-- Universal Global Text Search -->
             <div class="col-md-4">
-                <input wire:model.live.debounce.250ms="search" type="text" class="form-control" placeholder="Search standard columns..." />
+                <input wire:model.live.debounce.250ms="search" type="text" class="form-control rounded-4" placeholder="🔍 Search..." />
             </div>
 
             <!-- Loop to dynamically inject any custom filter select arrays -->
+            <div class="col-md-8 d-flex flex-row justify-content-end">
             @foreach($filters as $filter)
-                <div class="col-md-3">
-                    <select wire:model.live="activeFilters.{{ $filter['field'] }}" class="form-select">
+                <div class="p-1">
+                    <select wire:model.live="activeFilters.{{ $filter['field'] }}" class="form-select form-select-sm">
                         <option value="">{{ $filter['label'] }}</option>
                         @foreach($filter['options'] as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -33,6 +25,7 @@
                     </select>
                 </div>
             @endforeach
+            </div>
         </div>
     </div>
 
@@ -49,7 +42,7 @@
                 <tr>
                     @foreach($columns as $column)
                         @if($column['sortable'] ?? false)
-                            <th wire:click="sortBy('{{ $column['field'] }}')" style="cursor: pointer;" class="user-select-none">
+                            <th wire:click="sortBy('{{ $column['field'] }}')" style="cursor: pointer;" class="user-select-none text-start">
                                 {{ $column['label'] }}
                                 @if($sortField === $column['field'])
                                     <span class="small ms-1">{!! $sortDirection === 'asc' ? '▲' : '▼' !!}</span>
@@ -65,7 +58,7 @@
                     @forelse($records as $record)
                         <tr>
                             @foreach($columns as $column)
-                                <td>
+                                <td class="text-start">
                                     @if(($column['type'] ?? '') === 'currency')
                                         <!-- Cast string to float explicitly to fix the parameter type error -->
                                         ${{ number_format((float) $record->{$column['field']}, 2) }}
@@ -88,46 +81,57 @@
 
     <!-- Universal Pagination Footers -->
     <div class="card-footer py-3">
-        <div class="row align-items-center">
-            <div class="col-sm-6 text-center text-sm-start text-muted small mb-3 mb-sm-0">
+        <div class="row align-items-start">
+            <div class="col-6 col-sm-4 text-center text-sm-start text-muted small mb-3 mb-sm-0">
+                <div class="d-flex align-items-center">
+                    <label class="me-2 text-nowrap text-muted small">Show:</label>
+                    <select wire:model.live="perPage" class="form-select form-select-sm w-auto">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>             
+            <div class="col-6 col-sm-4 text-center text-sm-start text-muted text-wrap small mt-2">
                 Showing {{ $records->firstItem() ?? 0 }} to {{ $records->lastItem() ?? 0 }} of {{ $records->total() }} rows
-            </div>
-            <div class="col-sm-6 d-flex justify-content-end align-content-center">
-                    <nav aria-label="Pagination">
-        <ul class="pagination justify-content-center">
-            @if ($records->onFirstPage())
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-            @else
-                <li class="page-item">
-                    <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() - 1 }})">
-                        Previous
-                    </button>
-                </li>
-            @endif
+            </div>         
+            <div class="col-12 col-sm-4 d-flex justify-content-end align-content-center">
+                <nav aria-label="Pagination">
+                    <ul class="pagination justify-content-center">
+                        @if ($records->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() - 1 }})">
+                                    Previous
+                                </button>
+                            </li>
+                        @endif
 
-            @foreach ($records->getUrlRange(1, $records->lastPage()) as $page => $url)
-                <li class="page-item {{ $page == $records->currentPage() ? 'active' : '' }}">
-                    <button class="page-link" type="button" wire:click="gotoPage({{ $page }})">
-                        {{ $page }}
-                    </button>
-                </li>
-            @endforeach
+                        @foreach ($records->getUrlRange(1, $records->lastPage()) as $page => $url)
+                            <li class="page-item {{ $page == $records->currentPage() ? 'active' : '' }}">
+                                <button class="page-link" type="button" wire:click="gotoPage({{ $page }})">
+                                    {{ $page }}
+                                </button>
+                            </li>
+                        @endforeach
 
-            @if ($records->hasMorePages())
-                <li class="page-item">
-                    <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() + 1 }})">
-                        Next
-                    </button>
-                </li>
-            @else
-                <li class="page-item disabled">
-                    <span class="page-link">Next</span>
-                </li>
-            @endif
-        </ul>
-    </nav>
+                        @if ($records->hasMorePages())
+                            <li class="page-item">
+                                <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() + 1 }})">
+                                    Next
+                                </button>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
