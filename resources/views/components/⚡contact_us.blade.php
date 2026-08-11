@@ -72,10 +72,7 @@ new class extends Component
                                     <div class="bg-secondary bg-opacity-10 rounded-3 p-3" style="font-size:1.5rem;">📍</div>
                                     <div>
                                         <h6 class="fw-bold mb-1">Office Address</h6>
-                                        <p class="text-muted mb-0 small">
-                                            HF Asset Management Ltd.<br>
-                                            Dhaka, Bangladesh
-                                        </p>
+                                        <p class="text-muted mb-0 small">5th Floor, Runner Group,<br>138/1 Tejgaon Industrial Area, Dhaka 1208</p>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +87,7 @@ new class extends Component
                                         <h6 class="fw-bold mb-1">Phone</h6>
                                         <p class="text-muted mb-0 small">
                                             <a href="tel:+88028810000" class="text-decoration-none">+880 2 8810000</a><br>
-                                            <a href="tel:+8801700000000" class="text-decoration-none">+880 1700-000000</a>
+                                            <a href="tel:+8801700000000" class="text-decoration-none">+880 1706 634 377</a>
                                         </p>
                                     </div>
                                 </div>
@@ -121,8 +118,8 @@ new class extends Component
                                     <div>
                                         <h6 class="fw-bold mb-1">Office Hours</h6>
                                         <p class="text-muted mb-0 small">
-                                            Sunday – Thursday: 9:00 AM – 5:00 PM<br>
-                                            Friday – Saturday: Closed<br>
+                                            Sunday – Thursday: <span style="float-right">9:00 AM – 5:00 PM</span><br>
+                                            Friday – Saturday: <span style="float-right">Closed</span><br>
                                             <em class="text-danger">Public Holidays: Closed</em>
                                         </p>
                                     </div>
