@@ -2,11 +2,22 @@
 
 use Livewire\Attributes\Title;
 Use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 new class extends Component
 {
+    public $fund_performance;
+    public function mount(){
+        $this->fund_performance = DB::table('tbl_fundperformance')->get();
+
+        if ($this->fund_performance->isEmpty()) {
+            abort(404);
+        }
+
+    }
     public function render(){
         return $this->view()->title("Home");
+
     }
 }
 ?>
@@ -49,33 +60,26 @@ new class extends Component
                                         <th>Effective Date</th>
                                         <th>Fund Name</th>
                                         <th>NAV at Cost Per Unit*</th>
-                                        <th>NAV at Market (Selling Price) Per Unit*</th>
-                                        <th>Repurchase/Surrender Price Per Unit**</th>
+                                        <th>NAV at Market (Selling Price) Per Unit</th>
+                                        <th>Repurchase/Surrender Price Per Unit</th>
                                     </tr>
                                 </thead>
                                 <tbody style="border-top: 2px solid var(--bs-primary) ;">
+                                @foreach($fund_performance as $row)
                                     <tr>
-                                        <td>12 August 2026</td>
-                                        <td>HFAML Unit Fund</td>
-                                        <td>12.53</td>
-                                        <td>8.50</td>
-                                        <td>8.33</td>
+                                        <td>{{$row->effective_date}}</td>
+                                        <td>{{$row->fund_name}}</td>
+                                        <td>{{$row->nav_cp_pu}}</td>
+                                        <td>{{$row->nav_mp_pu}}</td>
+                                        <td>{{$row->nav_rp_pu}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>12 August 2026</td>
-                                        <td>HFAML ACME Employees' Unit Fund</td>
-                                        <td>13.31</td>
-                                        <td>9.43</td>
-                                        <td>9.25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12 August 2026</td>
-                                        <td>HFAML Shariah Unit Fund</td>
-                                        <td>11.96</td>
-                                        <td>9.25</td>
-                                        <td>9.07</td>
-                                    </tr>                                    
+                                @endforeach                                  
                                 </tbody>
+                                <tfoot class="small">
+                                    <tr>
+                                    <td colspan="5">Valid until the announcement of the next NAV. The repurchase/surrender price is calculated after deducting 2% exit load from the NAV.</td>
+                                    </tr>
+                                </tfoot>                            
                             </table>
                         </div>
                     </div>
