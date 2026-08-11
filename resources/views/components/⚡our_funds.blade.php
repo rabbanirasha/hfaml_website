@@ -87,27 +87,23 @@ new class extends Component
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <livewire:datatable 
                         title="Raw DB Products" 
-                        table="migrations" 
+                        table="users" 
                         :columns="[
                             ['field' => 'id', 'label' => 'Product Name', 'sortable' => true],
-                            ['field' => 'migration', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'batch', 'label' => 'Inventory', 'sortable' => true]
+                            ['field' => 'name', 'label' => 'Price ($)', 'sortable' => true],
+                            ['field' => 'email', 'label' => 'Price ($)', 'sortable' => true],
+                            ['field' => 'email_verified_at', 'label' => 'Price ($)', 'sortable' => true]
                         ]"
                         :filters="[
                             [
-                                'field' => 'id', 
+                                'field' => 'name', 
                                 'label' => 'All Statuses', 
                                 'options' => ['active' => 'Active Only', 'inactive' => 'Inactive Only', 'draft' => 'Drafts']
                             ],
                             [
-                                'field' => 'migration', 
+                                'field' => 'email', 
                                 'label' => 'All Visibility Modes', 
                                 'options' => ['public' => 'Public Pages', 'hidden' => 'Hidden Pages']
-                            ],
-                            [
-                                'field' => 'batch', 
-                                'label' => 'All Conditions', 
-                                'options' => ['new' => 'Brand New', 'used' => 'Pre-Owned', 'refurbished' => 'Refurbished']
                             ]
                         ]"
                     />                                                                     

@@ -1,8 +1,8 @@
-<div class="card shadow-sm">
+<div>
     <!-- Header Block featuring Title & Search Layout -->
-    <div class="card-header bg-white py-3">
+    <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0 text-dark font-weight-bold">{{ $title }}</h5>
+            {{-- <h5 class="mb-0 text-dark font-weight-bold">{{ $title }}</h5> --}}
             
             <!-- Row Count Limit Menu -->
             <div class="d-flex align-items-center">
@@ -19,12 +19,7 @@
         <div class="row g-2">
             <!-- Universal Global Text Search -->
             <div class="col-md-4">
-                <input 
-                    wire:model.live.debounce.250ms="search" 
-                    type="text" 
-                    class="form-control" 
-                    placeholder="Search standard columns..."
-                />
+                <input wire:model.live.debounce.250ms="search" type="text" class="form-control" placeholder="Search standard columns..." />
             </div>
 
             <!-- Loop to dynamically inject any custom filter select arrays -->
@@ -43,14 +38,14 @@
 
     <!-- Data Presentation Layout Engine -->
     <div class="table-responsive position-relative">
-        <div wire:loading.flex class="d-none position-absolute top-0 start-0 w-100 h-100 bg-white opacity-50 justify-content-center align-items-center" style="z-index: 10; pointer-events: none;" >
+        <div wire:loading.flex class="d-none position-absolute top-0 start-0 w-100 h-100 justify-content-center align-items-center" style="z-index: 10; pointer-events: none;" >
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
 
         <table class="table table-hover align-middle mb-0">
-            <thead class="table-light text-nowrap">
+            <thead class="text-nowrap">
                 <tr>
                     @foreach($columns as $column)
                         @if($column['sortable'] ?? false)
@@ -92,13 +87,47 @@
     </div>
 
     <!-- Universal Pagination Footers -->
-    <div class="card-footer bg-white py-3">
+    <div class="card-footer py-3">
         <div class="row align-items-center">
             <div class="col-sm-6 text-center text-sm-start text-muted small mb-3 mb-sm-0">
                 Showing {{ $records->firstItem() ?? 0 }} to {{ $records->lastItem() ?? 0 }} of {{ $records->total() }} rows
             </div>
-            <div class="col-sm-6 d-flex justify-content-center justify-content-sm-end">
-                {{ $records->links() }}
+            <div class="col-sm-6 d-flex justify-content-end align-content-center">
+                    <nav aria-label="Pagination">
+        <ul class="pagination justify-content-center">
+            @if ($records->onFirstPage())
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() - 1 }})">
+                        Previous
+                    </button>
+                </li>
+            @endif
+
+            @foreach ($records->getUrlRange(1, $records->lastPage()) as $page => $url)
+                <li class="page-item {{ $page == $records->currentPage() ? 'active' : '' }}">
+                    <button class="page-link" type="button" wire:click="gotoPage({{ $page }})">
+                        {{ $page }}
+                    </button>
+                </li>
+            @endforeach
+
+            @if ($records->hasMorePages())
+                <li class="page-item">
+                    <button class="page-link" type="button" wire:click="gotoPage({{ $records->currentPage() + 1 }})">
+                        Next
+                    </button>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link">Next</span>
+                </li>
+            @endif
+        </ul>
+    </nav>
             </div>
         </div>
     </div>

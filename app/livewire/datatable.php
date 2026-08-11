@@ -11,43 +11,39 @@ class Datatable extends Component
 {
     use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
+
     public string $title = 'Data View';
-    public string $table = ''; 
+    public string $table = '';
     public array $columns = [];
     public array $filters = [];
 
-    // NATIVE PHP 8.4 PROPERTY HOOKS: Attach set blocks directly to properties
-    #[Url] 
+    #[Url]
     public string $search = '' {
         set {
-            // Intercept the input value ($value), convert null to '', and assign it safely
             $this->search = $value ?? '';
             $this->resetPage();
         }
     }
 
-    #[Url] 
+    #[Url]
     public array $activeFilters = [] {
         set {
-            // Intercept the input value, convert null to an empty array, and assign it safely
             $this->activeFilters = $value ?? [];
             $this->resetPage();
         }
     }
 
-    #[Url] 
+    #[Url]
     public int $perPage = 10 {
         set {
-            // Intercept the input value, convert null to an empty array, and assign it safely
-            $this->perPage = $value ?? [];
+            $this->perPage = $value ?? 10;
             $this->resetPage();
         }
     }
 
     #[Url] public string $sortField = 'id';
     #[Url] public string $sortDirection = 'asc';
-
-    // REMOVED completely: $searchHook, $perPageHook, and $activeFiltersHook tracking properties
 
     public function sortBy(string $field): void
     {
@@ -57,6 +53,13 @@ class Datatable extends Component
             $this->sortField = $field;
             $this->sortDirection = 'asc';
         }
+
+        $this->resetPage();
+    }
+
+    public function gotoPage(int $page): void
+    {
+        $this->setPage($page);   // this is the Livewire paginator API
     }
 
     public function render()
@@ -84,7 +87,7 @@ class Datatable extends Component
         $query->orderBy($this->sortField, $this->sortDirection);
 
         return view('livewire.datatable', [
-            'records' => $query->paginate($this->perPage)
+            'records' => $query->paginate($this->perPage),
         ]);
     }
 }
