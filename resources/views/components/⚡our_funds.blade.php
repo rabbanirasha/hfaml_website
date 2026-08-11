@@ -24,14 +24,14 @@ new class extends Component
                         title="Fund Summary" 
                         table="tbl_fundsummary" 
                         :columns="[
-                            ['field' => 'fund_id', 'label' => 'id', 'sortable' => true],
-                            ['field' => 'fund_name', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'fund_type', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'reg_date', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'sponsor', 'label' => '#', 'sortable' => true],
-                            ['field' => 'trustee', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'custodian', 'label' => 'Price ($)', 'sortable' => true],
-                            ['field' => 'target_size', 'label' => 'Price ($)', 'sortable' => true],                                                   
+                            ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
+                            ['field' => 'fund_name', 'label' => 'Fund Name', 'sortable' => true],
+                            ['field' => 'fund_type', 'label' => 'Fund Type', 'sortable' => true],
+                            ['field' => 'reg_date', 'label' => 'Registration Date', 'sortable' => true],
+                            ['field' => 'sponsor', 'label' => 'Sponsor', 'sortable' => true],
+                            ['field' => 'trustee', 'label' => 'Trustee', 'sortable' => true],
+                            ['field' => 'custodian', 'label' => 'Custodian', 'sortable' => true],
+                            ['field' => 'target_size', 'label' => 'Target Size', 'sortable' => true],                                                   
                             
                         ]"
                         :filters="[
@@ -46,42 +46,27 @@ new class extends Component
                 <div class="col-md-10 col-xl-10 text-center mx-auto my-5">
                     <h4 class="fw-bolder text-center" style="color: #2c4fc3;">NAV History</h4>
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
-                    <table class="table table-responsive text-start mt-4">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th class="text-center" scope="col">"SIP" Investment</th>
-                        <th class="text-center" scope="col">Other Capital Market Investment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Uncomplicated &amp; largely automated</td>
-                            <td>Either gambling  or investment for research</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Small amount of fund required</td>
-                            <td>Require Lump sum funds</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>No need to time the market</td>
-                            <td>Market timing is important for gain</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Minimized average cost per unit</td>
-                            <td>Cost of investment depends on market timing</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Simple way to create long term wealth</td>
-                            <td>Trust your Luck!</td>
-                        </tr>
-                    </tbody>
-                    </table>                                    
+                    <livewire:datatable 
+                        title="NAV History" 
+                        table="tbl_eodfundsummary" 
+                        :columns="[
+                            ['field' => 'RecordID', 'label' => '#', 'sortable' => true],
+                            ['field' => 'FundCOAID', 'label' => 'Fund Name', 'sortable' => true],
+                            ['field' => 'Date', 'label' => 'Fund Type', 'sortable' => true],
+                            ['field' => 'NAVACTUAL', 'label' => 'Registration Date', 'sortable' => true],
+                            ['field' => 'NAVATCOSTPRICEAVG', 'label' => 'Sponsor', 'sortable' => true],
+                            ['field' => 'NAVATMARKETPRICE', 'label' => 'Trustee', 'sortable' => true],
+                            ['field' => 'TOTALNOOFSHARE', 'label' => 'Custodian', 'sortable' => true],                                                 
+                            
+                        ]"
+                        :filters="[
+                            [
+                                'field' => 'FundCOAID', 
+                                'label' => 'FundCOAID', 
+                                'options' => ['2' => 'HFUF', '3' => 'HFACMEUF','4' => 'HFSUF']
+                            ]
+                        ]"
+                    />                                                   
                 </div>
                 <div class="col-md-10 col-xl-10 text-center mx-auto my-5">
                     <h4 class="fw-bolder text-center" style="color: #2c4fc3;">Dividend History</h4>

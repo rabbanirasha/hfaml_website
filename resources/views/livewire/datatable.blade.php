@@ -18,7 +18,7 @@
             @foreach($filters as $filter)
                 <div class="p-1">
                     <select wire:model.live="activeFilters.{{ $filter['field'] }}" class="form-select form-select-sm">
-                        <option value="">{{ $filter['label'] }}</option>
+                        <option value="">🧹{{ $filter['label'] }}</option>
                         @foreach($filter['options'] as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -97,8 +97,36 @@
                 Showing {{ $records->firstItem() ?? 0 }} to {{ $records->lastItem() ?? 0 }} of {{ $records->total() }} rows
             </div>         
             <div class="col-12 col-sm-4 d-flex justify-content-end align-content-center">
+                @php
+                    $currentPage = $records->currentPage();
+                    $lastPage = $records->lastPage();
+                    $window = 1; // show 2 pages before and after current page
+
+                    $start = max(1, $currentPage - $window);
+                    $end = min($lastPage, $currentPage + $window);
+
+                    $pages = [];
+                    if ($start > 1) {
+                        $pages[] = 1;
+                        if ($start > 2) {
+                            $pages[] = 'ellipsis-start';
+                        }
+                    }
+
+                    for ($p = $start; $p <= $end; $p++) {
+                        $pages[] = $p;
+                    }
+
+                    if ($end < $lastPage) {
+                        if ($end < $lastPage - 1) {
+                            $pages[] = 'ellipsis-end';
+                        }
+                        $pages[] = $lastPage;
+                    }
+                @endphp
+
                 <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-center">
+                    <ul class="pagination justify-content-center flex-wrap">
                         @if ($records->onFirstPage())
                             <li class="page-item disabled">
                                 <span class="page-link">Previous</span>
@@ -111,12 +139,18 @@
                             </li>
                         @endif
 
-                        @foreach ($records->getUrlRange(1, $records->lastPage()) as $page => $url)
-                            <li class="page-item {{ $page == $records->currentPage() ? 'active' : '' }}">
-                                <button class="page-link" type="button" wire:click="gotoPage({{ $page }})">
-                                    {{ $page }}
-                                </button>
-                            </li>
+                        @foreach ($pages as $page)
+                            @if ($page === 'ellipsis-start' || $page === 'ellipsis-end')
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            @else
+                                <li class="page-item {{ $page == $records->currentPage() ? 'active' : '' }}">
+                                    <button class="page-link" type="button" wire:click="gotoPage({{ $page }})">
+                                        {{ $page }}
+                                    </button>
+                                </li>
+                            @endif
                         @endforeach
 
                         @if ($records->hasMorePages())
