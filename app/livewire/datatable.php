@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\Url;
 use Illuminate\Support\Facades\DB;
 
 class Datatable extends Component
@@ -18,32 +17,19 @@ class Datatable extends Component
     public array $columns = [];
     public array $filters = [];
 
-    #[Url]
-    public string $search = '' {
-        set {
-            $this->search = $value ?? '';
-            $this->resetPage();
+    public string $search = '';
+    public array $activeFilters = [];
+    public int $perPage = 10;
+
+    public string $sortField = 'id';
+    public string $sortDirection = 'asc';
+
+    public function mount(): void
+    {
+        if (!empty($this->columns)) {
+            $this->sortField = $this->columns[0]['field'] ?? 'id';
         }
     }
-
-    #[Url]
-    public array $activeFilters = [] {
-        set {
-            $this->activeFilters = $value ?? [];
-            $this->resetPage();
-        }
-    }
-
-    #[Url]
-    public int $perPage = 10 {
-        set {
-            $this->perPage = $value ?? 10;
-            $this->resetPage();
-        }
-    }
-
-    #[Url] public string $sortField = 'id';
-    #[Url] public string $sortDirection = 'asc';
 
     public function sortBy(string $field): void
     {
@@ -59,7 +45,7 @@ class Datatable extends Component
 
     public function gotoPage(int $page): void
     {
-        $this->setPage($page);   // this is the Livewire paginator API
+        $this->setPage($page);
     }
 
     public function render()
