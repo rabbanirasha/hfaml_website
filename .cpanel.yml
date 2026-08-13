@@ -1,12 +1,9 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/hfasset/hfaml_website_laravel/
-    - export NPMBIN=/home/hfasset/nodevenv/hfaml_website_laravel/22/bin
-    - /usr/local/bin/composer install --no-dev --optimize-autoloader --working-dir=$DEPLOYPATH
-    - $NPMBIN/npm ci --prefix $DEPLOYPATH
-    - $NPMBIN/npm run build --prefix $DEPLOYPATH
-    - /usr/local/bin/php $DEPLOYPATH/artisan migrate --force
-    - /usr/local/bin/php $DEPLOYPATH/artisan config:cache
-    - /usr/local/bin/php $DEPLOYPATH/artisan route:cache
-    - /usr/local/bin/php $DEPLOYPATH/artisan view:cache
+    - export DEPLOYPATH=/home/hfasset/hfaml_website/
+    - export PHP=/opt/cpanel/ea-php85/root/usr/bin/php
+    - $PHP $DEPLOYPATH/artisan migrate --force
+    - $PHP $DEPLOYPATH/artisan config:cache
+    - $PHP $DEPLOYPATH/artisan route:cache
+    - $PHP $DEPLOYPATH/artisan view:cache

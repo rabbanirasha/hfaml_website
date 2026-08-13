@@ -1,3 +1,12 @@
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(json|lock)$">
+    Require all denied
+</FilesMatch>
+
+RewriteRule ^(vendor|storage|bootstrap|config|database|resources|tests|routes|app)/ - [F,L]
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
