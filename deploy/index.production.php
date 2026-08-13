@@ -1,0 +1,3 @@
+require __DIR__.'/../hfasset_website/vendor/autoload.php';
+// ...
+$app = require_once __DIR__.'/../hfasset_website/bootstrap/app.php';
