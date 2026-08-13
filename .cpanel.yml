@@ -3,9 +3,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/hfasset/hfaml_website/
     - export PHP=/opt/cpanel/ea-php85/root/usr/bin/php
-    - $PHP /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction --working-dir=$DEPLOYPATH    
-    - $PHP $DEPLOYPATH/artisan migrate --force --no-interaction
-    - $PHP $DEPLOYPATH/artisan key:generate --no-interaction
+    - $PHP /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction --working-dir=$DEPLOYPATH
     - $PHP $DEPLOYPATH/artisan config:clear --no-interaction
     - $PHP $DEPLOYPATH/artisan optimize:clear --no-interaction
     - $PHP $DEPLOYPATH/artisan cache:clear --no-interaction
