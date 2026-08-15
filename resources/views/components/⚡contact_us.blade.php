@@ -47,7 +47,7 @@ new class extends Component
                                         </select>
                                     </div>
                                     <div class="col-12 form-floating">
-                                        <textarea style="height: 200px" class="form-control" id="message" name="message" rows="5" placeholder="Describe your query in detail..." required><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
+                                        <textarea style="height: 500px" class="form-control" id="message" name="message" rows="5" placeholder="Describe your query in detail..." required><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
                                         <label for="message" class="form-label fw-semibold">Message <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-12">
@@ -66,7 +66,7 @@ new class extends Component
                     <div class="d-flex flex-column gap-4">
 
                         <!-- Office Address -->
-                        <div class="card border-0 shadow-sm">
+                        <div class="card border-0">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="bg-secondary bg-opacity-10 rounded-3 p-3" style="font-size:1.5rem;">📍</div>
@@ -79,7 +79,7 @@ new class extends Component
                         </div>
 
                         <!-- Phone -->
-                        <div class="card border-0 shadow-sm">
+                        <div class="card border-0">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="bg-primary bg-opacity-10 rounded-3 p-3" style="font-size:1.5rem;">📞</div>
@@ -95,7 +95,7 @@ new class extends Component
                         </div>
 
                         <!-- Email -->
-                        <div class="card border-0 shadow-sm">
+                        <div class="card border-0">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="bg-warning bg-opacity-10 rounded-3 p-3" style="font-size:1.5rem;">✉️</div>
@@ -111,7 +111,7 @@ new class extends Component
                         </div>
 
                         <!-- Office Hours -->
-                        <div class="card border-0 shadow-sm">
+                        <div class="card border-0">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="bg-info bg-opacity-10 rounded-3 p-3" style="font-size:1.5rem;">⏰</div>
@@ -128,14 +128,14 @@ new class extends Component
                         </div>
 
                         <!-- Map Placeholder -->
-                        <div class="card border-0 shadow-sm overflow-hidden">
-                            <div class="d-flex align-items-center justify-content-center bg-light" style="height:180px;">
-                                <div class="text-center text-muted">
-                                    <div style="font-size:2.5rem;">🗺️</div>
-                                    <p class="mb-0 small mt-2">Google Maps integration<br><em>coming soon</em></p>
-                                </div>
-                            </div>
-                        </div>
+<div class="card border-0 shadow-sm overflow-auto">
+  <div class="card-body p-0 bg-light">
+    <div class="ratio ratio-4x3">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.5759825389364!2d90.40414661107914!3d23.762495388222654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8a7763bdebb%3A0x80d4d06fcf6a1473!2sHF%20Asset%20Management%20Limited%20(HFAML)!5e0!3m2!1sen!2sbd!4v1786799521746!5m2!1sen!2sbd"
+        style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </div>
+</div>
 
                     </div>
                 </div>

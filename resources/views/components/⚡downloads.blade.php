@@ -76,7 +76,7 @@ new class extends Component
                     <div class="card h-100 shadow-sm border-0">
                         <div class="card-header bg-success bg-opacity-10 py-3">
                             <h5 class="fw-bold mb-0">Scheme Documents</h5>
-                            <small class="opacity-75">SIDs, KIMs and prospectuses</small>
+                            <small class="opacity-75">Prospectus and Factsheet</small>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center py-3">

@@ -36,12 +36,12 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/app.js": {
-    "file": "assets/app-D7Udv1br.js",
+    "file": "assets/app-Cf1gFcOl.js",
     "name": "app",
     "src": "resources/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-CjLldcjQ.css"
+      "assets/app-CwjhDpSy.css"
     ],
     "assets": [
       "assets/bootstrap-icons-mSm7cUeB.woff2",

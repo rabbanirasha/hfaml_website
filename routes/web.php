@@ -12,5 +12,5 @@ Route::livewire('/downloads', 'downloads')->name('downloads');
 Route::livewire('/signup', 'signup')->name('signup');
 Route::livewire('/login', 'login')->name('login');
 Route::livewire('/contact-us', 'contact_us')->name('contact');
-Route::livewire('/mutual-fund/hfuf', 'view_fund')->name('hfuf');
+Route::livewire('/mutual-fund/{fund_code}', 'view_fund')->name('view_fund');
 

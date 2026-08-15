@@ -59,9 +59,9 @@ new class extends Component
                                     <tr>
                                         <th>Effective Date</th>
                                         <th>Fund Name</th>
-                                        <th>NAV at Cost Per Unit*</th>
-                                        <th>NAV at Market (Selling Price) Per Unit</th>
-                                        <th>Repurchase/Surrender Price Per Unit</th>
+                                        <th>NAV at Cost /Unit*</th>
+                                        <th>NAV at Market (Selling Price) /Unit</th>
+                                        <th>Repurchase or Surrender Price /Unit</th>
                                     </tr>
                                 </thead>
                                 <tbody style="border-top: 2px solid var(--bs-primary) ;">
@@ -92,29 +92,29 @@ new class extends Component
             <div>
                 <div class="row row-cols-1 row-cols-md-3">
                     <div class="col mb-4">
-                        <div class="card bg-primary-subtle">
-                            <div class="card-body text-center p-3">
+                        <div class="card bg-primary-subtle h-100">
+                            <div class="card-body text-center p-3 d-flex flex-column">
                                 <img class="mx-auto my-4 w-25" src="{{asset('img/money.svg')}}">
                                 <h5 class="fw-bold mb-3 card-title text-primary" style="border-bottom: 1px solid #dddddd;">HFAML Unit Fund</h5>
-                                <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by us, it helps stabilize the Capital Market, provide liquidity in the market and declare attractive dividend to the unit holders by investing the proceeds in the capital and money market of Bangladesh.</span><br><br><br></p><button class="btn btn-primary btn-sm" type="button">Learn more</button>
+                                <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by us, it helps stabilize the Capital Market, provide liquidity in the market and declare attractive dividend to the unit holders by investing the proceeds in the capital and money market of Bangladesh.</span><br><br><br></p><a class="btn btn-primary btn-sm mt-auto" href ="{{route('view_fund', ['fund_code' => 'hfuf'])}}" wire:navigate.hover type="button">Learn more</a>
                             </div>
                         </div>
                     </div>
                     <div class="col mb-4">
-                        <div class="card bg-primary-subtle">
-                            <div class="card-body text-center p-3">
+                        <div class="card bg-primary-subtle h-100">
+                            <div class="card-body text-center p-3 d-flex flex-column">
                                 <img class="mx-auto my-4 w-25" src="{{asset('img/employees.svg')}}">
                                 <h5 class="fw-bold mb-3 card-title text-primary" style="border-bottom: 1px solid #dddddd;">HFAML-ACME Employees' Unit Fund</h5>
-                                <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span><br><br></p><button class="btn btn-primary btn-sm" type="button">Learn more</button>
+                                <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span><br><br></p><a class="btn btn-primary btn-sm mt-auto" href ="{{route('view_fund', ['fund_code' => 'hfacmeuf'])}}" wire:navigate.hover type="button">Learn more</a>
                             </div>
                         </div>
                     </div>
                     <div class="col mb-4">
-                        <div class="card bg-primary-subtle">
-                            <div class="card-body text-center p-3">
+                        <div class="card bg-primary-subtle h-100">
+                            <div class="card-body text-center p-3 d-flex flex-column">
                                 <img class="mx-auto my-4 w-25" src="{{asset('img/kaaba.svg')}}">
                                 <h5 class="fw-bold mb-3 card-title text-primary" style="border-bottom: 1px solid #dddddd;">HFAML Shariah Unit Fund</h5>
-                                <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by us, it provides maximum return of investment in the form of capital appreciation and dividend payment by&nbsp;adjusting risks of investments in the shariah compliant instruments of the capital and the money market of Bangladesh, especially for investors who abides by the Islamic Shariah.</span></p><button class="btn btn-primary btn-sm" type="button">Learn more</button>
+                                <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by us, it provides maximum return of investment in the form of capital appreciation and dividend payment by&nbsp;adjusting risks of investments in the shariah compliant instruments of the capital and the money market of Bangladesh, especially for investors who abides by the Islamic Shariah.</span></p><a class="btn btn-primary btn-sm mt-auto" href ="{{route('view_fund', ['fund_code' => 'hfsuf'])}}" wire:navigate.hover type="button">Learn more</a>
                             </div>
                         </div>
                     </div>

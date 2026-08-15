@@ -19,21 +19,12 @@ new class extends Component
             <div class="row mb-4">
                 <div class="col-12">
                     <ul class="nav nav-underline justify-content-center">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-selected="true">All</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="annual-tab" data-bs-toggle="pill" data-bs-target="#annual" type="button" role="tab" aria-selected="false">Annual Reports</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="quarterly-tab" data-bs-toggle="pill" data-bs-target="#quarterly" type="button" role="tab" aria-selected="false">Quarterly Disclosures</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="portfolio-tab" data-bs-toggle="pill" data-bs-target="#portfolio" type="button" role="tab" aria-selected="false">Portfolio Statements</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="nav-tab" data-bs-toggle="pill" data-bs-target="#nav" type="button" role="tab" aria-selected="false">NAV Declarations</button>
-                </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-selected="true">All</button> </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="annual-tab" data-bs-toggle="pill" data-bs-target="#annual" type="button" role="tab" aria-selected="false">Annual Reports</button> </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="quarterly-tab" data-bs-toggle="pill" data-bs-target="#quarterly" type="button" role="tab" aria-selected="false">Quarterly Disclosures</button> </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="portfolio-tab" data-bs-toggle="pill" data-bs-target="#portfolio" type="button" role="tab" aria-selected="false">Portfolio Statements</button> </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="nav-tab" data-bs-toggle="pill" data-bs-target="#nav" type="button" role="tab" aria-selected="false">NAV Declarations</button> </li>
+                    <li class="nav-item" role="presentation"> <button class="nav-link" id="nav-tab" data-bs-toggle="pill" data-bs-target="#nav" type="button" role="tab" aria-selected="false">Price Sensitive Info</button> </li>                    
                     </ul>
                 </div>
             </div>

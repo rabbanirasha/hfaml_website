@@ -51,12 +51,12 @@ new class extends Component
                         table="tbl_eodfundsummary" 
                         :columns="[
                             ['field' => 'RecordID', 'label' => '#', 'sortable' => true],
-                            ['field' => 'FundCOAID', 'label' => 'Fund Name', 'sortable' => true],
-                            ['field' => 'Date', 'label' => 'Fund Type', 'sortable' => true],
-                            ['field' => 'NAVACTUAL', 'label' => 'Registration Date', 'sortable' => true],
-                            ['field' => 'NAVATCOSTPRICEAVG', 'label' => 'Sponsor', 'sortable' => true],
-                            ['field' => 'NAVATMARKETPRICE', 'label' => 'Trustee', 'sortable' => true],
-                            ['field' => 'TOTALNOOFSHARE', 'label' => 'Custodian', 'sortable' => true],                                                 
+                            ['field' => 'FundCOAID', 'label' => 'Fund ID', 'sortable' => true],
+                            ['field' => 'Date', 'label' => 'Date', 'sortable' => true],
+                            ['field' => 'NAVACTUAL', 'label' => 'Actual NAV', 'sortable' => true],
+                            ['field' => 'NAVATCOSTPRICEAVG', 'label' => 'NAV at Cost', 'sortable' => true],
+                            ['field' => 'NAVATMARKETPRICE', 'label' => 'NAV at Market', 'sortable' => true],
+                            ['field' => 'TOTALNOOFSHARE', 'label' => 'Total Shares', 'sortable' => true],                                                 
                             
                         ]"
                         :filters="[

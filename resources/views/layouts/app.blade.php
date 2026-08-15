@@ -26,7 +26,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse text-nowrap text-end justify-content-between p-2 rounded-1" id="navcol-1" style="background-color: var(--bs-body-bg);">
-                <ul class="navbar-nav text-center fs-7">
+                <ul class="navbar-nav text-center" style="font-size:0.9rem;">
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}" wire:navigate.hover wire:current.exact="active text-blue">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}" wire:navigate.hover wire:current="active text-blue">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('services') }}" wire:navigate.hover wire:current="active text-blue">Our Services</a></li>
