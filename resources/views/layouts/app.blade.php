@@ -13,7 +13,7 @@
 <body class="bg-primary-gradient">
     <!-- Start: Navbar Centered Links -->
     <nav class="navbar navbar-expand-lg sticky-top navbar-shrink navbar-light" id="mainNav" style="font-size: 13px;height: 60px;">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span><img class="img-fluid" src="{{asset('img/HFAML%20Logo.png')}}" loading="auto" style="height: 2.2rem;"></span></a>
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span><img class="img-fluid fit-contain" src="{{asset('img/HFAML%20Logo.png')}}" loading="auto" style="height: 2.2rem;"></span></a>
             <div class="theme-switcher dropdown me-auto">
                 <a class="dropdown-toggle my-auto" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;"><i class="bi bi-brightness-high-fill fs-6 text-primary"></i></a>
                 <div class="dropdown-menu" style="font-size:small;">
@@ -26,7 +26,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse text-nowrap text-end justify-content-between p-2 rounded-1" id="navcol-1" style="background-color: var(--bs-body-bg);">
-                <ul class="navbar-nav text-center">
+                <ul class="navbar-nav text-center fs-7">
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}" wire:navigate.hover wire:current.exact="active text-blue">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}" wire:navigate.hover wire:current="active text-blue">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('services') }}" wire:navigate.hover wire:current="active text-blue">Our Services</a></li>
