@@ -46,7 +46,7 @@ new class extends Component
             <div class="row p-2 rounded-bordered" style="background-color: var(--bs-body-bg);">
                 <div class="col-12 d-flex justify-content-center align-items-center mb-4 mt-2">
                     <div class="text-center">
-                        <h1 class="fw-bold mb-0 text-primary">Fund Performance</h1><a class="badge text-bg-primary btn" href="#">Historical Trend</a>
+                        <h1 class="fw-bold mb-0 text-primary">Fund Performance</h1><a class="badge text-bg-primary btn" href="{{ route('funds') }}" wire:navigate.hover>Historical Trend</a>
                     </div>
                 </div>
                 <div class="col text-center text-md-start">
