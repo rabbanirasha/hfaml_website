@@ -4,12 +4,12 @@ deployment:
     - export DEPLOYPATH=/home/hfasset/hfaml_website/
     - export PHP=/opt/cpanel/ea-php85/root/usr/bin/php
     # - $PHP /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction --working-dir=$DEPLOYPATH
-    - $PHP $DEPLOYPATH/artisan config:clear --no-interaction
-    - $PHP $DEPLOYPATH/artisan optimize:clear --no-interaction
-    - $PHP $DEPLOYPATH/artisan cache:clear --no-interaction
-    - $PHP $DEPLOYPATH/artisan view:clear --no-interaction
-    - $PHP $DEPLOYPATH/artisan event:cache --no-interaction
-    - $PHP $DEPLOYPATH/artisan view:cache --no-interaction
-    - $PHP $DEPLOYPATH/artisan route:cache --no-interaction
-    - $PHP $DEPLOYPATH/artisan config:cache --no-interaction
-    - $PHP $DEPLOYPATH/artisan optimize --no-interaction
+    - $PHP $DEPLOYPATH/artisan config:clear
+    - $PHP $DEPLOYPATH/artisan optimize:clear
+    - $PHP $DEPLOYPATH/artisan cache:clear
+    - $PHP $DEPLOYPATH/artisan view:clear
+    - $PHP $DEPLOYPATH/artisan event:cache
+    - $PHP $DEPLOYPATH/artisan view:cache
+    - $PHP $DEPLOYPATH/artisan route:cache
+    - $PHP $DEPLOYPATH/artisan config:cache
+    - $PHP $DEPLOYPATH/artisan optimize
