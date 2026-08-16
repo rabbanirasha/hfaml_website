@@ -18,7 +18,7 @@ new class extends Component
 
     }
     public function render(){
-        return $this->view()->title("Home");
+        return $this->view()->title($this->fund_summary->fund_code);
 
     }
 }

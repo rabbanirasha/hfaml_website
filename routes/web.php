@@ -13,4 +13,6 @@ Route::livewire('/signup', 'signup')->name('signup');
 Route::livewire('/login', 'login')->name('login');
 Route::livewire('/contact-us', 'contact_us')->name('contact');
 Route::livewire('/mutual-fund/{fund_code}', 'view_fund')->name('view_fund');
+Route::livewire('/news', 'news')->name('news');
+Route::livewire('/news/{news_id}', 'view_news')->name('view_news');
 

@@ -37,7 +37,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}" wire:navigate.hover wire:current="active text-blue">Contact Us</a></li>
                 </ul>
                 <div class="d-inline-flex">
-                    <a class="btn btn-sm d-none d-xl-inline-flex" role="button" wire:navigate.hover href="{{ route('signup') }}" style="color: var(--bs-primary);">SIGN UP</a>
+                    <a class="fw-bold btn btn-sm btn-outline-light text-primary mb-0 border-0 d-none d-xl-inline-flex" href ="{{route('signup')}}" wire:navigate.hover>SIGN UP</a>
                     <a class="btn btn-primary btn-sm shadow" role="button" wire:navigate.hover href="{{ route('login') }}">LOGIN</a>
                 </div>
             </div>

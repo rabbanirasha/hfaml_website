@@ -6,13 +6,11 @@ use Illuminate\Support\Facades\DB;
 
 new class extends Component
 {
-    public $fund_performance;
+    public $fund_performance, $news;
     public function mount(){
         $this->fund_performance = DB::table('tbl_fundperformance')->get();
+        $this->news = DB::table('tbl_news')->take(3)->get();
 
-        if ($this->fund_performance->isEmpty()) {
-            abort(404);
-        }
 
     }
     public function render(){
@@ -127,45 +125,23 @@ new class extends Component
             <div class="row p-2 rounded-bordered" style="background-color: var(--bs-body-bg);"><!-- Start: News Title -->
                 <div class="col-12">
                     <div class="text-center pb-3">
-                        <h1 class="fw-bold mb-0 text-primary">News</h1><a class="badge text-bg-primary btn" href="#">Read More News</a>
+                        <h1 class="fw-bold mb-0 text-primary">News</h1><a class="badge text-bg-primary btn" href ="{{route('news')}}" wire:navigate.hover>Go to News</a>
                     </div>
                 </div><!-- End: News Title -->
+                @foreach($news as $row)
                 <div class="col mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
-                        <p class="fs-4 fw-bolder text-start mb-2">Sponsored by the ACME Laboratories, it&nbsp;</p>
-                        <p class="mb-3"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span></p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/team/avatar2.jpg')}}">
+                        <p class="fs-4 fw-bolder text-start mb-2">{{$row->title}}</p>
+                        <p class="mb-3"><span style="font-weight: normal !important;">{{$row->main_body}}</span></p>
+                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/products/3.jpg')}}">
                             <div>
-                                <p class="fw-bold text-primary mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
+                                <p class="text-muted mb-0">{{$row->post_date}}</p>                                
+                                <a class="fw-bold text-primary mb-0" href ="{{route('view_news', ['news_id' => $row->news_id])}}" wire:navigate.hover>Read More</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col mb-4">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start">
-                        <p class="fs-4 fw-bolder text-start mb-2">Sponsored by the ACME Laboratories, it&nbsp;</p>
-                        <p class="mb-3"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span></p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/team/avatar2.jpg')}}">
-                            <div>
-                                <p class="fw-bold text-primary mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start">
-                        <p class="fs-4 fw-bolder text-start mb-2">Sponsored by the ACME Laboratories, it&nbsp;</p>
-                        <p class="mb-3"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span></p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{asset('img/team/avatar2.jpg')}}">
-                            <div>
-                                <p class="fw-bold text-primary mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Erat netus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach  
             </div>
         </div><!-- End: Hero Clean Reverse -->
     </header>
