@@ -2,11 +2,26 @@
 
 use Livewire\Attributes\Title;
 Use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 new class extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public $news;
+    public function mount(){
+        $this->news = DB::table('tbl_news')->get();
+        
+        // if ($this->news->isEmpty()) {
+        //     abort(404);
+        // }
+
+    }
     public function render(){
         return $this->view()->title("Reports");
+
     }
 }
 ?>
@@ -42,72 +57,18 @@ new class extends Component
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($news as $row)
                                 <tr>
-                                    <td class="px-4 fw-medium">HFAML Annual Report 2025-2026</td>
-                                    <td><span class="badge bg-primary">Annual</span></td>
-                                    <td>July 2026</td>
+                                    <td class="px-4 fw-medium">{{$row->title}}</td>
+                                    <td><span class="badge bg-primary">{{$row->news_id}}</span></td>
+                                    <td>{{$row->post_date}}</td>
                                     <td class="text-end px-4">
                                         <a href="#" class="btn btn-primary btn-sm">Download</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">HFAML Annual Report 2024-2025</td>
-                                    <td><span class="badge bg-primary">Annual</span></td>
-                                    <td>July 2025</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">Q4 Portfolio Disclosure - FY2025-26</td>
-                                    <td><span class="badge bg-info text-dark">Quarterly</span></td>
-                                    <td>June 2026</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">Q3 Portfolio Disclosure - FY2025-26</td>
-                                    <td><span class="badge bg-info text-dark">Quarterly</span></td>
-                                    <td>March 2026</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">Q2 Portfolio Disclosure - FY2025-26</td>
-                                    <td><span class="badge bg-info text-dark">Quarterly</span></td>
-                                    <td>December 2025</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">Q1 Portfolio Disclosure - FY2025-26</td>
-                                    <td><span class="badge bg-info text-dark">Quarterly</span></td>
-                                    <td>September 2025</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">HFAML Unit Fund - NAV Declaration</td>
-                                    <td><span class="badge bg-success">NAV</span></td>
-                                    <td>Weekly</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 fw-medium">HFAML Shariah Unit Fund - NAV Declaration</td>
-                                    <td><span class="badge bg-success">NAV</span></td>
-                                    <td>Weekly</td>
-                                    <td class="text-end px-4">
-                                        <a href="#" class="btn btn-primary btn-sm">Download</a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
-                        </table>
+                        </table>        
                     </div>
                 </div>
             </div>
