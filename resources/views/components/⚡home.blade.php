@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 new class extends Component
 {
-    public $fund_performance, $news;
+    public $fund_performance, $news, $heroImages;
     public function mount(){
         $this->fund_performance = DB::table('tbl_fundperformance')->get();
         $this->news = DB::table('tbl_news')->take(3)->get();
+        $this->heroImages = array_map( fn($file) => basename($file), glob(public_path('img/hero_banner/*.*')) );
+        sort($this->heroImages, SORT_NATURAL | SORT_FLAG_CASE);
 
 
     }
@@ -24,19 +26,21 @@ new class extends Component
     <section class="py-3">
         <div class="container text-center py-3"><!-- Start: Hero Carousel -->
             <div class="carousel slide carousel-dark shadow img-fluid" data-bs-ride="carousel" id="carousel-1">
-                <div class="carousel-inner img-fluid" style="height: 100%;">
-                    <div class="carousel-item active img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFSUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
-                    <div class="carousel-item h-100 img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
-                    <div class="carousel-item h-100 img-fluid"><img class="w-100 d-block img-fluid carousel-image" src="{{asset('img/HFACMEUF.png')}}" alt="Slide Image" style="z-index: -1;"></div>
+                <div class="carousel-inner img-fluid" style="height: 350px;">
+                    @foreach($heroImages as $index => $image)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }} img-fluid">
+                            <img class="w-100 h-100 d-block carousel-image fit-cover" src="{{ asset('img/hero_banner/' . $image) }}" alt="Slide Image {{ $index + 1 }}" style="z-index: -1;" >
+                        </div>
+                    @endforeach
                 </div>
                 <div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></button><!-- End: Previous -->
                     <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></button><!-- End: Next -->
                 </div>
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> 
-                    <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button>
+                    @foreach($heroImages as $index => $image)
+                        <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}" ></button>
+                    @endforeach
                 </div>
             </div><!-- End: Hero Carousel -->
         </div>
