@@ -14,7 +14,7 @@ new class extends Component
     public ?string $report_date = null;
     public string $remarks = '';
     public array $report_files = [];
-    public int $insertChunkSize = 25;
+    public int $insertChunkSize = 5;
 
     protected function extractDateFromFile($file): ?string
     {
@@ -76,16 +76,15 @@ new class extends Component
         return trim($name) !== '' ? $name : 'Report';
     }
 
-    public function submit(): void
+    public function submit()
     {
         $this->validate([
-            'report_type' => ['required', 'string', 'max:500'],
-            'report_files' => ['nullable', 'array', 'min:1', 'max:20480'],
-            'report_files.*' => ['file', 'max:20480', 'mimes:pdf,doc,docx,xls,xlsx,jpg,jpeg,png'],
-            'report_title' => ['nullable', 'string', 'max:1000'],
-            'report_date' => ['nullable', 'date'],
-            'remarks' => ['nullable', 'string', 'max:1000'],
-        ]);
+            'report_type' => 'required|string|max:500',
+            'report_files' => 'required|array|min:1',
+            'report_title' => 'nullable|string|max:1000',
+            'report_date' => 'nullable|date',
+            'remarks' => 'nullable|string|max:1000',                    
+        ]);        
 
         $rows = [];
 
@@ -149,7 +148,7 @@ new class extends Component
                                 </div>
                             @endif
 
-                            <form wire:submit.prevent="submit">
+                            <form wire:submit="submit">
                                 <div class="mb-3">
                                     <label for="report_title" class="form-label fw-semibold">Report Title</label>
                                     <input
@@ -218,9 +217,6 @@ new class extends Component
                                     >
                                     <small class="text-muted">You can select as many files as you want; uploads are inserted in batches of {{ $insertChunkSize }}.</small>
                                     @error('report_files')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                    @error('report_files.*')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
