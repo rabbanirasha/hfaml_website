@@ -1,12 +1,17 @@
-:root, [data-bs-theme=light] {
+:root, [data-bs-theme=auto] {
   --bs-primary: #ff8c00;
   --bs-primary-rgb: 255,140,0;
   --bs-primary-text-emphasis: #663800;
   --bs-primary-bg-subtle: #FFE8CC;
   --bs-primary-border-subtle: #FFD199;
+  --bs-secondary: #2c4fc3;
+  --bs-secondary-rgb: 44,79,195;
+  --bs-secondary-text-emphasis: #000000;
+  --bs-secondary-bg-subtle: #E8F6FF;
+  --bs-secondary-border-subtle: #E8F6FF;  
   --bs-link-hover-color: #2c4fc3;
   --bs-link-hover-color-rgb: 44,79,195;
-  --bs-focus-ring-opacity: 0.1;
+  --bs-focus-ring-opacity: 0;
 }
 
 .btn-primary {
