@@ -13,12 +13,29 @@ new class extends Component
     public string $tab = 'all';
 
     public array $tabs = [
-        'all' => 'All',
-        'Annual Reports' => 'Annual Reports',
-        'Quarterly Disclosures' => 'Quarterly Disclosures',
-        'Portfolio Statements' => 'Portfolio Statements',
-        'NAV Declarations' => 'NAV Declarations',
-        'Price Sensitive Info' => 'Price Sensitive Info',
+        'all' => [
+            'label' => 'All',
+        ],
+        'Annual Reports' => [
+            'label' => 'Annual Reports',
+            'color' => 'primary',
+        ],
+        'Quarterly Disclosures' => [
+            'label' => 'Quarterly Disclosures',
+            'color' => 'secondary',
+        ],
+        'Portfolio Statements' => [
+            'label' => 'Portfolio Statements',
+            'color' => 'success',
+        ],
+        'NAV Declarations' => [
+            'label' => 'NAV Declarations',
+            'color' => 'danger',
+        ],
+        'Price Sensitive Info' => [
+            'label' => 'Price Sensitive Info',
+            'color' => 'dark',
+        ],
     ];
 
     public int $perPage = 10;
@@ -62,19 +79,13 @@ new class extends Component
             <div class="row mb-4">
                 <div class="col-12">
                     <ul class="nav nav-underline justify-content-center">
-                        @foreach ($tabs as $key => $label)
-                            <li class="nav-item" role="presentation">
-                                <button
-                                    class="nav-link {{ $tab === $key ? 'active' : '' }}"
-                                    type="button"
-                                    wire:click="setTab('{{ $key }}')"
-                                    role="tab"
-                                    aria-selected="{{ $tab === $key ? 'true' : 'false' }}"
-                                >
-                                    {{ $label }}
-                                </button>
-                            </li>
-                        @endforeach
+                    @foreach ($tabs as $key => $tabData)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link {{ $tab === $key ? 'active' : '' }}" type="button" wire:click="setTab('{{ $key }}')" role="tab" aria-selected="{{ $tab === $key ? 'true' : 'false' }}" >
+                                {{ $tabData['label'] }}
+                            </button>
+                        </li>
+                    @endforeach
                     </ul>
                 </div>
             </div>
@@ -82,7 +93,7 @@ new class extends Component
             <div class="card border-0">
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover table-borderless align-middle mb-0">
+                        <table class="table table-hover align-middle mb-0">
                             <thead>
                                 <tr>
                                     <th class="px-4" scope="col">Report Title</th>
@@ -96,7 +107,7 @@ new class extends Component
                                 @foreach ($reports as $row)
                                     <tr>
                                         <td class="px-4 fw-medium">{{ $row->report_title }}</td>
-                                        <td><span class="badge bg-primary">{{ $row->report_type }}</span></td>
+                                        <td><span class="badge bg-{{ $tabs[$row->report_type]['color'] ?? 'secondary' }}"> {{ $row->report_type }} </span></td>
                                         <td>{{ $row->report_date }}</td>
                                         <td class="d-none d-md-table-cell">{{ $row->remarks }}</td>
                                         <td class="text-end px-4"> <a href="#" class="btn btn-primary btn-sm">Download</a> </td>

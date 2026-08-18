@@ -177,7 +177,7 @@ new class extends Component
 
             </div>
             <!-- Investor Portal Callout -->
-            <div class="card border-primary mt-5 shadow-sm">
+            <div class="card border-primary mt-5">
                 <div class="card-body d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 p-4">
                     <div>
                         <h5 class="fw-bold text-primary mb-1">Already an Investor?</h5>
