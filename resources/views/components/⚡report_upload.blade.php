@@ -235,7 +235,7 @@ new class extends Component
                                             Upload Selected Files
                                         </span>
                                         <span wire:loading wire:target="report_files,submit">
-                                            Uploading...
+                                            Preparing Upload...
                                         </span>
                                     </button>
                                 </div>
