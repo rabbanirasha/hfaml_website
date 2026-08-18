@@ -125,7 +125,7 @@ new class extends Component
                     <div class="col-6 col-lg-3">
                         <input wire:model.live.debounce.250ms="search" type="text" class="form-control rounded-4 mt-1" placeholder="🔍 Search..." />
                     </div>                               
-                    <div class="col-6 col-lg-3 text-start text-muted text-nowrap small mt-2">
+                    <div class="col-6 col-lg-3 text-start text-muted small mt-2">
                         Showing {{ $reports->firstItem() ?? 0 }} to {{ $reports->lastItem() ?? 0 }} of {{ $reports->total() }} rows
                     </div>         
                     <div class="col-6 col-lg-3 d-flex justify-content-end align-content-center ms-auto">

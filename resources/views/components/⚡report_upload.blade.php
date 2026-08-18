@@ -148,7 +148,7 @@ new class extends Component
                                 </div>
                             @endif
 
-                            <form wire:submit="submit">
+                            <form wire:submit.prevent="submit">
                                 <div class="mb-3">
                                     <label for="report_title" class="form-label fw-semibold">Report Title</label>
                                     <input
@@ -213,8 +213,11 @@ new class extends Component
                                         type="file"
                                         class="form-control form-control-lg rounded-3"
                                         wire:model="report_files"
+                                        wire:loading.attr="disabled"
+                                        wire:target="report_files"
                                         multiple
                                     >
+                                    <div wire:loading wire:target="report_files" class="text-muted small mt-1"> Preparing selected file(s)... </div>
                                     <small class="text-muted">You can select as many files as you want; uploads are inserted in batches of {{ $insertChunkSize }}.</small>
                                     @error('report_files')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
@@ -222,8 +225,18 @@ new class extends Component
                                 </div>
 
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary btn-lg">
-                                        Upload Selected Files
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary btn-lg"
+                                        wire:loading.attr="disabled"
+                                        wire:target="report_files,submit"
+                                    >
+                                        <span wire:loading.remove wire:target="report_files,submit">
+                                            Upload Selected Files
+                                        </span>
+                                        <span wire:loading wire:target="report_files,submit">
+                                            Uploading...
+                                        </span>
                                     </button>
                                 </div>
                             </form>
