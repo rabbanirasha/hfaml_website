@@ -79,10 +79,10 @@ new class extends Component
                 </div>
             </div>
 
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0">
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
+                        <table class="table table-hover table-borderless align-middle mb-0">
                             <thead>
                                 <tr>
                                     <th class="px-4" scope="col">Report Title</th>
@@ -109,9 +109,9 @@ new class extends Component
             </div>
 
             <!-- Universal Pagination Footers -->
-            <div class="card-footer py-3">
+            <div class="card-footer p-4">
                 <div class="row align-items-start">
-                    <div class="col-6 col-md-3 text-center text-sm-start text-muted small mb-3 mb-sm-0">
+                    <div class="col-6 col-lg-3 text-center text-sm-start text-muted small mb-3 mb-sm-0">
                         <div class="d-flex align-items-center">
                             <label class="me-2 text-nowrap text-muted small">Show:</label>
                             <select wire:model.live="perPage" class="form-select form-select-sm w-auto">
@@ -122,13 +122,13 @@ new class extends Component
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <input wire:model.live.debounce.250ms="search" type="text" class="form-control rounded-4" placeholder="🔍 Search..." />
+                    <div class="col-6 col-lg-3">
+                        <input wire:model.live.debounce.250ms="search" type="text" class="form-control rounded-4 mt-1" placeholder="🔍 Search..." />
                     </div>                               
-                    <div class="col-6 col-md-3 text-start text-muted text-nowrap small mt-2">
+                    <div class="col-6 col-lg-3 text-start text-muted text-nowrap small mt-2">
                         Showing {{ $reports->firstItem() ?? 0 }} to {{ $reports->lastItem() ?? 0 }} of {{ $reports->total() }} rows
                     </div>         
-                    <div class="col-12 col-md-3 d-flex justify-content-end align-content-center">
+                    <div class="col-6 col-lg-3 d-flex justify-content-end align-content-center ms-auto">
                         @php
                             $currentPage = $reports->currentPage();
                             $lastPage = $reports->lastPage();
@@ -158,7 +158,7 @@ new class extends Component
                         @endphp
 
                         <nav aria-label="Pagination">
-                            <ul class="pagination justify-content-center flex-wrap">
+                            <ul class="pagination justify-content-center flex-nowrap">
                                 @if ($reports->onFirstPage())
                                     <li class="page-item disabled">
                                         <span class="page-link">Prev</span>

@@ -93,10 +93,10 @@
                     </select>
                 </div>
             </div>             
-            <div class="col-6 col-sm-2 text-start text-muted text-nowrap small mt-2">
+            <div class="col-6 col-sm-2 text-start d-none d-lg-flex text-muted text-nowrap small mt-2">
                 Showing {{ $records->firstItem() ?? 0 }} to {{ $records->lastItem() ?? 0 }} of {{ $records->total() }} rows
             </div>         
-            <div class="col-12 col-sm-6 d-flex justify-content-end align-content-center">
+            <div class="col-12 col-sm-6 d-flex justify-content-end align-content-center ms-auto">
                 @php
                     $currentPage = $records->currentPage();
                     $lastPage = $records->lastPage();
@@ -126,7 +126,7 @@
                 @endphp
 
                 <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-center flex-wrap">
+                    <ul class="pagination justify-content-center flex-nowrap">
                         @if ($records->onFirstPage())
                             <li class="page-item disabled">
                                 <span class="page-link">Prev</span>

@@ -21,7 +21,7 @@ new class extends Component
 
                 <!-- Application Forms -->
                 <div class="col-lg-4">
-                    <div class="card h-100 shadow-sm border-0">
+                    <div class="card h-100 border-0">
                         <div class="card-header bg-primary bg-opacity-10 py-3">
                             <h5 class="fw-bold mb-0">Application Forms</h5>
                             <small class="opacity-75">For buying, selling & transferring units</small>
@@ -73,7 +73,7 @@ new class extends Component
 
                 <!-- Scheme Documents -->
                 <div class="col-lg-4">
-                    <div class="card h-100 shadow-sm border-0">
+                    <div class="card h-100 border-0">
                         <div class="card-header bg-success bg-opacity-10 py-3">
                             <h5 class="fw-bold mb-0">Scheme Documents</h5>
                             <small class="opacity-75">Prospectus and Factsheet</small>
@@ -125,7 +125,7 @@ new class extends Component
 
                 <!-- Account Management -->
                 <div class="col-lg-4">
-                    <div class="card h-100 shadow-sm border-0">
+                    <div class="card h-100 border-0">
                         <div class="card-header bg-danger bg-opacity-10 py-3">
                             <h5 class="fw-bold mb-0">Account Management</h5>
                             <small class="opacity-75">KYC, nominee, and update forms</small>
