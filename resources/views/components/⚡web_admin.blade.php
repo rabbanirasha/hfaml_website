@@ -226,7 +226,7 @@ new class extends Component
 <div>
     <section>
         <div class="container my-5">
-            <div class="row row-cols-auto justify-content-center">
+            <div class="row row-cols-1 row-cols-lg-2 justify-content-center">
                 <div class="col my-2">
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
@@ -311,28 +311,13 @@ new class extends Component
                                     @enderror
                                 </div>
 
-                                <div class="d-inline">
+                                <div class="d-flex justify-content-center gap-2">
                                     <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="report_files,submit" > <span wire:loading.remove wire:target="report_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="report_files,submit"> Preparing Upload... </span> </button>
                                     <button type="button" class="btn btn-danger btn-lg" wire:click="confirmClear('reports')">Clear Data</button>
-                                    @if ($confirmingClear)
-                                        <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        This will permanently delete all report records and files. This cannot be undone.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-secondary" wire:click="$set('confirmingClear', false)">Cancel</button>
-                                                        <button class="btn btn-danger" wire:click="clearData">Yes, delete everything</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
                                 </div>
                             </form>
                             @if (session()->has('success_reports'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
                                     {{ session('success_reports') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
@@ -422,28 +407,14 @@ new class extends Component
                                     @enderror
                                 </div>
 
-                                <div class="d-inline">
+                                <div class="d-flex justify-content-center gap-2">
                                     <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="download_files,submit" > <span wire:loading.remove wire:target="download_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="download_files,submit"> Preparing Upload... </span> </button>
                                     <button type="button" class="btn btn-danger btn-lg" wire:click="confirmClear('downloads')">Clear Data</button>
-                                    @if ($confirmingClear)
-                                        <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        This will permanently delete all download records and files. This cannot be undone.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-secondary" wire:click="$set('confirmingClear', false)">Cancel</button>
-                                                        <button class="btn btn-danger" wire:click="clearData">Yes, delete everything</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
+    
                                 </div>
                             </form>
                             @if (session()->has('success_downloads'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
                                     {{ session('success_downloads') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
