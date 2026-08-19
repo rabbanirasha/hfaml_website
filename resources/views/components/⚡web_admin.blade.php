@@ -3,6 +3,7 @@
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 new class extends Component
@@ -15,6 +16,7 @@ new class extends Component
     public string $remarks = '';
     public array $report_files = [];
     public int $insertChunkSize = 5;
+    public bool $confirmingClear = false;
 
     protected function extractDateFromFile($file): ?string
     {
@@ -76,7 +78,22 @@ new class extends Component
         return trim($name) !== '' ? $name : 'Report';
     }
 
-    public function submit()
+    public function clearData(): void
+    {
+        DB::table('tbl_reports')->truncate();
+
+        $path = storage_path('app/public/reports');
+        if (File::isDirectory($path)) {
+            File::deleteDirectory($path);
+            File::makeDirectory($path, 0755, true);
+        }
+
+        $this->confirmingClear = false;
+        session()->flash('success', 'All report records and files have been cleared.');
+        $this->reset();
+    }    
+
+    public function submit_reports()
     {
         $this->validate([
             'report_type' => 'required|string|max:500',
@@ -133,8 +150,8 @@ new class extends Component
 <div>
     <section>
         <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
+            <div class="row row-cols-auto justify-content-center">
+                <div class="col my-2">
                     <div class="card shadow-sm border-0 rounded-4">
                         <div class="card-body p-4 p-md-5">
                             <div class="mb-4 text-center">
@@ -143,12 +160,13 @@ new class extends Component
                             </div>
 
                             @if (session()->has('success'))
-                                <div class="alert alert-success" role="alert">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             @endif
 
-                            <form wire:submit.prevent="submit">
+                            <form wire:submit.prevent="submit_reports">
                                 <div class="mb-3">
                                     <label for="report_title" class="form-label fw-semibold">Report Title</label>
                                     <input
@@ -224,25 +242,29 @@ new class extends Component
                                     @enderror
                                 </div>
 
-                                <div class="d-grid">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary btn-lg"
-                                        wire:loading.attr="disabled"
-                                        wire:target="report_files,submit"
-                                    >
-                                        <span wire:loading.remove wire:target="report_files,submit">
-                                            Upload Selected Files
-                                        </span>
-                                        <span wire:loading wire:target="report_files,submit">
-                                            Preparing Upload...
-                                        </span>
-                                    </button>
+                                <div class="d-inline">
+                                    <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="report_files,submit" > <span wire:loading.remove wire:target="report_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="report_files,submit"> Preparing Upload... </span> </button>
+                                    <button type="button" class="btn btn-danger btn-lg" wire:click="$set('confirmingClear', true)"> Clear Data </button>
+                                    @if ($confirmingClear)
+                                        <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        This will permanently delete all report records and files. This cannot be undone.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" wire:click="$set('confirmingClear', false)">Cancel</button>
+                                                        <button class="btn btn-danger" wire:click="clearData">Yes, delete everything</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </form>
                         </div>
                     </div>
-                </div>
+                </div>    
             </div>
         </div>
     </section>

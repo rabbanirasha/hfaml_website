@@ -1,6 +1,7 @@
 <?php
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
@@ -110,7 +111,7 @@ new class extends Component
                                         <td><span class="text-wrap badge bg-{{ $tabs[$row->report_type]['color'] ?? 'secondary' }}"> {{ $row->report_type }} </span></td>
                                         <td>{{ $row->report_date }}</td>
                                         <td class="d-none d-md-table-cell">{{ $row->remarks }}</td>
-                                        <td class="text-end px-4"> <a href="#" class="btn btn-primary btn-sm">Download</a> </td>
+                                        <td class="text-end px-4"> <a href="{{ Storage::disk('public')->url($row->report_link) }}" class="btn btn-primary btn-sm" target="_blank">Download</a> </td>
                                     </tr>
                                 @endforeach
                             </tbody>
