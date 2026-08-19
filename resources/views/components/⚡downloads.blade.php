@@ -30,7 +30,7 @@ new class extends Component
             <h1 class="fw-bold pt-3 text-primary" style="text-align: center;">Downloads</h1>
             <hr style="border-style: inset;">
 
-            <div class="row g-4">
+            <div class="row g-4 px-2">
                 @foreach ($colors as $type => $meta)
                     <div class="col-lg-4">
                         <div class="card h-100 border-0">
@@ -40,13 +40,13 @@ new class extends Component
                             </div>
                             <ul class="list-group list-group-flush">
                                 @forelse (($downloads[$type] ?? []) as $row)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-0">
                                         <div>
                                             <div class="fw-semibold text-break">{{ $row->download_title }}</div>
                                             <div class="text-muted small">{{ $row->remarks }}</div>
                                         </div>
                                         <div class="d-flex flex-column align-items-end gap-1">
-                                            <a href="{{ Storage::disk('public')->url($row->download_link) }}" class="btn {{ $meta['btn_color'] }} btn-sm" target="_blank">Download</a>
+                                            <a href="{{ Storage::disk('public')->url($row->download_link) }}" class="btn {{ $meta['btn_color'] }} btn-sm mx-2" target="_blank">Download</a>
                                         </div>
                                     </li>
                                 @empty
