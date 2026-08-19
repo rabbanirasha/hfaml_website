@@ -96,18 +96,18 @@ new class extends Component
                         <table class="table table-hover align-middle mb-0">
                             <thead>
                                 <tr>
-                                    <th class="px-4" scope="col">Report Title</th>
-                                    <th class="px-4" scope="col">Type</th>
-                                    <th class="px-4" scope="col">Date</th>
-                                    <th class="px-4 d-none d-md-table-cell" scope="col">Remarks</th>
-                                    <th class="px-4" scope="col">Download</th>
+                                    <th class="px-4 w-50" scope="col" style="min-width:150px;">Report Title</th>
+                                    <th class="px-2" scope="col">Type</th>
+                                    <th class="px-2" scope="col">Date</th>
+                                    <th class="px-2 d-none d-md-table-cell" scope="col">Remarks</th>
+                                    <th class="px-2" scope="col">Download</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($reports as $row)
                                     <tr>
-                                        <td class="px-4 fw-medium">{{ $row->report_title }}</td>
-                                        <td><span class="badge bg-{{ $tabs[$row->report_type]['color'] ?? 'secondary' }}"> {{ $row->report_type }} </span></td>
+                                        <td class="px-4 fw-medium text-break">{{ $row->report_title }}</td>
+                                        <td><span class="text-wrap badge bg-{{ $tabs[$row->report_type]['color'] ?? 'secondary' }}"> {{ $row->report_type }} </span></td>
                                         <td>{{ $row->report_date }}</td>
                                         <td class="d-none d-md-table-cell">{{ $row->remarks }}</td>
                                         <td class="text-end px-4"> <a href="#" class="btn btn-primary btn-sm">Download</a> </td>
