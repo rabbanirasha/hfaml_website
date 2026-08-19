@@ -11,12 +11,18 @@ new class extends Component
     use WithFileUploads;
 
     public string $report_title = '';
+    public string $download_title = '';
     public string $report_type = '';
+    public string $download_type = '';
     public ?string $report_date = null;
+    public ?string $download_date = null;
     public string $remarks = '';
     public array $report_files = [];
+    public array $download_files = [];
     public int $insertChunkSize = 5;
     public bool $confirmingClear = false;
+    public ?string $clearTarget = null;
+    public array $clearableTargets;
 
     protected function extractDateFromFile($file): ?string
     {
@@ -78,20 +84,32 @@ new class extends Component
         return trim($name) !== '' ? $name : 'Report';
     }
 
+    public function confirmClear(string $target): void
+    {
+        $this->clearTarget = $target;
+    }    
+
     public function clearData(): void
     {
-        DB::table('tbl_reports')->truncate();
+        $key = $this->clearTarget;
+        $target = $this->clearableTargets[$key] ?? null;
 
-        $path = storage_path('app/public/reports');
+        if ($target === null) {
+            $this->clearTarget = null;
+            return;
+        }
+
+        DB::table($target['table'])->truncate();
+
+        $path = public_path('storage/' . $target['folder']);
         if (File::isDirectory($path)) {
             File::deleteDirectory($path);
             File::makeDirectory($path, 0755, true);
         }
 
-        $this->confirmingClear = false;
-        session()->flash('success', 'All report records and files have been cleared.');
-        $this->reset();
-    }    
+        $this->clearTarget = null;
+        session()->flash('success_' . $key, ucfirst($target['label']) . ' data cleared.');
+    }
 
     public function submit_reports()
     {
@@ -135,14 +153,72 @@ new class extends Component
             DB::table('tbl_reports')->insert($chunk->toArray());
         }
 
-        session()->flash('success', count($this->report_files) . ' report(s) uploaded successfully.');
+        session()->flash('success_reports', count($this->report_files) . ' report(s) uploaded successfully.');
 
         $this->reset(['report_title', 'report_type', 'report_date', 'remarks', 'report_files']);
     }
 
+    public function submit_downloads()
+    {
+        $this->validate([
+            'download_type' => 'required|string|max:500',
+            'download_files' => 'required|array|min:1',
+            'download_title' => 'nullable|string|max:1000',
+            'download_date' => 'nullable|date',
+            'remarks' => 'nullable|string|max:1000',                    
+        ]);        
+
+        $rows = [];
+
+        foreach ($this->download_files as $file) {
+            $title = trim($this->download_title) !== ''
+                ? $this->download_title
+                : $this->buildTitleFromFile($file);
+
+            $date = $this->download_date ?: $this->extractDateFromFile($file) ?: now()->format('Y-m-d');
+
+            $remarks = trim($this->remarks) !== ''
+                ? $this->remarks
+                : '';
+
+            $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '-' . random_int(1000, 9999) . '.' . $file->getClientOriginalExtension();
+
+            $storedPath = $file->storeAs('downloads', $filename, 'public');
+
+            $rows[] = [
+                'download_title' => $title,
+                'download_type' => $this->download_type,
+                'download_date' => $date,
+                'remarks' => $remarks,
+                'download_link' => $storedPath,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        foreach (collect($rows)->chunk($this->insertChunkSize) as $chunk) {
+            DB::table('tbl_downloads')->insert($chunk->toArray());
+        }
+
+        session()->flash('success_downloads', count($this->download_files) . ' form,doc(s) uploaded successfully.');
+
+        $this->reset(['download_title', 'download_type', 'download_date', 'remarks', 'download_files']);
+    }
+    
+    public function mount(): void
+    {
+        foreach (['report', 'download'] as $label) {
+            $this->clearableTargets[$label . 's'] = [
+                'table' => 'tbl_' . $label . 's',
+                'folder' => $label . 's',
+                'label' => $label,
+            ];
+        }
+    }    
+
     public function render()
     {
-        return $this->view()->title('Report Upload');
+        return $this->view()->title('Web Admin');
     }
 }
 ?>
@@ -158,13 +234,6 @@ new class extends Component
                                 <h2 class="fw-bold text-primary mb-1">Upload Reports</h2>
                                 <p class="text-muted mb-0">Select multiple files and upload them as one report type.</p>
                             </div>
-
-                            @if (session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                            @endif
 
                             <form wire:submit.prevent="submit_reports">
                                 <div class="mb-3">
@@ -236,7 +305,7 @@ new class extends Component
                                         multiple
                                     >
                                     <div wire:loading wire:target="report_files" class="text-muted small mt-1"> Preparing selected file(s)... </div>
-                                    <small class="text-muted">You can select as many files as you want; uploads are inserted in batches of {{ $insertChunkSize }}.</small>
+                                    <small class="text-muted">You can select as many files as you want as they uploaded in chunks of {{ $insertChunkSize }}.</small>
                                     @error('report_files')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
@@ -244,7 +313,7 @@ new class extends Component
 
                                 <div class="d-inline">
                                     <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="report_files,submit" > <span wire:loading.remove wire:target="report_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="report_files,submit"> Preparing Upload... </span> </button>
-                                    <button type="button" class="btn btn-danger btn-lg" wire:click="$set('confirmingClear', true)"> Clear Data </button>
+                                    <button type="button" class="btn btn-danger btn-lg" wire:click="confirmClear('reports')">Clear Data</button>
                                     @if ($confirmingClear)
                                         <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
                                             <div class="modal-dialog">
@@ -262,10 +331,142 @@ new class extends Component
                                     @endif
                                 </div>
                             </form>
+                            @if (session()->has('success_reports'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success_reports') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif                            
                         </div>
                     </div>
-                </div>    
+                </div>
+                <div class="col my-2">
+                    <div class="card shadow-sm border-0 rounded-4">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="mb-4 text-center">
+                                <h2 class="fw-bold text-primary mb-1">Upload Forms, Docs</h2>
+                                <p class="text-muted mb-0">Select multiple files and upload them as one report type.</p>
+                            </div>
+
+                            <form wire:submit.prevent="submit_downloads">
+                                <div class="mb-3">
+                                    <label for="download_title" class="form-label fw-semibold">Download Title</label>
+                                    <input
+                                        id="download_title"
+                                        type="text"
+                                        class="form-control form-control-lg rounded-3"
+                                        wire:model="download_title"
+                                        placeholder="Optional - defaults to each file name"
+                                    >
+                                    @error('download_title')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="download_type" class="form-label fw-semibold">download Type</label>
+                                    <select id="download_type" class="form-select form-select-lg rounded-3" wire:model="download_type">
+                                        <option value="">Select download type</option>
+                                        <option value="Application Forms">Application Forms</option>
+                                        <option value="Scheme Documents">Scheme Documents</option>
+                                        <option value="Account Management">Account Management</option>
+                                    </select>
+                                    @error('download_type')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="download_date" class="form-label fw-semibold">download Date</label>
+                                    <input
+                                        id="download_date"
+                                        type="date"
+                                        class="form-control form-control-lg rounded-3"
+                                        wire:model="download_date"
+                                    >
+                                    <small class="text-muted">Leave blank to use metadata from the file, or fallback to today.</small>
+                                    @error('download_date')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="remarks" class="form-label fw-semibold">Remarks</label>
+                                    <input
+                                        id="remarks"
+                                        type="text"
+                                        class="form-control form-control-lg rounded-3"
+                                        wire:model="remarks"
+                                        placeholder="Optional remarks"
+                                    >
+                                    @error('remarks')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="download_files" class="form-label fw-semibold">Upload</label>
+                                    <input
+                                        id="download_files"
+                                        type="file"
+                                        class="form-control form-control-lg rounded-3"
+                                        wire:model="download_files"
+                                        wire:loading.attr="disabled"
+                                        wire:target="download_files"
+                                        multiple
+                                    >
+                                    <div wire:loading wire:target="download_files" class="text-muted small mt-1"> Preparing selected file(s)... </div>
+                                    <small class="text-muted">You can select as many files as you want as they uploaded in chunks of {{ $insertChunkSize }}.</small>
+                                    @error('download_files')
+                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="d-inline">
+                                    <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="download_files,submit" > <span wire:loading.remove wire:target="download_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="download_files,submit"> Preparing Upload... </span> </button>
+                                    <button type="button" class="btn btn-danger btn-lg" wire:click="confirmClear('downloads')">Clear Data</button>
+                                    @if ($confirmingClear)
+                                        <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        This will permanently delete all download records and files. This cannot be undone.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" wire:click="$set('confirmingClear', false)">Cancel</button>
+                                                        <button class="btn btn-danger" wire:click="clearData">Yes, delete everything</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </form>
+                            @if (session()->has('success_downloads'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success_downloads') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif                            
+                        </div>
+                    </div>
+                </div>                    
             </div>
         </div>
+        @if ($clearTarget)
+            <div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,.5)">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            This will permanently delete all {{ $clearableTargets[$clearTarget]['label'] }} records and files. This cannot be undone.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" wire:click="$set('clearTarget', null)">Cancel</button>
+                            <button class="btn btn-danger" wire:click="clearData">Yes, delete everything</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif        
     </section>
 </div>
