@@ -10,6 +10,12 @@ new class extends Component
 {
     use WithFileUploads;
 
+    public array $download_types = [
+        'Application Forms'  => ['description' => 'For buying, selling & transferring units'],
+        'Scheme Documents'   => ['description' => 'Prospectus and Factsheet'],
+        'Account Management' => ['description' => 'KYC, nominee, and update forms'],
+    ];    
+
     public string $report_title = '';
     public string $download_title = '';
     public string $report_type = '';
@@ -228,7 +234,7 @@ new class extends Component
         <div class="container my-5">
             <div class="row row-cols-1 row-cols-lg-2 justify-content-center">
                 <div class="col my-2">
-                    <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
                         <div class="card-body p-4 p-md-5">
                             <div class="mb-4 text-center">
                                 <h2 class="fw-bold text-primary mb-1">Upload Reports</h2>
@@ -260,6 +266,7 @@ new class extends Component
                                         <option value="NAV Declarations">NAV Declarations</option>
                                         <option value="Price Sensitive Info">Price Sensitive Info</option>
                                     </select>
+                                    <small class="text-muted">Select a report type</small>
                                     @error('report_type')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
@@ -326,7 +333,7 @@ new class extends Component
                     </div>
                 </div>
                 <div class="col my-2">
-                    <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
                         <div class="card-body p-4 p-md-5">
                             <div class="mb-4 text-center">
                                 <h2 class="fw-bold text-primary mb-1">Upload Forms, Docs</h2>
@@ -350,12 +357,13 @@ new class extends Component
 
                                 <div class="mb-3">
                                     <label for="download_type" class="form-label fw-semibold">download Type</label>
-                                    <select id="download_type" class="form-select form-select-lg rounded-3" wire:model="download_type">
+                                    <select id="download_type" class="form-select form-select-lg rounded-3" wire:model.live="download_type">
                                         <option value="">Select download type</option>
-                                        <option value="Application Forms">Application Forms</option>
-                                        <option value="Scheme Documents">Scheme Documents</option>
-                                        <option value="Account Management">Account Management</option>
+                                        @foreach ($download_types as $type => $meta)
+                                            <option value="{{ $type }}">{{ $type }}</option>
+                                        @endforeach
                                     </select>
+                                    <small class="text-muted">{{ $download_types[$download_type]['description'] ?? 'Select a type to see its description' }}</small>
                                     @error('download_type')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
