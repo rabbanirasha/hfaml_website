@@ -32,7 +32,7 @@ new class extends Component
                 <div class="col-12 col-md-4 mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="fs-4 fw-bolder text-start mb-2">{{$row->title}}</p>
-                        <p class="mb-3"><span style="font-weight: normal !important;">{{$row->main_body}}</span></p>
+                        <p class="mb-3"><span style="font-weight: normal !important;">{!! $row->main_body !!}</span></p>
                         <a class="fw-bold text-primary mb-0" href ="{{route('view_news', ['news_id' => $row->news_id])}}" wire:navigate.hover>Read More</a>
                     </div>
                 </div>

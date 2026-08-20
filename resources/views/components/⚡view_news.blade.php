@@ -37,8 +37,8 @@ new class extends Component
                         <li class="list-inline-item fs-5"><i class="bi bi-linkedin"></i></li>                    
                     </ul>
                                  
-                    <img class="img-fluid rounded shadow w-100 fit-cover my-5" src="{{asset('img/products/1.jpg')}}" style="height: 300px;">
-                    <p class="text-muted">{{$news_article->main_body}}</p>
+                    <img class="img-fluid rounded shadow w-100 fit-cover my-5" src="{{asset($news_article->image_link)}}" style="height: 300px;">
+                    <p class="text-muted">{!! $news_article->main_body !!}</p>
                     <a class="fw-bold btn btn-outline-light text-primary mb-0 border-0" href ="{{route('news')}}" wire:navigate.hover>Go Back to News</a>
                 </div>
             </div>

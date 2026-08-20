@@ -26,8 +26,10 @@
                 </div>
             @endforeach
             @if($showAddButton)
-                <div class="p-1"><button class="btn btn-outline-light text-secondary px-0 ps-1"><i class="bi bi-plus-circle"></i>&nbsp;ADD</button></div>
-            @endif            
+                <div class="p-1">
+                    <button type="button" class="btn btn-outline-light text-secondary px-0 ps-1" wire:click="create"> <i class="bi bi-plus-circle"></i>&nbsp;ADD </button>
+                </div>
+            @endif           
             </div>
         </div>
     </div>
@@ -70,7 +72,7 @@
                                         <!-- Cast string to float explicitly to fix the parameter type error -->
                                         ${{ number_format((float) $record->{$column['field']}, 2) }}
                                     @else
-                                        {{ $record->{$column['field']} }}
+                                        {!! $record->{$column['field']} !!}
                                     @endif
                                 </td>
                             @endforeach                    

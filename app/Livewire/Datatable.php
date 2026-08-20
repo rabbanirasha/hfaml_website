@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 
 class Datatable extends Component
 {
@@ -28,6 +29,16 @@ class Datatable extends Component
     public bool $showActions = false;
     public bool $showAddButton = false;    
     public array $richFields = [];
+
+    public function create(): void
+    {
+        $this->dispatch('add-record',
+            table: $this->table,
+            primaryKey: $this->primaryKey,
+            columns: $this->columns,
+            richFields: $this->richFields,
+        );
+    }    
     
     public function edit($id): void
     {
