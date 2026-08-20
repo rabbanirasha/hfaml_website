@@ -124,6 +124,7 @@
             </div>
         </div>
     </footer><!-- End: Footer Multi Column -->
+    <livewire:globalmodal />
 </body>
 
 </html>

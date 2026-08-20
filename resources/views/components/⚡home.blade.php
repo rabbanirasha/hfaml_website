@@ -224,28 +224,28 @@ new class extends Component
                     <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                         <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/runner.jpg')}}">
                         <p><strong class="text-center">RUNNER GROUP</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#">Sponsor</a>
+                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'runner' })">Sponsor</a>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                         <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/icb.svg')}}">
                         <p><strong class="text-center">INVESTMENT CORPORATION OF BANGLADESH</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#">Trustee</a>
+                        <a class="badge text-bg-primary btn mt-auto" href="#" id="icb">Trustee</a>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                         <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/brac.jpg')}}">
                         <p><strong class="text-center">BRAC BANK PLC</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#">Custodian</a>
+                        <a class="badge text-bg-primary btn mt-auto" href="#" id="brac">Custodian</a>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                         <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/acme.jpg')}}">
                         <p><strong class="text-center">THE ACME LABORATORIES LTD.</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#">Sponsor</a>
+                        <a class="badge text-bg-primary btn mt-auto" href="#" id="acme">Sponsor</a>
                     </div>
                 </div>                                                                        
             </div>
