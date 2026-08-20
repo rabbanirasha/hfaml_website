@@ -24,6 +24,27 @@ class Datatable extends Component
     public string $sortField = 'id';
     public string $sortDirection = 'asc';
 
+    public string $primaryKey = 'id';
+    public bool $showActions = false;
+    public array $richFields = [];
+    
+    public function edit($id): void
+    {
+        $this->dispatch('edit-record',
+            table: $this->table,
+            primaryKey: $this->primaryKey,
+            id: $id,
+            richFields: $this->richFields,
+        );
+    }
+
+#[On('record-updated')]
+public function onRecordUpdated(string $table): void
+{
+    // no-op is fine: Livewire re-renders this component on any listened event,
+    // which re-runs render()'s DB::table() query and refreshes the row
+}    
+
     public function mount(): void
     {
         if (!empty($this->columns)) {

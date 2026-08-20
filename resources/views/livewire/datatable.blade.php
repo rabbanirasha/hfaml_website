@@ -51,7 +51,11 @@
                         @else
                             <th>{{ $column['label'] }}</th>
                         @endif
-                    @endforeach
+                    @endforeach             
+                    @if($showActions)
+                        <th class="text-end">Actions</th>
+                    @endif
+
                 </tr>
             </thead>
                 <tbody>
@@ -66,9 +70,22 @@
                                         {{ $record->{$column['field']} }}
                                     @endif
                                 </td>
-                            @endforeach
+                            @endforeach                    
+                            @if($showActions)
+                                <td class="text-end">
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                            wire:click="edit({{ $record->{$primaryKey} }})">
+                                        Edit
+                                    </button>
+                                </td>
+                            @endif                  
                         </tr>
                     @empty
+                        <tr>
+                            <td colspan="{{ count($columns) + ($showActions ? 1 : 0) }}" class="text-center py-4 text-muted">
+                                No records matching query definitions found.
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="{{ count($columns) }}" class="text-center py-4 text-muted">
                                 No records matching query definitions found.

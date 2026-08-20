@@ -2,6 +2,7 @@
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ new class extends Component
     public int $insertChunkSize = 5;
     public bool $confirmingClear = false;
     public ?string $clearTarget = null;
-    public array $clearableTargets;
+    public array $clearableTargets; 
 
     protected function extractDateFromFile($file): ?string
     {
@@ -88,7 +89,7 @@ new class extends Component
         $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
         return trim($name) !== '' ? $name : 'Report';
-    }
+    }   
 
     public function confirmClear(string $target): void
     {
@@ -115,7 +116,7 @@ new class extends Component
 
         $this->clearTarget = null;
         session()->flash('success_' . $key, ucfirst($target['label']) . ' data cleared.');
-    }
+    }   
 
     public function submit_reports()
     {
@@ -232,9 +233,9 @@ new class extends Component
 <div>
     <section>
         <div class="container my-5">
-            <div class="row row-cols-1 row-cols-lg-2 justify-content-center">
-                <div class="col my-2">
-                    <div class="card shadow-sm border-0 rounded-4 h-100">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 my-2">
+                    <div class="card shadow-sm rounded-bordered rounded-4 h-100">
                         <div class="card-body p-4 p-md-5">
                             <div class="mb-4 text-center">
                                 <h2 class="fw-bold text-primary mb-1">Upload Reports</h2>
@@ -332,8 +333,8 @@ new class extends Component
                         </div>
                     </div>
                 </div>
-                <div class="col my-2">
-                    <div class="card shadow-sm border-0 rounded-4 h-100">
+                <div class="col-12 col-lg-6 my-2">
+                    <div class="card shadow-sm rounded-bordered rounded-4 h-100">
                         <div class="card-body p-4 p-md-5">
                             <div class="mb-4 text-center">
                                 <h2 class="fw-bold text-primary mb-1">Upload Forms, Docs</h2>
@@ -429,7 +430,66 @@ new class extends Component
                             @endif                            
                         </div>
                     </div>
-                </div>                    
+                </div>
+                <div class="col-12 my-2">
+                    <div class="card shadow-sm rounded-bordered rounded-4 h-100">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="mb-4 text-center">
+                                <h2 class="fw-bold text-primary mb-1">News</h2>
+                                <p class="text-muted mb-0">Add or Edit News section</p>
+                            </div>
+                            <livewire:datatable 
+                                title="News" 
+                                table="tbl_news" 
+                                :columns="[
+                                    ['field' => 'news_id', 'label' => 'news_id', 'sortable' => true],
+                                    ['field' => 'post_date', 'label' => 'Post Date', 'sortable' => true],
+                                    ['field' => 'title', 'label' => 'Title', 'sortable' => true],
+                                    ['field' => 'main_body', 'label' => 'Description', 'sortable' => true],
+                                    ['field' => 'image_link', 'label' => 'Image', 'sortable' => true],                                                  
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'post_date', 
+                                        'label' => 'Post Date', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            />                                                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-2">
+                    <div class="card shadow-sm rounded-bordered rounded-4 h-100">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="mb-4 text-center">
+                                <h2 class="fw-bold text-primary mb-1">Modal</h2>
+                                <p class="text-muted mb-0">Edit Modal Body</p>
+                            </div>                        
+                            <livewire:datatable 
+                                title="Modal"
+                                table="tbl_modal"
+                                :show-actions="true"
+                                primary-key="target_id"
+                                :rich-fields="['modal_body']"
+                                :columns="[
+                                    ['field' => 'target_id', 'label' => 'target_id', 'sortable' => true],
+                                    ['field' => 'target_name', 'label' => 'target_name', 'sortable' => true],
+                                    ['field' => 'modal_body', 'label' => 'modal_body', 'sortable' => true],                                                
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'post_date', 
+                                        'label' => 'Post Date', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            />                                                        
+                        </div>
+                    </div>
+                </div>                                                      
             </div>
         </div>
         @if ($clearTarget)
@@ -448,4 +508,5 @@ new class extends Component
             </div>
         @endif        
     </section>
+    <livewire:record-editor />
 </div>

@@ -19,3 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 }, false);
+
+document.addEventListener('livewire:init', () => {
+    Livewire.on('record-modal-open', () => {
+        bootstrap.Modal.getOrCreateInstance('#recordEditModal').show();
+    });
+    Livewire.on('record-modal-close', () => {
+        bootstrap.Modal.getOrCreateInstance('#recordEditModal').hide();
+    });
+});
