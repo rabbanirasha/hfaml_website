@@ -40,13 +40,13 @@ new class extends Component
                             </div>
                             <ul class="list-group list-group-flush">
                                 @forelse (($downloads[$type] ?? []) as $row)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-0">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-0 ms-2">
                                         <div>
                                             <div class="fw-semibold text-break">{{ $row->download_title }}</div>
                                             <div class="text-muted small">{{ $row->remarks }}</div>
                                         </div>
                                         <div class="d-flex flex-column align-items-end gap-1">
-                                            <a href="{{ Storage::disk('public')->url($row->download_link) }}" class="btn {{ $meta['btn_color'] }} btn-sm mx-2" target="_blank">Download</a>
+                                            <a href="{{ Storage::disk('public')->url($row->download_link) }}" class="btn {{ $meta['btn_color'] }} btn-sm ms-2" target="_blank">Download</a>
                                         </div>
                                     </li>
                                 @empty

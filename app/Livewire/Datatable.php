@@ -26,6 +26,7 @@ class Datatable extends Component
 
     public string $primaryKey = 'id';
     public bool $showActions = false;
+    public bool $showAddButton = false;    
     public array $richFields = [];
     
     public function edit($id): void

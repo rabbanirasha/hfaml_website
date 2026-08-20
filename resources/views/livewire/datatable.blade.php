@@ -9,12 +9,12 @@
 
         <div class="row g-2">
             <!-- Universal Global Text Search -->
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex flex-row align-items-center">
                 <input wire:model.live.debounce.250ms="search" type="text" class="form-control rounded-4" placeholder="🔍 Search..." />
             </div>
 
             <!-- Loop to dynamically inject any custom filter select arrays -->
-            <div class="col-md-8 d-flex flex-row justify-content-end">
+            <div class="col-md-8 d-flex flex-row justify-content-end align-items-center">
             @foreach($filters as $filter)
                 <div class="p-1">
                     <select wire:model.live="activeFilters.{{ $filter['field'] }}" class="form-select form-select-sm">
@@ -25,6 +25,9 @@
                     </select>
                 </div>
             @endforeach
+            @if($showAddButton)
+                <div class="p-1"><button class="btn btn-outline-light text-secondary px-0 ps-1"><i class="bi bi-plus-circle"></i>&nbsp;ADD</button></div>
+            @endif            
             </div>
         </div>
     </div>
@@ -73,10 +76,7 @@
                             @endforeach                    
                             @if($showActions)
                                 <td class="text-end">
-                                    <button type="button" class="btn btn-sm btn-outline-primary"
-                                            wire:click="edit({{ $record->{$primaryKey} }})">
-                                        Edit
-                                    </button>
+                                    <button type="button" class="btn btn-sm btn-secondary" wire:click="edit({{ $record->{$primaryKey} }})"> Edit </button>
                                 </td>
                             @endif                  
                         </tr>

@@ -320,8 +320,8 @@ new class extends Component
                                 </div>
 
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="report_files,submit" > <span wire:loading.remove wire:target="report_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="report_files,submit"> Preparing Upload... </span> </button>
-                                    <button type="button" class="btn btn-danger btn-lg" wire:click="confirmClear('reports')">Clear Data</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" wire:loading.attr="disabled" wire:target="report_files,submit" > <span wire:loading.remove wire:target="report_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="report_files,submit"> Preparing Upload... </span> </button>
+                                    <button type="button" class="btn btn-danger btn-sm" wire:click="confirmClear('reports')">Clear Data</button>
                                 </div>
                             </form>
                             @if (session()->has('success_reports'))
@@ -417,8 +417,8 @@ new class extends Component
                                 </div>
 
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button type="submit" class="btn btn-primary btn-lg" wire:loading.attr="disabled" wire:target="download_files,submit" > <span wire:loading.remove wire:target="download_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="download_files,submit"> Preparing Upload... </span> </button>
-                                    <button type="button" class="btn btn-danger btn-lg" wire:click="confirmClear('downloads')">Clear Data</button>
+                                    <button type="submit" class="btn btn-primary btn-sm" wire:loading.attr="disabled" wire:target="download_files,submit" > <span wire:loading.remove wire:target="download_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="download_files,submit"> Preparing Upload... </span> </button>
+                                    <button type="button" class="btn btn-danger btn-sm" wire:click="confirmClear('downloads')">Clear Data</button>
     
                                 </div>
                             </form>
@@ -440,7 +440,11 @@ new class extends Component
                             </div>
                             <livewire:datatable 
                                 title="News" 
-                                table="tbl_news" 
+                                table="tbl_news"
+                                :show-actions="true"
+                                :show-add-button="true"
+                                primary-key="news_id"
+                                :rich-fields="['main_body']"                                
                                 :columns="[
                                     ['field' => 'news_id', 'label' => 'news_id', 'sortable' => true],
                                     ['field' => 'post_date', 'label' => 'Post Date', 'sortable' => true],
