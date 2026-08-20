@@ -512,5 +512,5 @@ new class extends Component
             </div>
         @endif        
     </section>
-    <livewire:record-editor />
+    <livewire:recordeditor />
 </div>
