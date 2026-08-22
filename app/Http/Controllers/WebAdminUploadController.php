@@ -24,18 +24,25 @@ class WebAdminUploadController extends Controller
             ->where('report_type', $data['report_type'])
             ->count() + 1;
 
+        $destination = public_path('storage/reports');
+        if (! is_dir($destination)) {
+            mkdir($destination, 0755, true);
+        }
+
         $rows = [];
 
         foreach ($request->file('report_files') as $i => $file) {
             $number = $startNumber + $i;
             $filename = Str::slug($data['report_type']) . '-' . $number . '-' . time() . '.' . $file->getClientOriginalExtension();
 
+            $file->move($destination, $filename);
+
             $rows[] = [
                 'report_title' => $data['report_type'] . '_' . $number,
                 'report_type'  => $data['report_type'],
                 'report_date'  => $date,
                 'remarks'      => $data['remarks'] ?? '',
-                'report_link'  => $file->storeAs('reports', $filename, 'public'),
+                'report_link'  => 'reports/' . $filename,
                 'created_at'   => now(),
                 'updated_at'   => now(),
             ];
@@ -62,18 +69,25 @@ class WebAdminUploadController extends Controller
             ->where('download_type', $data['download_type'])
             ->count() + 1;
 
+        $destination = public_path('storage/downloads');
+        if (! is_dir($destination)) {
+            mkdir($destination, 0755, true);
+        }
+
         $rows = [];
 
         foreach ($request->file('download_files') as $i => $file) {
             $number = $startNumber + $i;
             $filename = Str::slug($data['download_type']) . '-' . $number . '-' . time() . '.' . $file->getClientOriginalExtension();
 
+            $file->move($destination, $filename);
+
             $rows[] = [
                 'download_title' => $data['download_type'] . '_' . $number,
                 'download_type'  => $data['download_type'],
                 'download_date'  => $date,
                 'remarks'        => $data['remarks'] ?? '',
-                'download_link'  => $file->storeAs('downloads', $filename, 'public'),
+                'download_link'  => 'downloads/' . $filename,
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ];
