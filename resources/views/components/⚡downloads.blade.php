@@ -46,7 +46,7 @@ new class extends Component
                                             <div class="text-muted small">{{ $row->remarks }}</div>
                                         </div>
                                         <div class="d-flex flex-column align-items-end gap-1">
-                                            <a href="{{ Storage::disk('public')->url($row->download_link) }}" class="btn {{ $meta['btn_color'] }} btn-sm ms-2" target="_blank">Download</a>
+                                            <a href="{{ asset('storage/' . $row->download_link) }}" class="btn {{ $meta['btn_color'] }} btn-sm ms-2" target="_blank">Download</a>
                                         </div>
                                     </li>
                                 @empty
