@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebAdminUploadController;
 
 Route::livewire('/', 'home')->name('home');
 Route::livewire('/about-us', 'about_us')->name('about');
@@ -16,3 +17,5 @@ Route::livewire('/mutual-fund/{fund_code}', 'view_fund')->name('view_fund');
 Route::livewire('/news', 'news')->name('news');
 Route::livewire('/news/{news_id}', 'view_news')->name('view_news');
 Route::livewire('/web-admin', 'web_admin')->name('admin');
+Route::post('/web-admin/reports', [WebAdminUploadController::class, 'storeReports'])->name('web-admin.reports.store');
+Route::post('/web-admin/downloads', [WebAdminUploadController::class, 'storeDownloads'])->name('web-admin.downloads.store');

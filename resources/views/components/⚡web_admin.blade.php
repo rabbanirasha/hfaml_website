@@ -1,7 +1,6 @@
 <?php
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -9,87 +8,29 @@ use Illuminate\Support\Str;
 
 new class extends Component
 {
-    use WithFileUploads;
 
     public array $download_types = [
         'Application Forms'  => ['description' => 'For buying, selling & transferring units'],
         'Scheme Documents'   => ['description' => 'Prospectus and Factsheet'],
         'Account Management' => ['description' => 'KYC, nominee, and update forms'],
-    ];    
+    ];
 
-    public string $report_title = '';
-    public string $download_title = '';
+    public array $report_types = [
+        'Annual Reports'         => ['description' => 'Yearly audited financial statements'],
+        'Quarterly Disclosures'  => ['description' => 'Quarterly financial disclosures'],
+        'Portfolio Statements'   => ['description' => 'Fund portfolio holdings'],
+        'NAV Declarations'       => ['description' => 'Daily/periodic NAV values'],
+        'Price Sensitive Info'   => ['description' => 'Material price-sensitive disclosures'],
+    ];  
+
     public string $report_type = '';
     public string $download_type = '';
     public ?string $report_date = null;
     public ?string $download_date = null;
     public string $remarks = '';
-    public array $report_files = [];
-    public array $download_files = [];
-    public int $insertChunkSize = 5;
     public bool $confirmingClear = false;
     public ?string $clearTarget = null;
     public array $clearableTargets; 
-
-    protected function extractDateFromFile($file): ?string
-    {
-        $path = $file->getRealPath();
-
-        if ($path === false || ! is_file($path)) {
-            return null;
-        }
-
-        $ext = strtolower($file->getClientOriginalExtension());
-
-        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'tiff', 'heic', 'heif'], true) && function_exists('exif_read_data')) {
-            $exif = @exif_read_data($path);
-
-            foreach (['DateTimeOriginal', 'DateTimeDigitized', 'DateTime'] as $key) {
-                if (! empty($exif[$key])) {
-                    $date = $exif[$key];
-                    $dateTime = \DateTime::createFromFormat('Y:m:d H:i:s', $date);
-
-                    if ($dateTime !== false) {
-                        return $dateTime->format('Y-m-d');
-                    }
-                }
-            }
-        }
-
-        if ($ext === 'pdf') {
-            $output = [];
-            exec('pdfinfo ' . escapeshellarg($path) . ' 2>/dev/null', $output);
-
-            foreach ($output as $line) {
-                if (str_starts_with($line, 'CreationDate:') || str_starts_with($line, 'ModDate:')) {
-                    $raw = trim(str_replace(['CreationDate:', 'ModDate:'], '', $line));
-                    $raw = preg_replace('/^D:/', '', $raw);
-                    $raw = preg_replace('/\s+/', ' ', $raw);
-
-                    if (! empty($raw)) {
-                        $date = \DateTime::createFromFormat('YmdHisO', $raw);
-
-                        if ($date === false) {
-                            $date = \DateTime::createFromFormat('YmdHis', $raw);
-                        }
-
-                        if ($date !== false) {
-                            return $date->format('Y-m-d');
-                        }
-                    }
-                }
-            }
-        }
-
-        return filemtime($path) ? date('Y-m-d', filemtime($path)) : null;
-    }
-
-    protected function buildTitleFromFile($file): string
-    {
-        $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-
-        return trim($name) !== '' ? $name : 'Report';
-    }   
 
     public function confirmClear(string $target): void
     {
@@ -116,100 +57,6 @@ new class extends Component
 
         $this->clearTarget = null;
         session()->flash('success_' . $key, ucfirst($target['label']) . ' data cleared.');
-    }   
-
-    public function submit_reports()
-    {
-        $this->validate([
-            'report_type' => 'required|string|max:500',
-            'report_files' => 'required|array|min:1',
-            'report_title' => 'nullable|string|max:1000',
-            'report_date' => 'nullable|date',
-            'remarks' => 'nullable|string|max:1000',                    
-        ]);        
-
-        $rows = [];
-
-        foreach ($this->report_files as $file) {
-            $title = trim($this->report_title) !== ''
-                ? $this->report_title
-                : $this->buildTitleFromFile($file);
-
-            $date = $this->report_date ?: $this->extractDateFromFile($file) ?: now()->format('Y-m-d');
-
-            $remarks = trim($this->remarks) !== ''
-                ? $this->remarks
-                : '';
-
-            $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '-' . random_int(1000, 9999) . '.' . $file->getClientOriginalExtension();
-
-            $storedPath = $file->storeAs('reports', $filename, 'public');
-
-            $rows[] = [
-                'report_title' => $title,
-                'report_type' => $this->report_type,
-                'report_date' => $date,
-                'remarks' => $remarks,
-                'report_link' => $storedPath,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        foreach (collect($rows)->chunk($this->insertChunkSize) as $chunk) {
-            DB::table('tbl_reports')->insert($chunk->toArray());
-        }
-
-        session()->flash('success_reports', count($this->report_files) . ' report(s) uploaded successfully.');
-
-        $this->reset(['report_title', 'report_type', 'report_date', 'remarks', 'report_files']);
-    }
-
-    public function submit_downloads()
-    {
-        $this->validate([
-            'download_type' => 'required|string|max:500',
-            'download_files' => 'required|array|min:1',
-            'download_title' => 'nullable|string|max:1000',
-            'download_date' => 'nullable|date',
-            'remarks' => 'nullable|string|max:1000',                    
-        ]);        
-
-        $rows = [];
-
-        foreach ($this->download_files as $file) {
-            $title = trim($this->download_title) !== ''
-                ? $this->download_title
-                : $this->buildTitleFromFile($file);
-
-            $date = $this->download_date ?: $this->extractDateFromFile($file) ?: now()->format('Y-m-d');
-
-            $remarks = trim($this->remarks) !== ''
-                ? $this->remarks
-                : '';
-
-            $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '-' . random_int(1000, 9999) . '.' . $file->getClientOriginalExtension();
-
-            $storedPath = $file->storeAs('downloads', $filename, 'public');
-
-            $rows[] = [
-                'download_title' => $title,
-                'download_type' => $this->download_type,
-                'download_date' => $date,
-                'remarks' => $remarks,
-                'download_link' => $storedPath,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        foreach (collect($rows)->chunk($this->insertChunkSize) as $chunk) {
-            DB::table('tbl_downloads')->insert($chunk->toArray());
-        }
-
-        session()->flash('success_downloads', count($this->download_files) . ' form,doc(s) uploaded successfully.');
-
-        $this->reset(['download_title', 'download_type', 'download_date', 'remarks', 'download_files']);
     }
     
     public function mount(): void
@@ -242,85 +89,42 @@ new class extends Component
                                 <p class="text-muted mb-0">Select multiple files and upload them as one report type.</p>
                             </div>
 
-                            <form wire:submit.prevent="submit_reports">
-                                <div class="mb-3">
-                                    <label for="report_title" class="form-label fw-semibold">Report Title</label>
-                                    <input
-                                        id="report_title"
-                                        type="text"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="report_title"
-                                        placeholder="Optional - defaults to each file name"
-                                    >
-                                    @error('report_title')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
+                            <form method="POST" action="{{ route('web-admin.reports.store') }}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="mb-3">
                                     <label for="report_type" class="form-label fw-semibold">Report Type</label>
-                                    <select id="report_type" class="form-select form-select-lg rounded-3" wire:model="report_type">
-                                        <option value="">Select report type</option>
-                                        <option value="Annual Reports">Annual Reports</option>
-                                        <option value="Quarterly Disclosures">Quarterly Disclosures</option>
-                                        <option value="Portfolio Statements">Portfolio Statements</option>
-                                        <option value="NAV Declarations">NAV Declarations</option>
-                                        <option value="Price Sensitive Info">Price Sensitive Info</option>
+                                    <select id="report_type" name="report_type" class="form-select form-select-lg rounded-3" wire:model.live="report_type" required>
+                                        <option value="">Select Report Type</option>
+                                    @foreach ($report_types as $type => $meta)
+                                        <option value="{{ $type }}">{{ $type }}</option>
+                                    @endforeach
                                     </select>
-                                    <small class="text-muted">Select a report type</small>
-                                    @error('report_type')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
+                                    <small class="text-muted">{{ $report_types[$report_type]['description'] ?? 'Select a type to see its description' }}</small>
+                                    @error('report_type') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="report_date" class="form-label fw-semibold">Report Date</label>
-                                    <input
-                                        id="report_date"
-                                        type="date"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="report_date"
-                                    >
-                                    <small class="text-muted">Leave blank to use metadata from the file, or fallback to today.</small>
-                                    @error('report_date')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
+                                    <input id="report_date" type="date" name="report_date" class="form-control form-control-lg rounded-3">
+                                    <small class="text-muted">Leave blank to use today's date.</small>
+                                    @error('report_date') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="remarks" class="form-label fw-semibold">Remarks</label>
-                                    <input
-                                        id="remarks"
-                                        type="text"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="remarks"
-                                        placeholder="Optional remarks"
-                                    >
-                                    @error('remarks')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
+                                    <label for="report_remarks" class="form-label fw-semibold">Remarks</label>
+                                    <input id="report_remarks" type="text" name="remarks" class="form-control form-control-lg rounded-3" placeholder="Optional remarks">
+                                    @error('remarks') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="report_files" class="form-label fw-semibold">Upload</label>
-                                    <input
-                                        id="report_files"
-                                        type="file"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="report_files"
-                                        wire:loading.attr="disabled"
-                                        wire:target="report_files"
-                                        multiple
-                                    >
-                                    <div wire:loading wire:target="report_files" class="text-muted small mt-1"> Preparing selected file(s)... </div>
-                                    <small class="text-muted">You can select as many files as you want as they uploaded in chunks of {{ $insertChunkSize }}.</small>
-                                    @error('report_files')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
+                                    <input id="report_files" type="file" name="report_files[]" class="form-control form-control-lg rounded-3" multiple required>
+                                    <small class="text-muted">Files will be named Report Type_1, Report Type_2, and so on.</small>
+                                    @error('report_files') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                                 </div>
 
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button type="submit" class="btn btn-primary btn-sm" wire:loading.attr="disabled" wire:target="report_files,submit" > <span wire:loading.remove wire:target="report_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="report_files,submit"> Preparing Upload... </span> </button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Upload Selected Files</button>
                                     <button type="button" class="btn btn-danger btn-sm" wire:click="confirmClear('reports')">Clear Data</button>
                                 </div>
                             </form>
@@ -329,7 +133,7 @@ new class extends Component
                                     {{ session('success_reports') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                            @endif                            
+                            @endif                           
                         </div>
                     </div>
                 </div>
@@ -341,24 +145,12 @@ new class extends Component
                                 <p class="text-muted mb-0">Select multiple files and upload them as one report type.</p>
                             </div>
 
-                            <form wire:submit.prevent="submit_downloads">
-                                <div class="mb-3">
-                                    <label for="download_title" class="form-label fw-semibold">Download Title</label>
-                                    <input
-                                        id="download_title"
-                                        type="text"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="download_title"
-                                        placeholder="Optional - defaults to each file name"
-                                    >
-                                    @error('download_title')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                            <form method="POST" action="{{ route('web-admin.downloads.store') }}" enctype="multipart/form-data">
+                                @csrf
 
                                 <div class="mb-3">
                                     <label for="download_type" class="form-label fw-semibold">download Type</label>
-                                    <select id="download_type" class="form-select form-select-lg rounded-3" wire:model.live="download_type">
+                                    <select id="download_type" class="form-select form-select-lg rounded-3" name="download_type" wire:model.live="download_type">
                                         <option value="">Select download type</option>
                                         @foreach ($download_types as $type => $meta)
                                             <option value="{{ $type }}">{{ $type }}</option>
@@ -372,12 +164,7 @@ new class extends Component
 
                                 <div class="mb-3">
                                     <label for="download_date" class="form-label fw-semibold">download Date</label>
-                                    <input
-                                        id="download_date"
-                                        type="date"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="download_date"
-                                    >
+                                    <input id="download_date" type="date" class="form-control form-control-lg rounded-3" name="download_date" >
                                     <small class="text-muted">Leave blank to use metadata from the file, or fallback to today.</small>
                                     @error('download_date')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
@@ -386,13 +173,7 @@ new class extends Component
 
                                 <div class="mb-3">
                                     <label for="remarks" class="form-label fw-semibold">Remarks</label>
-                                    <input
-                                        id="remarks"
-                                        type="text"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="remarks"
-                                        placeholder="Optional remarks"
-                                    >
+                                    <input id="remarks" type="text" class="form-control form-control-lg rounded-3" name="remarks" placeholder="Optional remarks" >
                                     @error('remarks')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
@@ -400,24 +181,13 @@ new class extends Component
 
                                 <div class="mb-4">
                                     <label for="download_files" class="form-label fw-semibold">Upload</label>
-                                    <input
-                                        id="download_files"
-                                        type="file"
-                                        class="form-control form-control-lg rounded-3"
-                                        wire:model="download_files"
-                                        wire:loading.attr="disabled"
-                                        wire:target="download_files"
-                                        multiple
-                                    >
-                                    <div wire:loading wire:target="download_files" class="text-muted small mt-1"> Preparing selected file(s)... </div>
-                                    <small class="text-muted">You can select as many files as you want as they uploaded in chunks of {{ $insertChunkSize }}.</small>
-                                    @error('download_files')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
+                                    <input id="download_files" type="file" name="download_files[]" class="form-control form-control-lg rounded-3" multiple required>
+                                    <small class="text-muted">Files will be named Download Type_1, Download Type_2, and so on.</small>
+                                    @error('download_files') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                                 </div>
 
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button type="submit" class="btn btn-primary btn-sm" wire:loading.attr="disabled" wire:target="download_files,submit" > <span wire:loading.remove wire:target="download_files,submit"> Upload Selected Files </span> <span wire:loading wire:target="download_files,submit"> Preparing Upload... </span> </button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Upload Selected Files</button>
                                     <button type="button" class="btn btn-danger btn-sm" wire:click="confirmClear('downloads')">Clear Data</button>
     
                                 </div>
