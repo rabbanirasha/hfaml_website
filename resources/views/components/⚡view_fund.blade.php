@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\DB;
 
 new class extends Component
 {
-    public $fund_summary, $fund_performance;
+    public $fund_summary, $fund_performance, $fund_list;
     public function mount($fund_code){
         $fund_code_small = strtolower($fund_code);
         $this->fund_summary = DB::table('tbl_fundsummary')->where('fund_code', $fund_code_small)->first();
-        $this->fund_performance = DB::table('tbl_fundperformance')->where('fund_code', $fund_code_small)->first();
-        
+        $this->fund_list = DB::table('tbl_fundperformance')->get();
+        $this->fund_performance = $this->fund_list->firstWhere('fund_code', $fund_code);
+
         if (!$this->fund_summary) {
             abort(404);
         }
@@ -40,9 +41,9 @@ new class extends Component
                         <div class="col-md-4 text-md-end mt-3 mt-md-0">
                             <div class="bg-white text-dark p-3 rounded text-center shadow-sm">
                                 <div class="small text-muted text-uppercase fw-bold">Latest Selling Price /Unit</div>
-                                <div class="fs-1 fw-bold text-primary">{{$fund_performance->nav_mp_pu}}</div>
-                                <div class="small text-muted d-flex justify-content-around gap-2"> <span>Repurchase:</span><span class="fw-bold">{{$fund_performance->nav_rp_pu}}</span> </div>
-                                <div class="small d-flex justify-content-around gap-2 mt-1"> <span>As of:</span><span class="fw-bold">{{$fund_performance->effective_date}}</span> </div>
+                                <div class="fs-1 fw-bold text-primary">{{ $fund_performance?->nav_mp_pu ?? 'N/A' }}</div>
+                                <div class="small text-muted d-flex justify-content-around gap-2"> <span>Repurchase:</span><span class="fw-bold">{{$fund_performance->nav_rp_pu ?? 'N/A'}}</span> </div>
+                                <div class="small d-flex justify-content-around gap-2 mt-1"> <span>As of:</span><span class="fw-bold">{{$fund_performance->effective_date ?? 'N/A'}}</span> </div>
                             </div>
                         </div>
                     </div>
@@ -132,32 +133,46 @@ new class extends Component
                 <!-- Right Column: Quick Calculators & SID Downloads -->
                 <div class="col-lg-4">
                     <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-primary text-white py-3">
-                            <h6 class="fw-bold mb-0">Scheme Documents & Disclosures</h6>
+                        <div class="card-header bg-secondary text-white py-3">
+                            <h6 class="fw-bold mb-0">Forms, Documents, and Reports</h6>
                         </div>
                         <div class="list-group list-group-flush">
-                            <a href="/downloads" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 <div>
-                                    <strong>Scheme Information Document (SID)</strong>
-                                    <div class="small text-muted">Full Prospectus & Bylaws</div>
+                                    <strong>Downloads</strong>
+                                    <div class="small text-muted">Forms, Prospectus, Factsheet</div>
                                 </div>
-                                <span class="badge bg-secondary">PDF</span>
                             </a>
-                            <a href="/reports" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <a href="{{ route('reports') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 <div>
-                                    <strong>Quarterly Portfolio Disclosure</strong>
-                                    <div class="small text-muted">Asset Allocation & Holdings</div>
+                                    <strong>Reports</strong>
+                                    <div class="small text-muted">Performance, Audit, Finance and Accounting</div>
                                 </div>
-                                <span class="badge bg-secondary">PDF</span>
                             </a>
                         </div>
                     </div>
 
-                    <div class="card bg-primary-subtle border-primary text-center p-4">
-                        <h5 class="fw-bold text-primary mb-2">Ready to Invest in HFUF?</h5>
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-secondary text-white py-3">
+                            <h6 class="fw-bold mb-0">Our Funds</h6>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            @foreach($fund_list as $row)
+                            <a href ="{{route('view_fund', ['fund_code' => $row->fund_code])}}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ $row->fund_code }}</strong>
+                                    <div class="small text-muted">{{ $row->fund_name }}</div>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>                    
+
+                    <div class="card bg-secondary-subtle border-primary text-center p-4">
+                        <h5 class="fw-bold text-secondary mb-2">Ready to Invest in HFUF?</h5>
                         <p class="small text-muted mb-3">Open your investor account online or submit a buy request directly with our support team.</p>
-                        <a href="/register" class="btn btn-primary shadow-sm mb-2 w-100">Open Investor Account</a>
-                        <a href="/contact" class="btn btn-outline-primary w-100">Contact Investment Desk</a>
+                        <a href="/register" class="btn btn-secondary shadow-sm mb-2 w-100">Open Investor Account</a>
+                        <a href="/contact" class="btn btn-secondary w-100">Contact Investment Desk</a>
                     </div>
                 </div>
             </div>

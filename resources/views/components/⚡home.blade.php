@@ -69,7 +69,7 @@ new class extends Component
                             @foreach($fund_performance as $row)
                                 <tr>
                                     <td>{{$row->effective_date}}</td>
-                                    <td><a class="text-secondary" target="\_blank" link="noreferrer" href ="{{route('view_fund', ['fund_code' => $row->fund_code])}}">{{$row->fund_name}}</a></td>
+                                    <td><a class="text-secondary" target="\_blank" href ="{{route('view_fund', ['fund_code' => $row->fund_code])}}" wire:navigate.hover>{{$row->fund_name}}</a></td>
                                     <td><span class ="d-block text-center">{{$row->nav_cp_pu}}</span></td>
                                     <td><span class ="d-block text-center">{{$row->nav_mp_pu}}</span></td>
                                     <td><span class ="d-block text-center">{{$row->nav_rp_pu}}</span></td>
