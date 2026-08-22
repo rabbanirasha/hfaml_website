@@ -29,3 +29,26 @@ echo "<h3>PHP Binary Directory:</h3> " . PHP_BINDIR . "<br>";
 ?>
 ```
 Now visit https://your-site/public/find-php.php
+
+## Allow more file uploads
+If you encounter issues in uploading files at https://your-site/web-admin, edit your php.ini file:
+```
+; Enable file uploads
+file_uploads = On
+
+; Maximum allowed size for a single uploaded file
+upload_max_filesize = 100M
+
+; Maximum size of the entire POST request data (must be >= upload_max_filesize)
+post_max_size = 105M
+
+; Maximum number of files that can be uploaded simultaneously in one request
+max_file_uploads = 50
+
+; Memory limit allocated for a script (must be >= post_max_size)
+memory_limit = 256M
+
+; Recommended: Increase execution timeouts so large uploads don't time out
+max_execution_time = 300
+max_input_time = 300
+```
