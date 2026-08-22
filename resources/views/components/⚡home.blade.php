@@ -54,36 +54,34 @@ new class extends Component
                     </div>
                 </div>
                 <div class="col text-center text-md-start">
-                    <div class="text-center">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Effective Date</th>
-                                        <th>Fund Name</th>
-                                        <th>NAV at Cost /Unit*</th>
-                                        <th>NAV at Market (Selling Price) /Unit</th>
-                                        <th>Repurchase or Surrender Price /Unit</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="border-top: 2px solid var(--bs-primary) ;">
-                                @foreach($fund_performance as $row)
-                                    <tr>
-                                        <td>{{$row->effective_date}}</td>
-                                        <td>{{$row->fund_name}}</td>
-                                        <td>{{$row->nav_cp_pu}}</td>
-                                        <td>{{$row->nav_mp_pu}}</td>
-                                        <td>{{$row->nav_rp_pu}}</td>
-                                    </tr>
-                                @endforeach                                  
-                                </tbody>
-                                <tfoot class="small">
-                                    <tr>
-                                    <td colspan="5">Valid until the announcement of the next NAV. The repurchase/surrender price is calculated after deducting 2% exit load from the NAV.</td>
-                                    </tr>
-                                </tfoot>                            
-                            </table>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Effective Date</th>
+                                    <th>Fund Name</th>
+                                    <th>NAV at Cost /Unit*</th>
+                                    <th>NAV at Market (Selling Price) /Unit</th>
+                                    <th>Repurchase or Surrender Price /Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody style="border-top: 2px solid var(--bs-primary) ;">
+                            @foreach($fund_performance as $row)
+                                <tr>
+                                    <td>{{$row->effective_date}}</td>
+                                    <td><a class="text-secondary" target="\_blank" link="noreferrer" href ="{{route('view_fund', ['fund_code' => $row->fund_code])}}">{{$row->fund_name}}</a></td>
+                                    <td><span class ="d-block text-center">{{$row->nav_cp_pu}}</span></td>
+                                    <td><span class ="d-block text-center">{{$row->nav_mp_pu}}</span></td>
+                                    <td><span class ="d-block text-center">{{$row->nav_rp_pu}}</span></td>
+                                </tr>
+                            @endforeach                                  
+                            </tbody>
+                            <tfoot class="small">
+                                <tr>
+                                <td colspan="5">Valid until the announcement of the next NAV. The repurchase/surrender price is calculated after deducting 2% exit load from the NAV.</td>
+                                </tr>
+                            </tfoot>                            
+                        </table>
                     </div>
                 </div>
             </div>
