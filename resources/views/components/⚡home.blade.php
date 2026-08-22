@@ -76,7 +76,7 @@ new class extends Component
                                 </tr>
                             @endforeach                                  
                             </tbody>
-                            <tfoot class="small">
+                            <tfoot class="small text-center">
                                 <tr>
                                 <td colspan="5">Valid until the announcement of the next NAV. The repurchase/surrender price is calculated after deducting 2% exit load from the NAV.</td>
                                 </tr>
