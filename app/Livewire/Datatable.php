@@ -17,6 +17,7 @@ class Datatable extends Component
     public string $table = '';
     public array $columns = [];
     public array $filters = [];
+    public int $truncateLength = 50;
 
     public string $search = '';
     public array $activeFilters = [];

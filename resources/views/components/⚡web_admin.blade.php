@@ -205,6 +205,70 @@ new class extends Component
                     <div class="card shadow-sm rounded-bordered rounded-4 h-100">
                         <div class="card-body p-4 p-md-5">
                             <div class="mb-4 text-center">
+                                <h2 class="fw-bold text-primary mb-1">Reports</h2>
+                                <p class="text-muted mb-0">Add or Edit Reports section</p>
+                            </div>
+                            <livewire:datatable 
+                                title="Reports" 
+                                table="tbl_reports"
+                                :show-actions="true"
+                                primary-key="report_id"                              
+                                :columns="[
+                                    ['field' => 'report_id', 'label' => 'report_id', 'sortable' => true],
+                                    ['field' => 'report_title', 'label' => 'report_title', 'sortable' => true],
+                                    ['field' => 'report_type', 'label' => 'report_type', 'sortable' => true],
+                                    ['field' => 'report_date', 'label' => 'report_date', 'sortable' => true, 'truncate' => true],
+                                    ['field' => 'remarks', 'label' => 'remarks', 'sortable' => true],
+                                    ['field' => 'report_link', 'label' => 'report_link', 'sortable' => true],                                                  
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'report_date', 
+                                        'label' => 'Post Date', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            />                                                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 my-2">
+                    <div class="card shadow-sm rounded-bordered rounded-4 h-100">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="mb-4 text-center">
+                                <h2 class="fw-bold text-primary mb-1">Downloads</h2>
+                                <p class="text-muted mb-0">Add or Edit Downloads section</p>
+                            </div>
+                            <livewire:datatable 
+                                title="Downloads" 
+                                table="tbl_downloads"
+                                :show-actions="true"
+                                primary-key="download_id"                              
+                                :columns="[
+                                    ['field' => 'download_id', 'label' => 'download_id', 'sortable' => true],
+                                    ['field' => 'download_title', 'label' => 'download_title', 'sortable' => true],
+                                    ['field' => 'download_type', 'label' => 'download_type', 'sortable' => true],
+                                    ['field' => 'download_date', 'label' => 'download_date', 'sortable' => true, 'truncate' => true],
+                                    ['field' => 'remarks', 'label' => 'remarks', 'sortable' => true],
+                                    ['field' => 'download_link', 'label' => 'download_link', 'sortable' => true],                                                  
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'download_date', 
+                                        'label' => 'Post Date', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            />                                                        
+                        </div>
+                    </div>
+                </div>                                  
+                <div class="col-12 my-2">
+                    <div class="card shadow-sm rounded-bordered rounded-4 h-100">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="mb-4 text-center">
                                 <h2 class="fw-bold text-primary mb-1">News</h2>
                                 <p class="text-muted mb-0">Add or Edit News section</p>
                             </div>
@@ -219,7 +283,7 @@ new class extends Component
                                     ['field' => 'news_id', 'label' => 'news_id', 'sortable' => true],
                                     ['field' => 'post_date', 'label' => 'Post Date', 'sortable' => true],
                                     ['field' => 'title', 'label' => 'Title', 'sortable' => true],
-                                    ['field' => 'main_body', 'label' => 'Description', 'sortable' => true],
+                                    ['field' => 'main_body', 'label' => 'Description', 'sortable' => true, 'truncate' => true],
                                     ['field' => 'image_link', 'label' => 'Image', 'sortable' => true],                                                  
                                     
                                 ]"
@@ -254,7 +318,7 @@ new class extends Component
                                     ['field' => 'target_name', 'label' => 'target_name', 'sortable' => true],
                                     ['field' => 'target_title', 'label' => 'target_title', 'sortable' => true],
                                     ['field' => 'target_designation', 'label' => 'target_designation', 'sortable' => true],
-                                    ['field' => 'modal_body', 'label' => 'modal_body', 'sortable' => true],
+                                    ['field' => 'modal_body', 'label' => 'modal_body', 'sortable' => true, 'truncate' => true],
                                     ['field' => 'image_link', 'label' => 'image_link', 'sortable' => true],                                               
                                     
                                 ]"

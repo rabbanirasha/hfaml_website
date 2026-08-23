@@ -67,12 +67,18 @@
                     @forelse($records as $record)
                         <tr>
                             @foreach($columns as $column)
-                                <td class="text-start">
-                                    @if(($column['type'] ?? '') === 'currency')
-                                        <!-- Cast string to float explicitly to fix the parameter type error -->
-                                        ${{ number_format((float) $record->{$column['field']}, 2) }}
+                                <td class="text-start"> 
+                                    @php $rawValue = $record->{$column['field']} ?? ''; 
+                                    $stringValue = (string) $rawValue; 
+                                    $truncate = (bool) ($column['truncate'] ?? false); 
+                                    $length = (int) ($column['truncate_length'] ?? $truncateLength); 
+                                    @endphp
+                                    @if (($column['type'] ?? '') === 'currency')
+                                        ${{ number_format((float) $rawValue, 2) }}
+                                    @elseif ($truncate)
+                                        {{ \Illuminate\Support\Str::limit(strip_tags($stringValue), max(1, $length)) }}
                                     @else
-                                        {!! $record->{$column['field']} !!}
+                                        {!! $stringValue !!}
                                     @endif
                                 </td>
                             @endforeach                    
