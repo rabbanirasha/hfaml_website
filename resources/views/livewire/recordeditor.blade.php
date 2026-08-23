@@ -26,14 +26,35 @@
                         @elseif (($fieldTypes[$field] ?? null) === 'date')
                             <input type="date" class="form-control" wire:model="fields.{{ $field }}">
                         @elseif (str_ends_with($field, '_link'))
-                            <input type="file" class="form-control" wire:model="imageUploads.{{ $field }}" accept="image/*">
-                            <div wire:loading wire:target="imageUploads.{{ $field }}" class="text-muted small mt-1">Uploading...</div>
-                            @if ($value)
-                                <div class="mt-2 text-center"><img src="{{ asset($value) }}" style="max-height:100px;" alt=""></div>
-                            @endif
+                        @php $isPdf = $value && \Illuminate\Support\Str::endsWith(strtolower($value), '.pdf'); @endphp
+                            <div x-data="{ previewUrl: null, previewType: null, setPreview(event) { const file = event.target.files?.[0]; if (!file) { this.previewUrl = null; this.previewType = null; return; } if (this.previewUrl) URL.revokeObjectURL(this.previewUrl); this.previewUrl = URL.createObjectURL(file); this.previewType = file.type === 'application/pdf' ? 'pdf' : (file.type.startsWith('image/') ? 'image' : null); } }" >                        
+                                <input type="file" class="form-control" wire:model="imageUploads.{{ $field }}" accept="image/*,.pdf,application/pdf" x-on:change="setPreview($event)" >
+                                <div wire:loading wire:target="imageUploads.{{ $field }}" class="text-muted small mt-1">Uploading...</div>
+                                <div class="row my-5">
+                                    <div class="col-6 text-center">
+                                        <h6 class="fw-bold text-primary mb-1">Preview</h6>
+                                        <template x-if="previewType === 'image'"> <div class="mt-2"> <img :src="previewUrl" style="max-height:100px;" alt=""> </div> </template>
+                                        <template x-if="previewType === 'pdf'"> <div class="mt-2"> <iframe :src="previewUrl" style="max-height:100px;border:0px solid #ddd;"></iframe> </div> </template>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <h6 class="fw-bold text-primary mb-1">Current</h6>
+                                        @if ($value)
+                                            @if ($isPdf)
+                                                <div class="mt-2">
+                                                    <iframe src="{{ asset($value) }}" style="max-height:100px;border:0px solid #ddd;"></iframe>
+                                                </div>
+                                            @else
+                                                <div class="mt-2">
+                                                    <img src="{{ asset($value) }}" style="max-height:100px;" alt="">
+                                                </div>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             @error('imageUploads.' . $field)
                                 <div class="text-danger small mt-1">{{ $message }}</div>
-                            @enderror                            
+                            @enderror                        
                         @else
                             <input type="text" class="form-control" wire:model="fields.{{ $field }}">
                         @endif
