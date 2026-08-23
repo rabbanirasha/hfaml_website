@@ -49,7 +49,7 @@ new class extends Component
 
         DB::table($target['table'])->truncate();
 
-        $path = public_path('storage/' . $target['folder']);
+        $path = public_path('docs/' . $target['folder']);
         if (File::isDirectory($path)) {
             File::deleteDirectory($path);
             File::makeDirectory($path, 0755, true);

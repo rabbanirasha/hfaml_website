@@ -24,7 +24,7 @@ class WebAdminUploadController extends Controller
             ->where('report_type', $data['report_type'])
             ->count() + 1;
 
-        $destination = public_path('storage/reports');
+        $destination = public_path('docs/reports/');
         if (! is_dir($destination)) {
             mkdir($destination, 0755, true);
         }
@@ -69,7 +69,7 @@ class WebAdminUploadController extends Controller
             ->where('download_type', $data['download_type'])
             ->count() + 1;
 
-        $destination = public_path('storage/downloads');
+        $destination = public_path('docs/downloads/');
         if (! is_dir($destination)) {
             mkdir($destination, 0755, true);
         }
