@@ -44,34 +44,15 @@ new class extends Component
                     <h4 class="fw-bolder" style="color: #2c4fc3;">OUR PARTNERS</h4>
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <div class="row justify-content-center mx-auto">
+                        @foreach($partners as $partner)
                         <div class="col-3 col-md-6">
                             <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                                <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/runner.jpg')}}">
-                                <p><strong class="text-center">RUNNER GROUP</strong></p>
-                                <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'runner' })">Read More</a>
+                                <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset($partner->image_link)}}">
+                                <p><strong class="text-center">{{ $partner->target_title }}</strong></p>
+                                <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: '{{ $partner->target_name }}' })">Read More</a>
                             </div>
                         </div>
-                        <div class="col-3 col-md-6">
-                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                                <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/icb.svg')}}">
-                                <p><strong class="text-center">INVESTMENT CORPORATION OF BANGLADESH</strong></p>
-                                <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'icb' })">Read More</a>
-                            </div>
-                        </div>
-                        <div class="col-3 col-md-6">
-                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                                <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/brac.jpg')}}">
-                                <p><strong class="text-center">BRAC BANK PLC</strong></p>
-                                <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'brac' })">Read More</a>
-                            </div>
-                        </div>
-                        <div class="col-3 col-md-6">
-                            <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                                <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/acme.jpg')}}">
-                                <p><strong class="text-center">THE ACME LABORATORIES LTD.</strong></p>
-                                <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'acme' })">Read More</a>
-                            </div>
-                        </div>                                                                        
+                        @endforeach                                                                     
                     </div>
                 </div>
                 <div class="col-md-8 col-xl-6 text-center p-4 mx-auto">
@@ -123,92 +104,32 @@ new class extends Component
             <!-- Start: BOD -->
             <div class="py-5">
                 <p class="fs-5 mb-3 text-center"><strong>Board of Directors</strong></p>
-                <div class="row justify-content-center mx-auto">                    
+                <div class="row justify-content-center mx-auto">
+                    @foreach ($board as $bod)                  
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbebe1428a.webp')}}">
-                            <p class="mb-0 fw-bold">Mr. Hafizur Rahman Khan</p>
-                            <p class="mb-0">Chairman</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
+                            <img class="team-photo mb-3" src="{{asset($bod->image_link)}}">
+                            <p class="mb-0 fw-bold">{{ $bod->target_title }}</p>
+                            <p class="mb-0">{{ $bod->target_designation }}</p>
+                            <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: '{{ $bod->target_name }}' })">Read More</a>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/454A7214.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Md Fayekuzzaman</p>
-                            <p class="mb-0">Executive Director &amp; Former Chief Executive Officer (CEO)</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/2026-01-19-696dbf27c8092.webp')}}">
-                            <p class="mb-0 fw-bold">Mr. Md. Mozammel Hossain</p>
-                            <p class="mb-0">Director</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/IMG_5496.jpg')}}">
-                            <p class="mb-0 fw-bold">Ms. Munira Begum</p>
-                            <p class="mb-0">Director</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div><!-- End: BOD --><!-- Start: MT -->
             <div class="pb-5">
                 <p class="fs-5 mb-3 text-center"><strong>Management &amp; Executive Team</strong></p>
                 <div class="row justify-content-center mx-auto">
+                    @foreach($management as $mgmt)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/IMG_20210525_141630.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. S.M. Shakhawat Hossain</p>
-                            <p class="mb-0">Chief Executive Officer (CEO)</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
+                            <img class="team-photo mb-3" src="{{asset($mgmt->image_link)}}">
+                            <p class="mb-0 fw-bold">{{ $mgmt->target_title }}</p>
+                            <p class="mb-0">{{ $mgmt->target_designation }}</p>
+                            <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: '{{ $mgmt->target_name }}' })">Read More</a>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/nazmul-islam.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Nazmul Islam</p>
-                            <p class="mb-0">Chief Operating Officer (COO)</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/Shihab-Alom-Khan.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Shihab Alam Khan</p>
-                            <p class="mb-0">Sr. Manager - Portfolio Mgmt.</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/pic.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Md Mohiuddin Miah</p>
-                            <p class="mb-0">Manager - Accounts and Finance</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/Fazlul-Pic.jpg')}}">
-                            <p class="mb-0 fw-bold">Mr. Fazlul Gani Mazumder</p>
-                            <p class="mb-0">Manager - Compliance and HR</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>                                                                                               
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                            <img class="team-photo mb-3" src="{{asset('img/team/rasha_2024.jpg')}}">
-                            <p class="mb-0 fw-bold">Rabbani Rasha</p>
-                            <p class="mb-0">Manager - Information Technology</p>
-                            <a class="badge text-bg-primary btn mt-auto" href="#">Read More</a>
-                        </div>
-                    </div>                                       
+                    @endforeach                                     
                 </div>
             </div>
             <!-- End: MT -->

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +27,13 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         Paginator::useBootstrapFive();
+
+        $modals = DB::table('tbl_modal')->whereIn('target_type', ['partner', 'board', 'management'])->get()->groupBy('target_type');
+        $partners = $modals->get('partner', collect());
+        $board = $modals->get('board', collect());
+        $management = $modals->get('management', collect());
+        
+        View::share(compact('partners', 'board','management'));
     }
 
     /**

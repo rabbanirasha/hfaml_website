@@ -218,34 +218,16 @@ new class extends Component
         <h1 class="fw-bold text-center text-primary">Our Partners</h1>
         <div class="container text-center py-2">
             <div class="row justify-content-center mx-auto">
+                @foreach($partners as $partner)
                 <div class="col-3">
                     <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                        <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/runner.jpg')}}">
-                        <p><strong class="text-center">RUNNER GROUP</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'runner' })">Sponsor</a>
+                        <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset($partner->image_link)}}">
+                        <p><strong class="text-center">{{ $partner->target_title }}</strong></p>
+                        <p class="mb-0 mt-auto">{{ $partner->target_designation }}</p>
+                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: '{{ $partner->target_name }}' })">Read More</a>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                        <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/icb.svg')}}">
-                        <p><strong class="text-center">INVESTMENT CORPORATION OF BANGLADESH</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'icb' })">Trustee</a>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                        <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/brac.jpg')}}">
-                        <p><strong class="text-center">BRAC BANK PLC</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'brac' })">Custodian</a>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="d-flex flex-column align-items-center h-100 text-center p-3">
-                        <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset('img/brands/acme.jpg')}}">
-                        <p><strong class="text-center">THE ACME LABORATORIES LTD.</strong></p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: 'acme' })">Sponsor</a>
-                    </div>
-                </div>                                                                        
+                @endforeach                                                                   
             </div>
         </div>
     </section>

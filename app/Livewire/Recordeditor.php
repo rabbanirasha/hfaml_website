@@ -80,12 +80,14 @@ class Recordeditor extends Component
         }
 
         // only validate fields that actually have a new file selected
-        $this->validate(
-            collect($this->imageUploads)
-                ->filter()
-                ->mapWithKeys(fn ($file, $field) => ["imageUploads.$field" => 'image|max:5120'])
-                ->all()
-        );
+        $rules = collect($this->imageUploads)
+            ->filter()
+            ->mapWithKeys(fn ($file, $field) => ["imageUploads.$field" => 'mimes:jpg,jpeg,png,gif,bmp,webp,svg|max:20480'])
+            ->all();
+
+        if ($rules) {
+            $this->validate($rules);
+        }
 
         foreach ($this->imageUploads as $field => $file) {
             if ($file) {

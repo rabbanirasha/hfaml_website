@@ -245,12 +245,17 @@ new class extends Component
                                 title="Modal"
                                 table="tbl_modal"
                                 :show-actions="true"
+                                :show-add-button="true"
                                 primary-key="target_id"
                                 :rich-fields="['modal_body']"
                                 :columns="[
                                     ['field' => 'target_id', 'label' => 'target_id', 'sortable' => true],
+                                    ['field' => 'target_type', 'label' => 'target_type', 'sortable' => true],
                                     ['field' => 'target_name', 'label' => 'target_name', 'sortable' => true],
-                                    ['field' => 'modal_body', 'label' => 'modal_body', 'sortable' => true],                                                
+                                    ['field' => 'target_title', 'label' => 'target_title', 'sortable' => true],
+                                    ['field' => 'target_designation', 'label' => 'target_designation', 'sortable' => true],
+                                    ['field' => 'modal_body', 'label' => 'modal_body', 'sortable' => true],
+                                    ['field' => 'image_link', 'label' => 'image_link', 'sortable' => true],                                               
                                     
                                 ]"
                                 :filters="[
