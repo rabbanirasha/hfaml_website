@@ -10,9 +10,14 @@ RewriteRule ^(vendor|storage|bootstrap|config|database|resources|tests|routes|ap
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Redirect all requests to public/index.php
+    # Serve real static files directly (build assets, docs, img, etc.)
     RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L,QSA]
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Everything else goes through Laravel's front controller
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/index.php [L]
 </IfModule>
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php85” package as the default “PHP” programming language.
