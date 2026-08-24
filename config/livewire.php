@@ -129,7 +129,7 @@ return [
     */
 
     'temporary_file_upload' => [
-        'disk' => null,        // e.g. 'local'
+        'disk' => 'local',        // e.g. 'local'
         'rules' => 'file|max:512000', // 512000 KB = 500MB, matches your controller's max:512000
         'directory' => null,
         'middleware' => 'throttle:60,1',
