@@ -20,13 +20,18 @@ git commit -m "your message or changelog"
 git push
 ```
 
-## How to find the php binary path of your host
+## How to find the php binary path and essential extensions of your host
 Create find-php.php file at /your-laravel-project/public/find-php.php and enter the following in the file:
 ```
 <?php
 echo "<h3>PHP Binary Path:</h3> " . PHP_BINARY . "<br>";
 echo "<h3>PHP Binary Directory:</h3> " . PHP_BINDIR . "<br>";
+$required = ['fileinfo', 'mbstring', 'openssl', 'pdo_mysql', 'tokenizer', 'xml', 'ctype', 'json', 'bcmath', 'curl'];
+foreach ($required as $ext) {
+    echo $ext . ': ' . (extension_loaded($ext) ? 'enabled' : 'MISSING') . "\n";
+}
 ?>
+
 ```
 Now visit https://your-site/public/find-php.php
 
