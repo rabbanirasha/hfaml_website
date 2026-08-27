@@ -93,7 +93,7 @@ class Recordeditor extends Component
             if ($file) {
                 $oldPath = $this->fields[$field] ?? null;
 
-                $folder = ($this->table == 'tbl_downloads' || 'tbl_reports' ? 'docs/':'') . Str::after($this->table, 'tbl_'); // e.g. tbl_news -> img/news
+                $folder = (in_array($this->table, ['tbl_downloads', 'tbl_reports'], true) ? 'docs/' : 'img/') . Str::after($this->table, 'tbl_');
                 $destination = public_path($folder);
 
                 if (! File::isDirectory($destination)) {
