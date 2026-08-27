@@ -20,10 +20,6 @@ class WebAdminUploadController extends Controller
 
         $date = $data['report_date'] ?? now()->format('Y-m-d');
 
-        $startNumber = DB::table('tbl_reports')
-            ->where('report_type', $data['report_type'])
-            ->count() + 1;
-
         $destination = public_path('docs/reports/');
         if (! is_dir($destination)) {
             mkdir($destination, 0755, true);
@@ -31,18 +27,17 @@ class WebAdminUploadController extends Controller
 
         $rows = [];
 
-        foreach ($request->file('report_files') as $i => $file) {
-            $number = $startNumber + $i;
-            $filename = Str::slug($data['report_type']) . '-' . $number . '-' . time() . '.' . $file->getClientOriginalExtension();
+        foreach ($request->file('report_files') as $file) {
+            $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '-' . random_int(1000, 9999) . '.' . $file->getClientOriginalExtension();
 
             $file->move($destination, $filename);
 
             $rows[] = [
-                'report_title' => $data['report_type'] . '_' . $number,
+                'report_title' => Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)),
                 'report_type'  => $data['report_type'],
                 'report_date'  => $date,
                 'remarks'      => $data['remarks'] ?? '',
-                'report_link'  => 'reports/' . $filename,
+                'report_link'  => 'docs/reports/' . $filename,
                 'created_at'   => now(),
                 'updated_at'   => now(),
             ];
@@ -65,10 +60,6 @@ class WebAdminUploadController extends Controller
 
         $date = $data['download_date'] ?? now()->format('Y-m-d');
 
-        $startNumber = DB::table('tbl_downloads')
-            ->where('download_type', $data['download_type'])
-            ->count() + 1;
-
         $destination = public_path('docs/downloads/');
         if (! is_dir($destination)) {
             mkdir($destination, 0755, true);
@@ -76,18 +67,17 @@ class WebAdminUploadController extends Controller
 
         $rows = [];
 
-        foreach ($request->file('download_files') as $i => $file) {
-            $number = $startNumber + $i;
-            $filename = Str::slug($data['download_type']) . '-' . $number . '-' . time() . '.' . $file->getClientOriginalExtension();
+        foreach ($request->file('download_files') as $file) {
+            $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '-' . random_int(1000, 9999) . '.' . $file->getClientOriginalExtension();
 
             $file->move($destination, $filename);
 
             $rows[] = [
-                'download_title' => $data['download_type'] . '_' . $number,
+                'download_title' => Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)),
                 'download_type'  => $data['download_type'],
                 'download_date'  => $date,
                 'remarks'        => $data['remarks'] ?? '',
-                'download_link'  => 'downloads/' . $filename,
+                'download_link'  => 'docs/downloads/' . $filename,
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ];

@@ -41,11 +41,11 @@
                                         @if ($value)
                                             @if ($isPdf)
                                                 <div class="mt-2">
-                                                    <iframe src="{{ asset('docs/'.$value) }}" style="max-height:100px;border:0px solid #ddd;"></iframe>
+                                                    <iframe src="{{ asset($value) }}" style="max-height:100px;border:0px solid #ddd;"></iframe>
                                                 </div>
                                             @else
                                                 <div class="mt-2">
-                                                    <img src="{{ asset('docs/'.$value) }}" style="max-height:100px;" alt="">
+                                                    <img src="{{ asset($value) }}" style="max-height:100px;" alt="">
                                                 </div>
                                             @endif
                                         @endif

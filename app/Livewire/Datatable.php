@@ -24,7 +24,7 @@ class Datatable extends Component
     public int $perPage = 10;
 
     public string $sortField = 'id';
-    public string $sortDirection = 'asc';
+    public string $sortDirection = 'desc';
 
     public string $primaryKey = 'id';
     public bool $showActions = false;

@@ -93,16 +93,14 @@ class Recordeditor extends Component
             if ($file) {
                 $oldPath = $this->fields[$field] ?? null;
 
-                $folder = 'img/' . Str::after($this->table, 'tbl_'); // e.g. tbl_news -> img/news
+                $folder = ($this->table == 'tbl_downloads' || 'tbl_reports' ? 'docs/':'') . Str::after($this->table, 'tbl_'); // e.g. tbl_news -> img/news
                 $destination = public_path($folder);
 
                 if (! File::isDirectory($destination)) {
                     File::makeDirectory($destination, 0755, true);
                 }
 
-                $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
-                    . '-' . time() . '-' . random_int(1000, 9999)
-                    . '.' . $file->getClientOriginalExtension();
+                $filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '-' . random_int(1000, 9999) . '.' . $file->getClientOriginalExtension();
 
                 File::copy($file->getRealPath(), $destination . DIRECTORY_SEPARATOR . $filename);
 

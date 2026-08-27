@@ -27,11 +27,12 @@
             </button>
             <div class="collapse navbar-collapse text-nowrap text-end justify-content-between p-2 rounded-1" id="navcol-1" style="background-color: var(--bs-body-bg);">
                 <ul class="navbar-nav text-center" style="font-size:0.9rem;">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}" wire:navigate.hover wire:current.exact="active text-blue">Home</a></li>
+                    <li class="nav-item d-none d-xl-block"><a class="nav-link" href="{{ route('home') }}" wire:navigate.hover wire:current.exact="active text-blue">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}" wire:navigate.hover wire:current="active text-blue">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('services') }}" wire:navigate.hover wire:current="active text-blue">Our Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('funds') }}" wire:navigate.hover wire:current="active text-blue">Our Funds</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('schemes') }}" wire:navigate.hover wire:current="active text-blue">Our Schemes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('news') }}" wire:navigate.hover wire:current="active text-blue">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('reports') }}" wire:navigate.hover wire:current="active text-blue">Reports</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('downloads') }}" wire:navigate.hover wire:current="active text-blue">Downloads</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}" wire:navigate.hover wire:current="active text-blue">Contact Us</a></li>
