@@ -29,8 +29,8 @@ new class extends Component
             'label' => 'Portfolio Statements',
             'color' => 'success',
         ],
-        'NAV Declarations' => [
-            'label' => 'NAV Declarations',
+        'Book Closure' => [
+            'label' => 'Book Closure',
             'color' => 'danger',
         ],
         'Price Sensitive Info' => [

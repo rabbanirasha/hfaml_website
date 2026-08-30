@@ -19,7 +19,7 @@ new class extends Component
         'Annual Reports'         => ['description' => 'Yearly audited financial statements'],
         'Quarterly Disclosures'  => ['description' => 'Quarterly financial disclosures'],
         'Portfolio Statements'   => ['description' => 'Fund portfolio holdings'],
-        'NAV Declarations'       => ['description' => 'Daily/periodic NAV values'],
+        'Book Closure'           => ['description' => 'Suspension of Buy/Sell during December'],
         'Price Sensitive Info'   => ['description' => 'Material price-sensitive disclosures'],
     ];  
 
