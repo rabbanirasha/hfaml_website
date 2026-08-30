@@ -222,9 +222,11 @@ new class extends Component
                 <div class="col-3">
                     <div class="d-flex flex-column align-items-center h-100 text-center p-3">
                         <img class="rounded-circle mx-auto fit-cover logo-image" src="{{asset($partner->image_link)}}">
-                        <p><strong class="text-center">{{ $partner->target_title }}</strong></p>
-                        <p class="mb-0 mt-auto">{{ $partner->target_designation }}</p>
-                        <a class="badge text-bg-primary btn mt-auto" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: '{{ $partner->target_name }}' })">Read More</a>
+                        <p class="mt-3"><strong class="text-center">{{ $partner->target_title }}</strong></p>
+                        <div class="mt-auto">
+                            <p class="mb-0 mt-auto text-primary fw-bolder">{{ $partner->target_designation }}</p>
+                            <a class="badge text-bg-primary btn" href="#" data-bs-toggle="modal" data-bs-target="#genericModal" wire:click="$dispatch('show-modal', { target_name: '{{ $partner->target_name }}' })">Read More</a>
+                        </div>
                     </div>
                 </div>
                 @endforeach                                                                   

@@ -115,7 +115,7 @@ new class extends Component
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-start gap-3">
                                     <div class="bg-info bg-opacity-10 rounded-3 p-3" style="font-size:1.5rem;">⏰</div>
-                                    <div>
+                                    <div class="w-100">
                                         <h6 class="fw-bold mb-1">Office Hours</h6>
                                         <p class="text-muted mb-0 small">
                                             Sunday – Thursday: <span style="float: right;">9:00 AM – 5:00 PM</span><br>
