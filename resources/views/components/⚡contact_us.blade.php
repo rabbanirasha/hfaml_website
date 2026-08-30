@@ -119,8 +119,8 @@ new class extends Component
                                         <h6 class="fw-bold mb-1">Office Hours</h6>
                                         <p class="text-muted mb-0 small">
                                             Sunday – Thursday: <span style="float: right;">9:00 AM – 5:00 PM</span><br>
-                                            Friday – Saturday: <span style="float: right;">Closed</span><br>
-                                            <em class="text-danger">Public Holidays: <span style="float: right;">Closed</span></em>
+                                            Friday – Saturday: <span class="text-danger" style="float: right;">Closed</span><br>
+                                            Public Holidays: <span class="text-danger" style="float: right;">Closed</span>
                                         </p>
                                     </div>
                                 </div>
