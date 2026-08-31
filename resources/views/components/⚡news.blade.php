@@ -3,12 +3,13 @@
 use Livewire\Attributes\Title;
 Use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 new class extends Component
 {
     public $news;
     public function mount(){
-        $this->news = DB::table('tbl_news')->get();
+        $this->news = DB::table('tbl_news')->orderByDesc('post_date')->get();
         
         if ($this->news->isEmpty()) {
             abort(404);
@@ -30,10 +31,11 @@ new class extends Component
             <div class="row p-5">
             @foreach($news as $row)
                 <div class="col-12 col-md-4 mb-4">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start">
-                        <p class="fs-4 fw-bolder text-start mb-2">{{$row->title}}</p>
-                        <p class="mb-3"><span style="font-weight: normal !important;">{!! $row->main_body !!}</span></p>
-                        <a class="fw-bold text-primary mb-0" href ="{{route('view_news', ['news_id' => $row->news_id])}}" wire:navigate.hover>Read More</a>
+                    <div class="d-flex flex-column align-items-center align-items-sm-start h-100">
+                        <p class="fs-4 fw-bolder text-start mb-0">{{$row->title}}</p>
+                        <em class="text-start mb-2">{{$row->post_date}}</em>
+                        <p class="mb-3"><span style="font-weight: normal !important;">{{ Str::words(strip_tags($row->main_body), 30, '...') }}</span></p>
+                        <a class="fw-bold text-primary mb-0 mt-auto" href ="{{route('view_news', ['news_id' => $row->news_id])}}" wire:navigate.hover>Read More</a>
                     </div>
                 </div>
             @endforeach                                

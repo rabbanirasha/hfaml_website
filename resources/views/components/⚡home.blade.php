@@ -3,13 +3,14 @@
 use Livewire\Attributes\Title;
 Use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 new class extends Component
 {
     public $fund_performance, $news, $heroImages;
     public function mount(){
         $this->fund_performance = DB::table('tbl_fundperformance')->get();
-        $this->news = DB::table('tbl_news')->take(3)->get();
+        $this->news = DB::table('tbl_news')->orderByDesc('post_date')->take(3)->get();
         $this->heroImages = array_map( fn($file) => basename($file), glob(public_path('img/hero_banner/*.*')) );
         sort($this->heroImages, SORT_NATURAL | SORT_FLAG_CASE);
 
@@ -132,10 +133,10 @@ new class extends Component
                 </div><!-- End: News Title -->
                 @foreach($news as $row)
                 <div class="col-12 col-md-4 mb-4">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <div class="d-flex flex-column align-items-center align-items-sm-start h-100">
                         <p class="fs-4 fw-bolder text-start mb-2">{{$row->title}}</p>
-                        <p class="mb-3"><span style="font-weight: normal !important;">{{$row->main_body}}</span></p>
-                        <a class="fw-bold text-primary mb-0" href ="{{route('view_news', ['news_id' => $row->news_id])}}" wire:navigate.hover>Read More</a>
+                        <p class="mb-3"><span style="font-weight: normal !important;">{{ Str::words(strip_tags($row->main_body), 30, '...') }}</span></p>
+                        <a class="fw-bold text-primary mb-0 mt-auto" href ="{{route('view_news', ['news_id' => $row->news_id])}}" wire:navigate.hover>Read More</a>
                     </div>
                 </div>
                 @endforeach  
