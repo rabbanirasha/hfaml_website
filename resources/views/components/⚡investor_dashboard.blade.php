@@ -3,15 +3,18 @@
 use Livewire\Attributes\Title;
 Use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 new class extends Component
 {
-    public $news;
+    public $fund_summary, $fund_performance, $fund_list;
     public function mount(){
-        $this->news = DB::table('tbl_news')->orderByDesc('post_date')->get();
-        
-        if ($this->news->isEmpty()) {
+        $fund_code = "HFUF";
+        $fund_code_small = strtolower($fund_code);
+        $this->fund_summary = DB::table('tbl_fundsummary')->where('fund_code', $fund_code_small)->first();
+        $this->fund_list = DB::table('tbl_fundperformance')->get();
+        $this->fund_performance = $this->fund_list->firstWhere('fund_code', $fund_code);
+
+        if (!$this->fund_summary) {
             abort(404);
         }
 
@@ -25,140 +28,173 @@ new class extends Component
 
 <div>
     <section><!-- Start: About Us -->
-    <div class="container my-5 rounded-1 p-2 rounded-bordered" style="background-color: var(--bs-body-bg);">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold" style="color: #1a4d8c;">Welcome back, <?= htmlspecialchars($user->name ?? 'Investor') ?></h2>
-            <a href="/logout" class="btn btn-outline-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
-        </div>
-
-        <!-- Summary Cards -->
-        <div class="row mb-5">
-            <div class="col-md-4 mb-3">
-                <div class="card shadow-sm border-0 h-100" style="border-left: 4px solid #1a4d8c;">
-                    <div class="card-body">
-                        <p class="text-muted mb-1 text-uppercase small fw-bold">Total Units Held</p>
-                        <h3 class="mb-0"><?= number_format($summary_stats['total_units'] ?? 0, 4) ?></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card shadow-sm border-0 h-100" style="border-left: 4px solid #28a745;">
-                    <div class="card-body">
-                        <p class="text-muted mb-1 text-uppercase small fw-bold">Current Portfolio Value (BDT)</p>
-                        <h3 class="mb-0">৳ <?= number_format($summary_stats['total_value'] ?? 0, 2) ?></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <?php 
-                    $gain_loss = $summary_stats['total_gain_loss'] ?? 0;
-                    $gain_color = $gain_loss >= 0 ? 'text-success' : 'text-danger';
-                    $border_color = $gain_loss >= 0 ? '#28a745' : '#dc3545';
-                ?>
-                <div class="card shadow-sm border-0 h-100" style="border-left: 4px solid <?= $border_color ?>;">
-                    <div class="card-body">
-                        <p class="text-muted mb-1 text-uppercase small fw-bold">Total Gain/Loss</p>
-                        <h3 class="mb-0 <?= $gain_color ?>">
-                            <?= $gain_loss >= 0 ? '+' : '' ?>৳ <?= number_format($gain_loss, 2) ?>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Holdings Section -->
-            <div class="col-lg-8 mb-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
-                        <h5 class="fw-bold" style="color: #1a4d8c;">Your Holdings</h5>
-                    </div>
-                    <div class="card-body">
-                        <?php if (empty($portfolios)): ?>
-                            <div class="text-center py-5">
-                                <i class="bi bi-folder-x text-muted" style="font-size: 3rem;"></i>
-                                <h6 class="mt-3 text-muted">No holdings found.</h6>
-                                <p class="text-muted mb-4">Contact HFAML to link your folio to this account.</p>
-                                <a href="/contact" class="btn btn-primary" style="background-color: #1a4d8c;">Contact Us</a>
+        <div class="container my-5 rounded-1 p-2">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4 text-end mt-3 mt-md-0">
+                    <div class="card rounded-bordered shadow-sm bg-white w-100">
+                        <div class="d-flex align-items-center p-4">
+                            <div class="bs-icon-xl bs-icon-circle bg-secondary text-white me-3 bs-icon"> <i class="bi bi-pie-chart-fill"></i> </div>
+                            <div class="text-dark w-100">
+                                <div class="fs-5 fw-bold text-secondary"> Total Unit Holdings </div>
+                                <div class="fs-1 fw-bold"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>
                             </div>
-                        <?php else: ?>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Fund Name</th>
-                                            <th class="text-end">Units Held</th>
-                                            <th class="text-end">Avg Cost/Unit</th>
-                                            <th class="text-end">Current NAV</th>
-                                            <th class="text-end">Current Value</th>
-                                            <th class="text-end">Gain/Loss</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end mt-3 mt-md-0">
+                    <div class="card rounded-bordered shadow-sm bg-white w-100">
+                        <div class="d-flex align-items-center p-4">
+                            <div class="bs-icon-xl bs-icon-circle bg-secondary text-white me-3 bs-icon"> <i class="bi bi-cash-coin"></i> </div>
+                            <div class="text-dark w-100">
+                                <div class="fs-5 fw-bold text-secondary"> Current Portfolio Value  </div>
+                                <div class="fs-1 fw-bold"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end mt-3 mt-md-0">
+                    <div class="card rounded-bordered shadow-sm bg-white w-100">
+                        <div class="d-flex align-items-center p-4">
+                            <div class="bs-icon-xl bs-icon-circle bg-secondary text-white me-3 bs-icon"> <i class="bi bi-graph-up-arrow"></i> </div>
+                            <div class="text-dark w-100">
+                                <div class="fs-5 fw-bold text-secondary"> Total Gain / Loss</div>
+                                <div class="fs-1 fw-bold"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                                              
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="row mt-5">
+                <!-- Left Column -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-secondary text-white py-3">
+                            <h6 class="fw-bold mb-0">Latest NAV at Market<span class="badge bg-light text-secondary" style="float:right;">As of 1 Sept 2026</span></h6>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div> <strong>HFUF</strong> <div class="small text-muted">Cost NAV: 10 | Surrender NAV: 10</div> </div>
+                                <div class="fs-3 fw-bold text-body-black"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>                              
+                            </a>
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div> <strong>HFUF</strong> <div class="small text-muted">Cost NAV: 10 | Surrender NAV: 10</div> </div>
+                                <div class="fs-3 fw-bold text-body-black"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>                              
+                            </a>                                                                                  
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-secondary text-white py-3">
+                            <h6 class="fw-bold mb-0">Schemes under your account</h6>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div> <strong>HFUF_SIP_CIP</strong> <div class="small text-muted">SIP scheme with stock dividend</div> </div>
+                                <div class="fs-5 fw-bold text-body-black"> HFUF005 </div>                              
+                            </a>
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div> <strong>HFACME_SIP_CASH</strong> <div class="small text-muted">SIP scheme with cash dividend</div> </div>
+                                <div class="fs-5 fw-bold text-body-black"> HFACMEUF003 </div>                              
+                            </a>
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div> <strong>HFSUF_CASH</strong> <div class="small text-muted">lump-sum scheme with cash dividend</div> </div>
+                                <div class="fs-5 fw-bold text-body-black"> HFSUF004 </div>                              
+                            </a>
+                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div> <strong>HFSUF_CIP</strong> <div class="small text-muted">lump-sum scheme with stock dividend</div> </div>
+                                <div class="fs-5 fw-bold text-body-black"> HFSUF005 </div>                              
+                            </a>                                                                                                                                              
+                        </div>
+                    </div>                     
+
+                    <div class="card bg-secondary-subtle border-primary text-center p-4">
+                        <h5 class="fw-bold text-secondary mb-2">Ready to Invest in HFUF?</h5>
+                        <p class="small text-muted mb-3">Open your investor account online or submit a buy request directly with our support team.</p>
+                        <a href="/register" class="btn btn-secondary shadow-sm mb-2 w-100">Open Investor Account</a>
+                        <a href="/contact" class="btn btn-secondary w-100">Contact Investment Desk</a>
+                    </div>
+                </div>                
+                <!-- Right Column -->
+                <div class="col-lg-8">
+                    <!-- NAV Historical Chart -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="fw-bold mb-0 text-secondary">Your Portfolio</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="navChart" height="260"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Fund Description & Profile -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="fw-bold mb-0 text-secondary">Your Ledger</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="lead fs-6" style="text-align: justify;">Our equity funding solution helps our clients raise equity throughout the various stages of its growth cycle. Many corporate require capital to support their growth without increasing the debt burden on their balance sheet and in order to facilitate this HFAML acts as an advisor that helping the company raise funds through private placement of their shares to various private equity funds in Bangladesh and across the globe. Our core private equity team extensive experience along with other functional support teams offers end to end equity advisory solutions to corporate in the need of equity capital. Given our long standing relationship with the blue chip investors we assist the company in capturing the complete value of the organization and the brand. The team has a strong experience in negotiating the investment terms and coordinating the due diligence process which results in the faster execution of the transaction.</p>
+                            
+                            <div class="table-responsive mt-3">
+                                <table class="table table-bordered align-middle">
                                     <tbody>
-                                        <?php foreach ($portfolios as $p): ?>
-                                            <?php 
-                                                $gl = $p['gain_loss'] ?? 0;
-                                                $gl_class = $gl >= 0 ? 'text-success' : 'text-danger';
-                                            ?>
-                                            <tr>
-                                                <td class="fw-bold"><?= htmlspecialchars($p['fund_name']) ?></td>
-                                                <td class="text-end"><?= number_format($p['units_held'], 4) ?></td>
-                                                <td class="text-end">৳ <?= number_format($p['avg_cost'], 2) ?></td>
-                                                <td class="text-end">৳ <?= number_format($p['current_nav'], 2) ?></td>
-                                                <td class="text-end fw-bold">৳ <?= number_format($p['current_value'], 2) ?></td>
-                                                <td class="text-end <?= $gl_class ?>">
-                                                    <?= $gl >= 0 ? '+' : '' ?>৳ <?= number_format($gl, 2) ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <a href="/invest/topup?fund=<?= urlencode($p['fund_id']) ?>" class="btn btn-sm btn-outline-primary" title="Buy More">Top Up</a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                        <tr>
+                                            <th class="bg-light w-33">Sponsor</th>
+                                            <td>{{$fund_summary->sponsor}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Trustee</th>
+                                            <td>{{$fund_summary->trustee}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Custodian</th>
+                                            <td>{{$fund_summary->custodian}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Inception Date</th>
+                                            <td>{{$fund_summary->reg_date}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Initial Size</th>
+                                            <td>{{$fund_summary->initial_size}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Target_size</th>
+                                            <td>{{$fund_summary->target_size}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Face Value</th>
+                                            <td>{{$fund_summary->face_value}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Nature</th>
+                                            <td>{{$fund_summary->nature}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Type</th>
+                                            <td>{{$fund_summary->type}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Constituents</th>
+                                            <td>{{$fund_summary->constituents}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Objectives</th>
+                                            <td>{{$fund_summary->objectives}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="bg-light">Investment</th>
+                                            <td>{{$fund_summary->investment}}</td>
+                                        </tr>                                                                                                                                                                                                                                                                                                                       
                                     </tbody>
                                 </table>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent NAV Section -->
-            <div class="col-lg-4 mb-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
-                        <h5 class="fw-bold" style="color: #1a4d8c;">Latest NAV</h5>
-                        <small class="text-muted">As of <?= htmlspecialchars($nav_date ?? date('d M Y')) ?></small>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless table-sm">
-                                <tbody>
-                                    <?php foreach ($latest_navs ?? [] as $nav): ?>
-                                        <tr class="border-bottom">
-                                            <td class="py-2">
-                                                <span class="d-block fw-bold"><?= htmlspecialchars($nav['fund_short_name'] ?? $nav['fund_name']) ?></span>
-                                            </td>
-                                            <td class="text-end py-2 align-middle">
-                                                <span class="fw-bold" style="color: #1a4d8c;">৳ <?= number_format($nav['nav'], 2) ?></span>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    <?php if (empty($latest_navs)): ?>
-                                        <tr>
-                                            <td colspan="2" class="text-center text-muted">NAV data unavailable</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-center mt-3">
-                            <a href="/funds" class="text-decoration-none" style="color: #1a4d8c; font-size: 0.9rem;">View All Funds <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- End: About Us -->
     </section>
 </div>
