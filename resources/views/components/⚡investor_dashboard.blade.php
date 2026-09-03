@@ -71,17 +71,13 @@ new class extends Component
                 <div class="col-lg-4">
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-secondary text-white py-3">
-                            <h6 class="fw-bold mb-0">Latest NAV at Market<span class="badge bg-light text-secondary" style="float:right;">As of 1 Sept 2026</span></h6>
+                            <h6 class="fw-bold mb-0">NAV at Market<span class="badge bg-light text-secondary" style="float:right;">As of 1 Sept 2026</span></h6>
                         </div>
                         <div class="list-group list-group-flush">
                             <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                <div> <strong>HFUF</strong> <div class="small text-muted">Cost NAV: 10 | Surrender NAV: 10</div> </div>
+                                <div> <strong>HFUF</strong> <div class="small text-muted">NAV at cost: 10 | NAV at Surrender: 10</div> </div>
                                 <div class="fs-3 fw-bold text-body-black"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>                              
-                            </a>
-                            <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                <div> <strong>HFUF</strong> <div class="small text-muted">Cost NAV: 10 | Surrender NAV: 10</div> </div>
-                                <div class="fs-3 fw-bold text-body-black"> {{ $fund_performance?->nav_mp_pu ?? 'N/A' }} </div>                              
-                            </a>                                                                                  
+                            </a>                                                                              
                         </div>
                     </div>
                     
@@ -92,19 +88,19 @@ new class extends Component
                         <div class="list-group list-group-flush">
                             <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 <div> <strong>HFUF_SIP_CIP</strong> <div class="small text-muted">SIP scheme with stock dividend</div> </div>
-                                <div class="fs-5 fw-bold text-body-black"> HFUF005 </div>                              
+                                <div class="fs-6 fw-bold text-body-black"> HFUF005 </div>                              
                             </a>
                             <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 <div> <strong>HFACME_SIP_CASH</strong> <div class="small text-muted">SIP scheme with cash dividend</div> </div>
-                                <div class="fs-5 fw-bold text-body-black"> HFACMEUF003 </div>                              
+                                <div class="fs-6 fw-bold text-body-black"> HFACMEUF003 </div>                              
                             </a>
                             <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 <div> <strong>HFSUF_CASH</strong> <div class="small text-muted">lump-sum scheme with cash dividend</div> </div>
-                                <div class="fs-5 fw-bold text-body-black"> HFSUF004 </div>                              
+                                <div class="fs-6 fw-bold text-body-black"> HFSUF004 </div>                              
                             </a>
                             <a href="{{ route('downloads') }}" wire:navigate.hover class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                 <div> <strong>HFSUF_CIP</strong> <div class="small text-muted">lump-sum scheme with stock dividend</div> </div>
-                                <div class="fs-5 fw-bold text-body-black"> HFSUF005 </div>                              
+                                <div class="fs-6 fw-bold text-body-black"> HFSUF005 </div>                              
                             </a>                                                                                                                                              
                         </div>
                     </div>                     
@@ -118,80 +114,62 @@ new class extends Component
                 </div>                
                 <!-- Right Column -->
                 <div class="col-lg-8">
-                    <!-- NAV Historical Chart -->
+
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-white py-3">
-                            <h5 class="fw-bold mb-0 text-secondary">Your Portfolio</h5>
+                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Your Portfolio</h3>
                         </div>
                         <div class="card-body">
-                            <canvas id="navChart" height="260"></canvas>
+                            <livewire:datatable 
+                                title="Investor Folio" 
+                                table="tbl_investorportfolios" 
+                                :columns="[
+                                    ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
+                                    ['field' => 'unit_holding', 'label' => 'Units', 'sortable' => true],
+                                    ['field' => 'total_cost_bdt', 'label' => 'Cost Value', 'sortable' => true],
+                                    ['field' => 'current_market_value_bdt', 'label' => 'Market Value', 'sortable' => true],
+                                    ['field' => 'unrealized_gain_loss_bdt', 'label' => 'U/R Gain', 'sortable' => true],                                               
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'fund_type', 
+                                        'label' => 'fund_type', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            /> 
                         </div>
                     </div>
 
-                    <!-- Fund Description & Profile -->
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-white py-3">
-                            <h5 class="fw-bold mb-0 text-secondary">Your Ledger</h5>
+                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Your Ledger</h3>
                         </div>
                         <div class="card-body">
-                            <p class="lead fs-6" style="text-align: justify;">Our equity funding solution helps our clients raise equity throughout the various stages of its growth cycle. Many corporate require capital to support their growth without increasing the debt burden on their balance sheet and in order to facilitate this HFAML acts as an advisor that helping the company raise funds through private placement of their shares to various private equity funds in Bangladesh and across the globe. Our core private equity team extensive experience along with other functional support teams offers end to end equity advisory solutions to corporate in the need of equity capital. Given our long standing relationship with the blue chip investors we assist the company in capturing the complete value of the organization and the brand. The team has a strong experience in negotiating the investment terms and coordinating the due diligence process which results in the faster execution of the transaction.</p>
-                            
-                            <div class="table-responsive mt-3">
-                                <table class="table table-bordered align-middle">
-                                    <tbody>
-                                        <tr>
-                                            <th class="bg-light w-33">Sponsor</th>
-                                            <td>{{$fund_summary->sponsor}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Trustee</th>
-                                            <td>{{$fund_summary->trustee}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Custodian</th>
-                                            <td>{{$fund_summary->custodian}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Inception Date</th>
-                                            <td>{{$fund_summary->reg_date}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Initial Size</th>
-                                            <td>{{$fund_summary->initial_size}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Target_size</th>
-                                            <td>{{$fund_summary->target_size}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Face Value</th>
-                                            <td>{{$fund_summary->face_value}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Nature</th>
-                                            <td>{{$fund_summary->nature}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Type</th>
-                                            <td>{{$fund_summary->type}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Constituents</th>
-                                            <td>{{$fund_summary->constituents}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Objectives</th>
-                                            <td>{{$fund_summary->objectives}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="bg-light">Investment</th>
-                                            <td>{{$fund_summary->investment}}</td>
-                                        </tr>                                                                                                                                                                                                                                                                                                                       
-                                    </tbody>
-                                </table>
-                            </div>
+                            <livewire:datatable 
+                                title="Investor Folio" 
+                                table="tbl_investorportfolios" 
+                                :columns="[
+                                    ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
+                                    ['field' => 'unit_holding', 'label' => 'Units', 'sortable' => true],
+                                    ['field' => 'total_cost_bdt', 'label' => 'Cost Value', 'sortable' => true],
+                                    ['field' => 'current_market_value_bdt', 'label' => 'Market Value', 'sortable' => true],
+                                    ['field' => 'unrealized_gain_loss_bdt', 'label' => 'U/R Gain', 'sortable' => true],                                               
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'fund_type', 
+                                        'label' => 'fund_type', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            /> 
                         </div>
-                    </div>
+                    </div>                   
+
+
                 </div>
             </div>
         </div>

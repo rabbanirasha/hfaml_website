@@ -1,6 +1,6 @@
 <div>
     <!-- Header Block featuring Title & Search Layout -->
-    <div class="card-header py-3">
+    <div class="card-header bg-transparent py-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
             {{-- <h5 class="mb-0 text-dark font-weight-bold">{{ $title }}</h5> --}}
             
