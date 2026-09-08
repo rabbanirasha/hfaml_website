@@ -65,6 +65,68 @@ new class extends Component
                 </div>                                                              
             </div>
 
+            <div class="row mt-5">
+                <!-- Left Column -->
+                <div class="col-lg-6">
+
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Portfolio</h3>
+                        </div>
+                        <div class="card-body">
+                            <livewire:datatable 
+                                title="Investor Folio" 
+                                table="tbl_investorportfolios" 
+                                :columns="[
+                                    ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
+                                    ['field' => 'unit_holding', 'label' => 'Units', 'sortable' => true],
+                                    ['field' => 'total_cost_bdt', 'label' => 'Cost Value', 'sortable' => true],
+                                    ['field' => 'current_market_value_bdt', 'label' => 'Market Value', 'sortable' => true],
+                                    ['field' => 'unrealized_gain_loss_bdt', 'label' => 'U/R Gain', 'sortable' => true],                                               
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'fund_type', 
+                                        'label' => 'fund_type', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            /> 
+                        </div>
+                    </div>
+                </div>             
+                <!-- Right Column -->
+                <div class="col-lg-6">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Ledger</h3>
+                        </div>
+                        <div class="card-body">
+                            <livewire:datatable 
+                                title="Investor Folio" 
+                                table="tbl_investorportfolios" 
+                                :columns="[
+                                    ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
+                                    ['field' => 'unit_holding', 'label' => 'Units', 'sortable' => true],
+                                    ['field' => 'total_cost_bdt', 'label' => 'Cost Value', 'sortable' => true],
+                                    ['field' => 'current_market_value_bdt', 'label' => 'Market Value', 'sortable' => true],
+                                    ['field' => 'unrealized_gain_loss_bdt', 'label' => 'U/R Gain', 'sortable' => true],                                               
+                                    
+                                ]"
+                                :filters="[
+                                    [
+                                        'field' => 'fund_type', 
+                                        'label' => 'fund_type', 
+                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
+                                    ]
+                                ]"
+                            /> 
+                        </div>
+                    </div>                   
+                </div>
+            </div>            
+
             <!-- Main Content Grid -->
             <div class="row mt-5">
                 <!-- Left Column -->
@@ -136,62 +198,14 @@ new class extends Component
                 </div>                
                 <!-- Right Column -->
                 <div class="col-lg-8">
-
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-white py-3">
-                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Your Portfolio</h3>
+                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Trends</h3>
                         </div>
                         <div class="card-body">
-                            <livewire:datatable 
-                                title="Investor Folio" 
-                                table="tbl_investorportfolios" 
-                                :columns="[
-                                    ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
-                                    ['field' => 'unit_holding', 'label' => 'Units', 'sortable' => true],
-                                    ['field' => 'total_cost_bdt', 'label' => 'Cost Value', 'sortable' => true],
-                                    ['field' => 'current_market_value_bdt', 'label' => 'Market Value', 'sortable' => true],
-                                    ['field' => 'unrealized_gain_loss_bdt', 'label' => 'U/R Gain', 'sortable' => true],                                               
-                                    
-                                ]"
-                                :filters="[
-                                    [
-                                        'field' => 'fund_type', 
-                                        'label' => 'fund_type', 
-                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
-                                    ]
-                                ]"
-                            /> 
+                            <p class="text-center">graph goes here</p>
                         </div>
                     </div>
-
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-white py-3">
-                            <h3 class="fw-bold mb-0 mt-3 text-secondary text-center">Your Ledger</h3>
-                        </div>
-                        <div class="card-body">
-                            <livewire:datatable 
-                                title="Investor Folio" 
-                                table="tbl_investorportfolios" 
-                                :columns="[
-                                    ['field' => 'fund_id', 'label' => '#', 'sortable' => true],
-                                    ['field' => 'unit_holding', 'label' => 'Units', 'sortable' => true],
-                                    ['field' => 'total_cost_bdt', 'label' => 'Cost Value', 'sortable' => true],
-                                    ['field' => 'current_market_value_bdt', 'label' => 'Market Value', 'sortable' => true],
-                                    ['field' => 'unrealized_gain_loss_bdt', 'label' => 'U/R Gain', 'sortable' => true],                                               
-                                    
-                                ]"
-                                :filters="[
-                                    [
-                                        'field' => 'fund_type', 
-                                        'label' => 'fund_type', 
-                                        'options' => ['Open-end Growth Mutual Fund' => 'Open-end Growth Mutual Fund', 'Close End' => 'Closed End']
-                                    ]
-                                ]"
-                            /> 
-                        </div>
-                    </div>                   
-
-
                 </div>
             </div>
         </div>
