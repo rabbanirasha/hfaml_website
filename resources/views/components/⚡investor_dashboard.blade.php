@@ -103,14 +103,36 @@ new class extends Component
                                 <div class="fs-6 fw-bold text-body-black"> HFSUF005 </div>                              
                             </a>                                                                                                                                              
                         </div>
-                    </div>                     
-
-                    <div class="card bg-secondary-subtle border-primary text-center p-4">
-                        <h5 class="fw-bold text-secondary mb-2">Ready to Invest in HFUF?</h5>
-                        <p class="small text-muted mb-3">Open your investor account online or submit a buy request directly with our support team.</p>
-                        <a href="/register" class="btn btn-secondary shadow-sm mb-2 w-100">Open Investor Account</a>
-                        <a href="/contact" class="btn btn-secondary w-100">Contact Investment Desk</a>
                     </div>
+                    
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-secondary text-white py-3">
+                            <h6 class="fw-bold mb-0">Account Growth<span class="badge bg-light text-secondary" style="float:right;">Cumulative ROI with dividend</span></h6>
+                        </div>
+                    <table class="table table-responsive text-center mt-4">
+                        <thead>
+                            <tr>
+                            <th>Year</th>
+                            <th>Units</th>
+                            <th>Value (BDT)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2018</td>
+                                <td>10,000</td>
+                                <td>100,000</td>
+                            </tr>
+                            <tr>
+                                <td>2019</td>
+                                <td>12,000</td>
+                                <td>150,000</td>
+                            </tr>                        
+                        </tbody>                      
+                    </table>
+                    <p class="small text-center px-4">Number of units is the total of all units irrespective of Fund names under this account and Value as per current market</p>   
+                    </div>                      
+
                 </div>                
                 <!-- Right Column -->
                 <div class="col-lg-8">
