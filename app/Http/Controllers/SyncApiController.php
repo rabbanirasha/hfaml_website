@@ -10,16 +10,13 @@ class SyncApiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'investor_portfolios' => ['required', 'array'],
-            'fund_performance' => ['required', 'array'],
-            'fund_summary' => ['required', 'array'],
-        ]);
-
-        $tableMap = [
-            'investor_portfolios' => 'tbl_investorportfolios',
-            'fund_performance' => 'tbl_fundperformance',
-            'fund_summary' => 'tbl_fundsummary',
-        ];        
+            'Acc_tblAccPeriod' => ['required', 'array'],
+            'Acc_tblAccType' => ['required', 'array'],
+        ]);    
+        
+        // foreach ($validated as $tableName => $records) {
+        //     DB::table($tableName)->insert($records);
+        // }  
 
         // DB::table('tbl_investorportfolios')->upsert(
         //     $validated['records'],
@@ -35,8 +32,10 @@ class SyncApiController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'count' => count($validated['records']),
-            'records' => $validated['records'],
+            'count' => count($validated['Acc_tblAccPeriod']),
+            'Acc_tblAccPeriod' => $validated['Acc_tblAccPeriod'],
+            'Acc_tblAccPeriod' => $validated['Acc_tblAccType'],
+            'data' => $validated,
         ]);
     }
 
