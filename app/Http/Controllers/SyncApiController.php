@@ -14,9 +14,9 @@ class SyncApiController extends Controller
             'Acc_tblAccType' => ['required', 'array'],
         ]);    
         
-        // foreach ($validated as $tableName => $records) {
-        //     DB::table($tableName)->insert($records);
-        // }  
+        foreach ($validated as $tableName => $records) {
+            DB::table($tableName)->insert($records);
+        }  
 
         // DB::table('tbl_investorportfolios')->upsert(
         //     $validated['records'],
@@ -34,7 +34,7 @@ class SyncApiController extends Controller
             'status' => 'ok',
             'count' => count($validated['Acc_tblAccPeriod']),
             'Acc_tblAccPeriod' => $validated['Acc_tblAccPeriod'],
-            'Acc_tblAccPeriod' => $validated['Acc_tblAccType'],
+            'Acc_tblAccType' => $validated['Acc_tblAccType'],
             'data' => $validated,
         ]);
     }

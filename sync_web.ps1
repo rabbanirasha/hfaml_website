@@ -30,9 +30,19 @@ function Get-QueryResults {
     })
 }
 
-$connectionString = "Server=LOCALHOST;Database=HFTEST;Integrated Security=True;"
-$conn = New-Object System.Data.SqlClient.SqlConnection($connectionString)
-$conn.Open()
+$connectionString = "Server=127.0.0.1,1433;Database=HFTEST;User ID=sa;Password=Theocean123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=10;"
+
+try {
+    Write-Host "Opening SQL connection..."
+    $conn = New-Object System.Data.SqlClient.SqlConnection($connectionString)
+    $conn.Open()
+    Write-Host "SQL connection opened successfully."
+}
+catch {
+    Write-Host "SQL connection failed:"
+    Write-Host $_.Exception.Message
+    exit 1
+}
 
 $payload = @{
     Acc_tblAccPeriod = Get-QueryResults -Connection $conn -Query @"
@@ -47,6 +57,10 @@ SELECT * FROM Acc_tblAccType
 $conn.Dispose()
 
 $body = $payload | ConvertTo-Json -Depth 10
+Write-Host "Request body:"
+Write-Host $body
+Write-Host "Acc_tblAccPeriod rows: $(@($payload.Acc_tblAccPeriod).Count)"
+Write-Host "Acc_tblAccType rows: $(@($payload.Acc_tblAccType).Count)"
 
 Invoke-RestMethod `
     -Uri "http://192.168.9.45:8000/api/v1/sync/nav-data" `
