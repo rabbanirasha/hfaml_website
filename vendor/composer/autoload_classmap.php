@@ -7,7 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\SyncApiController' => $baseDir . '/app/Http/Controllers/SyncApiController.php',
     'App\\Http\\Controllers\\WebAdminUploadController' => $baseDir . '/app/Http/Controllers/WebAdminUploadController.php',
+    'App\\Http\\Middleware\\SyncAuth' => $baseDir . '/app/Http/Middleware/SyncAuth.php',
     'App\\Livewire\\Datatable' => $baseDir . '/app/Livewire/Datatable.php',
     'App\\Livewire\\Globalmodal' => $baseDir . '/app/Livewire/Globalmodal.php',
     'App\\Livewire\\Recordeditor' => $baseDir . '/app/Livewire/Recordeditor.php',

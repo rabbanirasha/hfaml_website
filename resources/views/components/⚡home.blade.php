@@ -95,7 +95,7 @@ new class extends Component
                     <div class="col mb-4">
                         <div class="card bg-primary-subtle h-100">
                             <div class="card-body text-center p-3 d-flex flex-column">
-                                <img class="mx-auto my-4 w-25" src="{{asset('img/money.svg')}}">
+                                <img class="mx-auto my-4 w-25 swing animated infinite" src="{{asset('img/money.svg')}}">
                                 <h5 class="fw-bold mb-3 card-title text-primary" style="border-bottom: 1px solid #dddddd;">HFAML Unit Fund</h5>
                                 <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by us, it helps stabilize the Capital Market, provide liquidity in the market and declare attractive dividend to the unit holders by investing the proceeds in the capital and money market of Bangladesh.</span><br><br><br></p><a class="btn btn-primary btn-sm mt-auto" href ="{{route('view_fund', ['fund_code' => 'hfuf'])}}" wire:navigate.hover type="button">Learn more</a>
                             </div>
@@ -104,7 +104,7 @@ new class extends Component
                     <div class="col mb-4">
                         <div class="card bg-primary-subtle h-100">
                             <div class="card-body text-center p-3 d-flex flex-column">
-                                <img class="mx-auto my-4 w-25" src="{{asset('img/employees.svg')}}">
+                                <img class="mx-auto my-4 w-25 tada animated infinite" src="{{asset('img/employees.svg')}}">
                                 <h5 class="fw-bold mb-3 card-title text-primary" style="border-bottom: 1px solid #dddddd;">HFAML-ACME Employees' Unit Fund</h5>
                                 <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by the ACME Laboratories, it provides attractive dividends, helps stabilize the Capital Market and provide liquidity in the market by investing the proceeds in the capital and the money market of Bangladesh, for a wider range of investors.&nbsp;</span><br><br></p><a class="btn btn-primary btn-sm mt-auto" href ="{{route('view_fund', ['fund_code' => 'hfacmeuf'])}}" wire:navigate.hover type="button">Learn more</a>
                             </div>
@@ -113,7 +113,7 @@ new class extends Component
                     <div class="col mb-4">
                         <div class="card bg-primary-subtle h-100">
                             <div class="card-body text-center p-3 d-flex flex-column">
-                                <img class="mx-auto my-4 w-25" src="{{asset('img/kaaba.svg')}}">
+                                <img class="mx-auto my-4 w-25 pulse animated infinite" src="{{asset('img/kaaba.svg')}}">
                                 <h5 class="fw-bold mb-3 card-title text-primary" style="border-bottom: 1px solid #dddddd;">HFAML Shariah Unit Fund</h5>
                                 <p class="fw-bold mb-2 card-text text-dark" style="text-align: justify;"><span style="font-weight: normal !important;">Sponsored by us, it provides maximum return of investment in the form of capital appreciation and dividend payment by&nbsp;adjusting risks of investments in the shariah compliant instruments of the capital and the money market of Bangladesh, especially for investors who abides by the Islamic Shariah.</span></p><a class="btn btn-primary btn-sm mt-auto" href ="{{route('view_fund', ['fund_code' => 'hfsuf'])}}" wire:navigate.hover type="button">Learn more</a>
                             </div>
@@ -147,8 +147,8 @@ new class extends Component
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-6 mb-4">
-                    <div class="py-3 mx-auto pulse animated infinite" style="max-width: 450px;">
-                        <img class="mx-auto my-4 w-25" src="{{asset('img/question.svg')}}">
+                    <div class="py-3 mx-auto" style="max-width: 450px;">
+                        <img class="mx-auto my-4 w-25 heartBeat animated infinite" src="{{asset('img/question.svg')}}">
                         <h4 class="fw-bold" style="color: #2c4fc3;">Not Sure Where to Invest?</h4>
                         <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                         <p class="my-3">Invest in our Mutual Funds today with as low as BDT 1000 &amp; receive <strong>attractive </strong>dividends. In our hands, your precious investments continue to grow <strong>fast &amp; safe</strong>.<br><a class="badge text-bg-primary btn" href="{{ route('services') }}" wire:navigate.hover>Learn More</a></p>
@@ -156,8 +156,8 @@ new class extends Component
                 </div>
                 <div class="col-md-6 mb-4">
                     {{-- <div class="p-5 mx-lg-5 pulse animated infinite" style="background: url({{asset('img/blob.svg')}}) center / contain no-repeat;"><img class="img-fluid rounded w-100" style="min-height: 300px;" src="{{asset('img/investment.png')}}"></div> --}}
-                    <div class="py-3 mx-auto pulse animated infinite" style="max-width: 450px;">
-                        <img class="mx-auto my-4 w-25" src="{{asset('img/speedometer.svg')}}">
+                    <div class="py-3 mx-auto" style="max-width: 450px;">
+                        <img class="mx-auto my-4 w-25 heartBeat animated infinite" src="{{asset('img/speedometer.svg')}}">
                         <h4 class="fw-bold" style="color: #2c4fc3;">Corporate Advisory</h4>
                         <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                         <p class="my-3">We offer <strong>advice </strong>on strategy, structure, value &amp; capital<strong>&nbsp;</strong>to revive and boost performance of corporations.<br><a class="badge text-bg-primary btn" href="{{ route('services') }}" wire:navigate.hover>Learn More</a></p>

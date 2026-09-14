@@ -50,6 +50,7 @@ class ComposerStaticInitaab0ccdcd4b1b8a30b6ea7230c67ec33
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'd634523d799d97a8ab4807b650bf5cea' => __DIR__ . '/..' . '/pestphp/pest-plugin-laravel/src/Autoload.php',
+        '13f613a45e1e4318bfa10be45689e9ba' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -676,7 +677,9 @@ class ComposerStaticInitaab0ccdcd4b1b8a30b6ea7230c67ec33
 
     public static $classMap = array (
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\SyncApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/SyncApiController.php',
         'App\\Http\\Controllers\\WebAdminUploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/WebAdminUploadController.php',
+        'App\\Http\\Middleware\\SyncAuth' => __DIR__ . '/../..' . '/app/Http/Middleware/SyncAuth.php',
         'App\\Livewire\\Datatable' => __DIR__ . '/../..' . '/app/Livewire/Datatable.php',
         'App\\Livewire\\Globalmodal' => __DIR__ . '/../..' . '/app/Livewire/Globalmodal.php',
         'App\\Livewire\\Recordeditor' => __DIR__ . '/../..' . '/app/Livewire/Recordeditor.php',

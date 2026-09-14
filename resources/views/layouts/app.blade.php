@@ -115,13 +115,15 @@
                 </div><!-- End: Related Sites -->
             </div>
             <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-                <p class="mb-0">Copyright © 2024 HF Asset Management Ltd.</p>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item"><i class="bi bi-facebook"></i></li>
                     <li class="list-inline-item"><i class="bi bi-twitter-x"></i></li>
                     <li class="list-inline-item"><i class="bi bi-whatsapp"></i></li>
                     <li class="list-inline-item"><i class="bi bi-linkedin"></i></li>                    
                 </ul>
+                <p class="mb-0 text-center">Copyright © {{ date('Y') }} HF Asset Management Ltd.</p>
+                <p class="mb-0"><span><img class="img-fluid fit-contain" src="{{asset('img/HFAML%20Logo.png')}}" loading="auto" style="height: 3rem;"></span></p>
+
             </div>
         </div>
     </footer><!-- End: Footer Multi Column -->

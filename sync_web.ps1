@@ -50,9 +50,7 @@ catch {
 }
 
 $payload = @{
-    Acc_tblAccPeriod = Get-QueryResults -Connection $conn -Query "SELECT * FROM Acc_tblAccPeriod"
-    Acc_tblAccType = Get-QueryResults -Connection $conn -Query "SELECT * FROM Acc_tblAccType"
-    Acc_tblCashflowItems = Get-QueryResults -Connection $conn -Query "SELECT * FROM Acc_tblCashflowItems"
+    EOD_Fund_Summary = Get-QueryResults -Connection $conn -Query "SELECT TOP 100 RecordID, B.FundCode,B.FundName, Date, TOTALNOOFSHARE, NAVACTUAL as NAV_CP, NAVATMARKETPRICE as NAV_MP, NAVACTUAL/TOTALNOOFSHARE as NAV_CP_PU, NAVATMARKETPRICE/TOTALNOOFSHARE as NAV_MP_PU FROM EOD_Fund_Summary as A LEFT JOIN Setup_tblFund_List as B on A.FundCOAID = B.FundCOAID"
 }
 
 $conn.Dispose()
