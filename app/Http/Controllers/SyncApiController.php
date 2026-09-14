@@ -2,63 +2,112 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class SyncApiController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'Acc_tblAccPeriod' => ['required', 'array'],
-            'Acc_tblAccType' => ['required', 'array'],
-        ]);    
-        
-        foreach ($validated as $tableName => $records) {
-            DB::table($tableName)->insert($records);
-        }  
+        $payload = $request->all();
 
-        // DB::table('tbl_investorportfolios')->upsert(
-        //     $validated['records'],
-        //     ['fund_code', 'as_of_date'],
-        //     [
-        //         'unit_holding',
-        //         'total_cost_bdt',
-        //         'current_market_value_bdt',
-        //         'unrealized_gain_loss_bdt',
-        //         'updated_at',
-        //     ]
-        // );
+        $validated = collect($payload)
+            ->filter(fn ($value) => is_array($value))
+            ->all();
+
+        abort_if($validated === [], 422, 'No table datasets provided.');
+
+        foreach (array_keys($validated) as $tableName) {
+            abort_unless(
+                $this->isValidTableName($tableName),
+                422,
+                "Invalid table name: {$tableName}"
+            );
+        }
+
+        $counts = [];
+
+        DB::transaction(function () use ($validated, &$counts): void {
+            foreach ($validated as $tableName => $records) {
+                if ($records === []) {
+                    $counts[$tableName] = 0;
+                    continue;
+                }
+
+                $this->ensureTableExists($tableName, $records[0]);
+                $this->ensurePrimaryKey($tableName, array_key_first($records[0]));
+
+                $counts[$tableName] = DB::table($tableName)->insertOrIgnore($records);
+            }
+        });
 
         return response()->json([
             'status' => 'ok',
-            'count' => count($validated['Acc_tblAccPeriod']),
-            'Acc_tblAccPeriod' => $validated['Acc_tblAccPeriod'],
-            'Acc_tblAccType' => $validated['Acc_tblAccType'],
-            'data' => $validated,
+            'inserted' => $counts,
         ]);
     }
 
+    private function isValidTableName(string $tableName): bool
+    {
+        return preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/', $tableName) === 1;
+    }
 
+    private function ensureTableExists(string $table, array $sampleRecord): void
+    {
+        if (Schema::hasTable($table)) {
+            return;
+        }
 
-    ## FOR TESTING PURPOSES ##
-    // public function store(Request $request)
-    // {
-    //     return response()->json([
-    //         'status' => 'ok',
-    //         'message' => 'Sync API endpoint is working',
-    //         'received_at' => now()->toIso8601String(),
-    //         'records' => [
-    //             [
-    //                 'fund_code' => 'HFUF',
-    //                 'as_of_date' => '2026-09-09',
-    //                 'unit_holding' => 10000.0000,
-    //                 'total_cost_bdt' => 100000.00,
-    //                 'current_market_value_bdt' => 112500.00,
-    //                 'unrealized_gain_loss_bdt' => 12500.00,
-    //             ],
-    //         ],
-    //     ]);
-    // }
+        foreach (array_keys($sampleRecord) as $column) {
+            abort_unless(
+                $this->isValidTableName($column),
+                422,
+                "Invalid column name: {$column}"
+            );
+        }
 
+        Schema::create($table, function (Blueprint $blueprint) use ($sampleRecord): void {
+            foreach ($sampleRecord as $column => $value) {
+                $this->addColumn($blueprint, $column, $value);
+            }
+        });
+    }
+
+    private function addColumn(Blueprint $blueprint, string $column, mixed $value): void
+    {
+        match (true) {
+            is_null($value) => $blueprint->string($column)->nullable(),
+            is_bool($value) => $blueprint->boolean($column)->nullable(),
+            is_int($value) => $blueprint->bigInteger($column)->nullable(),
+            is_float($value) => $blueprint->decimal($column, 18, 4)->nullable(),
+            $this->looksLikeDateTime($value) => $blueprint->dateTime($column)->nullable(),
+            default => $blueprint->text($column)->nullable(),
+        };
+    }
+
+    private function looksLikeDateTime(mixed $value): bool
+    {
+        return is_string($value)
+            && preg_match('/^\d{4}-\d{2}-\d{2}([ T]\d{2}:\d{2}:\d{2})?$/', $value) === 1;
+    }
+
+    private function ensurePrimaryKey(string $table, string $column): void
+    {
+        $hasPrimaryKey = DB::table('information_schema.table_constraints')
+            ->where('table_schema', DB::getDatabaseName())
+            ->where('table_name', $table)
+            ->where('constraint_type', 'PRIMARY KEY')
+            ->exists();
+
+        if ($hasPrimaryKey) {
+            return;
+        }
+
+        Schema::table($table, function (Blueprint $table) use ($column): void {
+            $table->primary($column);
+        });
+    }
 }

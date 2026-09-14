@@ -1,29 +1,34 @@
 function Get-QueryResults {
     param (
         [System.Data.SqlClient.SqlConnection] $Connection,
-        [string] $Query
+        [string] $Query,
+        [int] $TimeoutSeconds = 30
     )
 
     $command = $Connection.CreateCommand()
     $command.CommandText = $Query
+    $command.CommandTimeout = $TimeoutSeconds
 
     $adapter = New-Object System.Data.SqlClient.SqlDataAdapter($command)
     $table = New-Object System.Data.DataTable
     [void] $adapter.Fill($table)
 
-    return @($table | ForEach-Object {
+    return @($table.Rows | ForEach-Object {
+        $row = $_
         $record = [ordered]@{}
 
-        foreach ($property in $_.PSObject.Properties) {
-            $value = $property.Value
+        foreach ($column in $table.Columns) {
+            $value = $row[$column.ColumnName]
 
             if ($value -is [DBNull]) {
                 $value = $null
             } elseif ($value -is [datetime]) {
                 $value = $value.ToString("yyyy-MM-dd HH:mm:ss")
+            } elseif ($value -is [byte[]]) {
+                $value = [Convert]::ToBase64String($value)
             }
 
-            $record[$property.Name] = $value
+            $record[$column.ColumnName] = $value
         }
 
         [pscustomobject] $record
@@ -45,28 +50,31 @@ catch {
 }
 
 $payload = @{
-    Acc_tblAccPeriod = Get-QueryResults -Connection $conn -Query @"
-SELECT * FROM Acc_tblAccPeriod
-"@
-
-    Acc_tblAccType = Get-QueryResults -Connection $conn -Query @"
-SELECT * FROM Acc_tblAccType
-"@
+    Acc_tblAccPeriod = Get-QueryResults -Connection $conn -Query "SELECT * FROM Acc_tblAccPeriod"
+    Acc_tblAccType = Get-QueryResults -Connection $conn -Query "SELECT * FROM Acc_tblAccType"
+    Acc_tblCashflowItems = Get-QueryResults -Connection $conn -Query "SELECT * FROM Acc_tblCashflowItems"
 }
 
 $conn.Dispose()
 
-$body = $payload | ConvertTo-Json -Depth 10
-Write-Host "Request body:"
-Write-Host $body
-Write-Host "Acc_tblAccPeriod rows: $(@($payload.Acc_tblAccPeriod).Count)"
-Write-Host "Acc_tblAccType rows: $(@($payload.Acc_tblAccType).Count)"
+try {
+    $body = $payload | ConvertTo-Json -Depth 10 -ErrorAction Stop
+}
+catch {
+    Write-Host "JSON conversion failed:"
+    Write-Host $_.Exception.Message
+    exit 1
+}
+
+foreach ($key in $payload.Keys) {
+    Write-Host "$key rows: $(@($payload[$key]).Count)"
+}
 
 Invoke-RestMethod `
     -Uri "http://192.168.9.45:8000/api/v1/sync/nav-data" `
     -Method Post `
     -Headers @{
-        Authorization = "Bearer use-a-long-random-secret-here"
+        Authorization = "Bearer aCDCmjCQYe9h9ojAl7zfeQfspoiQnrymFLTxmzrCEvo="
         Accept = "application/json"
     } `
     -ContentType "application/json" `
