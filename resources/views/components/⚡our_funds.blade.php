@@ -48,15 +48,16 @@ new class extends Component
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <livewire:datatable 
                         title="NAV History" 
-                        table="tbl_eodfundsummary" 
+                        table="eod_fund_summary" 
                         :columns="[
                             ['field' => 'RecordID', 'label' => '#', 'sortable' => true],
-                            ['field' => 'FundCOAID', 'label' => 'Fund ID', 'sortable' => true],
+                            ['field' => 'FundCode', 'label' => 'FundCode', 'sortable' => true],
+                            ['field' => 'FundName', 'label' => 'FundName', 'sortable' => true],
                             ['field' => 'Date', 'label' => 'Date', 'sortable' => true],
-                            ['field' => 'NAVACTUAL', 'label' => 'Actual NAV', 'sortable' => true],
-                            ['field' => 'NAVATCOSTPRICEAVG', 'label' => 'NAV at Cost', 'sortable' => true],
-                            ['field' => 'NAVATMARKETPRICE', 'label' => 'NAV at Market', 'sortable' => true],
-                            ['field' => 'TOTALNOOFSHARE', 'label' => 'Total Shares', 'sortable' => true],                                                 
+                            ['field' => 'TOTALNOOFSHARE', 'label' => 'Total Shares', 'sortable' => true],                            
+                            ['field' => 'NAV_CP', 'label' => 'NAV_CP', 'sortable' => true],
+                            ['field' => 'NAV_MP', 'label' => 'NAV at Cost', 'sortable' => true],
+                            ['field' => 'NAVATMARKETPRICE', 'label' => 'NAV at Market', 'sortable' => true],                                               
                             
                         ]"
                         :filters="[
