@@ -57,7 +57,9 @@ new class extends Component
                             ['field' => 'TOTALNOOFSHARE', 'label' => 'Total Shares', 'sortable' => true],                            
                             ['field' => 'NAV_CP', 'label' => 'NAV_CP', 'sortable' => true],
                             ['field' => 'NAV_MP', 'label' => 'NAV at Cost', 'sortable' => true],
-                            ['field' => 'NAVATMARKETPRICE', 'label' => 'NAV at Market', 'sortable' => true],                                               
+                            ['field' => 'NAV_CP_PU', 'label' => 'NAV_CP_PU', 'sortable' => true],
+                            ['field' => 'NAV_MP_PU', 'label' => 'NAV_MP_PU', 'sortable' => true],
+                            ['field' => 'NAV_SP_PU', 'label' => 'NAV_SP_PU', 'sortable' => true],                                               
                             
                         ]"
                         :filters="[
