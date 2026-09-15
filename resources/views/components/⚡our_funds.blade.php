@@ -76,15 +76,21 @@ new class extends Component
                     <hr class="hr-warning mx-auto" style="background-color: #2c4fc3;height: 5px;width: 80px;margin-top: -5px;">
                     <livewire:datatable 
                         title="Dividend History" 
-                        table="tbl_dividenddeclaration" 
+                        table="openfund_tbldividenddeclaration" 
                         :columns="[
                             ['field' => 'DividendCOAID', 'label' => '#', 'sortable' => true],
-                            ['field' => 'FundCOAID', 'label' => 'Fund Name', 'sortable' => true],
+                            ['field' => 'FundCode', 'label' => 'FundCode', 'sortable' => true],
+                            ['field' => 'DividendID', 'label' => 'DividendID', 'sortable' => true],
                             ['field' => 'RecordDate', 'label' => 'RecordDate', 'sortable' => true],
                             ['field' => 'EffectiveDate', 'label' => 'EffectiveDate', 'sortable' => true],
-                            ['field' => 'DividendPercentage', 'label' => 'DividendPercentage', 'sortable' => true],
-                            ['field' => 'SaleRateForCIP', 'label' => 'SaleRateForCIP', 'sortable' => true],
-                            ['field' => 'DividendDuring', 'label' => 'DividendDuring', 'sortable' => true],                                                 
+                            ['field' => 'TrusteeCommitteMeetingDate', 'label' => 'TrusteeCommitteMeetingDate', 'sortable' => true],
+                            ['field' => 'LastNAVpublicationDate', 'label' => 'LastNAVpublicationDate', 'sortable' => true],
+                            ['field' => 'DividendPercentage', 'label' => 'DividendPercentage', 'sortable' => true], 
+                            ['field' => 'SaleRateForCIP', 'label' => 'SaleRateForCIP', 'sortable' => true], 
+                            ['field' => 'TaxRateForIndividual', 'label' => 'TaxRateForIndividual', 'sortable' => true], 
+                            ['field' => 'TaxRateForInstitution', 'label' => 'TaxRateForInstitution', 'sortable' => true],
+                            ['field' => 'TaxFreeAmountForIndividual', 'label' => 'TaxFreeAmountForIndividual', 'sortable' => true], 
+                            ['field' => 'TaxFreeAmountForInstitution', 'label' => 'TaxFreeAmountForInstitution', 'sortable' => true],                                                                                                                                                                                                                          
                             
                         ]"
                         :filters="[

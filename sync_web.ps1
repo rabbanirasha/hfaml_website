@@ -35,7 +35,7 @@ function Get-QueryResults {
     })
 }
 
-$connectionString = "Server=127.0.0.1,1433;Database=HFTEST;User ID=sa;Password=Theocean123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=10;"
+$connectionString = "Server=127.0.0.1,1433;Database=XASSETHF;User ID=sa;Password=Theocean123;Encrypt=True;TrustServerCertificate=True;Connection Timeout=10;"
 
 try {
     Write-Host "Opening SQL connection..."
@@ -50,7 +50,8 @@ catch {
 }
 
 $payload = @{
-    EOD_Fund_Summary = Get-QueryResults -Connection $conn -Query "SELECT TOP 100 RecordID, B.FundCode,B.FundName, Date, FORMAT(TOTALNOOFSHARE,'N0') as TOTALNOOFSHARE, FORMAT(NAVACTUAL,'N2') as NAV_CP, FORMAT(NAVATMARKETPRICE,'N2') as NAV_MP, FORMAT(NAVACTUAL/TOTALNOOFSHARE,'N2') as NAV_CP_PU, FORMAT(NAVATMARKETPRICE/TOTALNOOFSHARE,'N2') as NAV_MP_PU, FORMAT(CEILING((ROUND(NAVATMARKETPRICE/TOTALNOOFSHARE,2)*0.98)/0.01)*0.01,'N2') as NAV_SP_PU FROM EOD_Fund_Summary as A LEFT JOIN Setup_tblFund_List as B on A.FundCOAID = B.FundCOAID ORDER BY RecordID DESC"
+    EOD_Fund_Summary = Get-QueryResults -Connection $conn -Query "SELECT TOP 100 RecordID, B.FundCode, Date, FORMAT(TOTALNOOFSHARE,'N0') as TOTALNOOFSHARE, FORMAT(NAVACTUAL,'N2') as NAV_CP, FORMAT(NAVATMARKETPRICE,'N2') as NAV_MP, FORMAT(NAVACTUAL/TOTALNOOFSHARE,'N2') as NAV_CP_PU, FORMAT(NAVATMARKETPRICE/TOTALNOOFSHARE,'N2') as NAV_MP_PU, FORMAT(CEILING((ROUND(NAVATMARKETPRICE/TOTALNOOFSHARE,2)*0.98)/0.01)*0.01,'N2') as NAV_SP_PU FROM EOD_Fund_Summary as A LEFT JOIN Setup_tblFund_List as B on A.FundCOAID = B.FundCOAID ORDER BY RecordID DESC"
+    OpenFund_tblDividendDeclaration = Get-QueryResults -Connection $conn -Query "SELECT DividendCOAID ,B.FundCode ,DividendID ,RecordDate ,EffectiveDate ,TrusteeCommitteMeetingDate ,LastNAVpublicationDate,DividendPercentage ,SaleRateForCIP ,TaxRateForIndividual ,TaxRateForInstitution ,TaxFreeAmountForIndividual ,TaxFreeAmountForInstitution FROM OpenFund_tblDividendDeclaration as A LEFT JOIN Setup_tblFund_List as B on A.FundCOAID = B.FundCOAID"
 }
 
 $conn.Dispose()
@@ -69,7 +70,7 @@ foreach ($key in $payload.Keys) {
 }
 
 Invoke-RestMethod `
-    -Uri "https://hfassetmanagement.com/api/v1/sync/nav-data" `
+    -Uri "http://192.168.9.45:8000/api/v1/sync/nav-data" `
     -Method Post `
     -Headers @{
         Authorization = "Bearer aCDCmjCQYe9h9ojAl7zfeQfspoiQnrymFLTxmzrCEvo="
