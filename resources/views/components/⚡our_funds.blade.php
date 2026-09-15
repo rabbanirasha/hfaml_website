@@ -51,8 +51,7 @@ new class extends Component
                         table="eod_fund_summary" 
                         :columns="[
                             ['field' => 'RecordID', 'label' => '#', 'sortable' => true],
-                            ['field' => 'FundCode', 'label' => 'FundCode', 'sortable' => true],
-                            ['field' => 'FundName', 'label' => 'FundName', 'sortable' => true],
+                            ['field' => 'FundCode', 'label' => 'FundCode', 'sortable' => true],                            
                             ['field' => 'Date', 'label' => 'Date', 'sortable' => true],
                             ['field' => 'TOTALNOOFSHARE', 'label' => 'Total Shares', 'sortable' => true],                            
                             ['field' => 'NAV_CP', 'label' => 'NAV_CP', 'sortable' => true],

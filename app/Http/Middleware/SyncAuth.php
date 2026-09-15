@@ -10,7 +10,7 @@ class SyncAuth
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $provided = $request->bearerToken();
+        $provided = $request->header('X-Sync-Token');
         $expected = config('services.sync.secret');
 
         if (! $provided || ! $expected || ! hash_equals($expected, $provided)) {
