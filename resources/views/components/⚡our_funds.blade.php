@@ -50,15 +50,14 @@ new class extends Component
                         title="NAV History" 
                         table="eod_fund_summary" 
                         :columns="[
-                            ['field' => 'RecordID', 'label' => '#', 'sortable' => true],
-                            ['field' => 'FundCode', 'label' => 'FundCode', 'sortable' => true],                            
-                            ['field' => 'Date', 'label' => 'Date', 'sortable' => true],
+                            ['field' => 'Date', 'label' => 'Date', 'sortable' => true, 'type' => 'date'],
+                            ['field' => 'FundCode', 'label' => 'Fund', 'sortable' => true],                            
                             ['field' => 'TOTALNOOFSHARE', 'label' => 'Total Shares', 'sortable' => true],                            
-                            ['field' => 'NAV_CP', 'label' => 'NAV_CP', 'sortable' => true],
-                            ['field' => 'NAV_MP', 'label' => 'NAV at Cost', 'sortable' => true],
-                            ['field' => 'NAV_CP_PU', 'label' => 'NAV_CP_PU', 'sortable' => true],
-                            ['field' => 'NAV_MP_PU', 'label' => 'NAV_MP_PU', 'sortable' => true],
-                            ['field' => 'NAV_SP_PU', 'label' => 'NAV_SP_PU', 'sortable' => true],                                               
+                            ['field' => 'NAV_CP', 'label' => 'Cost NAV', 'sortable' => true],
+                            ['field' => 'NAV_MP', 'label' => 'Market NAV', 'sortable' => true],
+                            ['field' => 'NAV_CP_PU', 'label' => 'Cost NAV/Unit', 'sortable' => true],
+                            ['field' => 'NAV_MP_PU', 'label' => 'Market NAV/Unit', 'sortable' => true],
+                            ['field' => 'NAV_SP_PU', 'label' => 'Surrender NAV/Unit', 'sortable' => true],                                               
                             
                         ]"
                         :filters="[
@@ -80,10 +79,10 @@ new class extends Component
                             ['field' => 'DividendCOAID', 'label' => '#', 'sortable' => true],
                             ['field' => 'FundCode', 'label' => 'FundCode', 'sortable' => true],
                             ['field' => 'DividendID', 'label' => 'DividendID', 'sortable' => true],
-                            ['field' => 'RecordDate', 'label' => 'RecordDate', 'sortable' => true],
-                            ['field' => 'EffectiveDate', 'label' => 'EffectiveDate', 'sortable' => true],
-                            ['field' => 'TrusteeCommitteMeetingDate', 'label' => 'TrusteeCommitteMeetingDate', 'sortable' => true],
-                            ['field' => 'LastNAVpublicationDate', 'label' => 'LastNAVpublicationDate', 'sortable' => true],
+                            ['field' => 'RecordDate', 'label' => 'RecordDate', 'sortable' => true, 'type' => 'date'],
+                            ['field' => 'EffectiveDate', 'label' => 'EffectiveDate', 'sortable' => true, 'type' => 'date'],
+                            ['field' => 'TrusteeCommitteMeetingDate', 'label' => 'TrusteeCommitteMeetingDate', 'sortable' => true, 'type' => 'date'],
+                            ['field' => 'LastNAVpublicationDate', 'label' => 'LastNAVpublicationDate', 'sortable' => true, 'type' => 'date'],
                             ['field' => 'DividendPercentage', 'label' => 'DividendPercentage', 'sortable' => true], 
                             ['field' => 'SaleRateForCIP', 'label' => 'SaleRateForCIP', 'sortable' => true], 
                             ['field' => 'TaxRateForIndividual', 'label' => 'TaxRateForIndividual', 'sortable' => true], 

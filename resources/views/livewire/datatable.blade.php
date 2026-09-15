@@ -75,6 +75,8 @@
                                     @endphp
                                     @if (($column['type'] ?? '') === 'currency')
                                         ${{ number_format((float) $rawValue, 2) }}
+                                    @elseif (($column['type'] ?? '') === 'date')
+                                        {{ $rawValue ? \Illuminate\Support\Carbon::parse($rawValue)->format('d M Y') : '' }}
                                     @elseif ($truncate)
                                         {{ \Illuminate\Support\Str::limit(strip_tags($stringValue), max(1, $length)) }}
                                     @else
